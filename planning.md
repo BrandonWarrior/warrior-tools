@@ -4,7 +4,7 @@
 
 **Warrior Tools** is an e-commerce web application designed for power tool enthusiasts, tradespeople, and DIYers. The platform allows users to browse, search, and purchase high-quality power tools. The goal of this application is to provide a fast, secure, and modern shopping experience with features such as account registration, product filtering, newsletter subscriptions, and an easy-to-use admin interface for managing products.
 
-The application is being developed using the Django web framework and will include Stripe integration for secure payments, a relational database (initially SQLite, then PostgreSQL in production), and be fully deployed to a cloud hosting platform (e.g., Heroku or Render).
+The application is being developed using the Django web framework and will include Stripe integration for secure payments, a relational database (initially SQLite, then PostgreSQL in production), and be fully deployed to a cloud hosting platform - Heroku
 
 ---
 
