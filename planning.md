@@ -21,6 +21,39 @@ The application is being developed using the Django web framework and will inclu
 
 ---
 
+## Wireframes
+
+A wireframe mockup of the Warrior Tools home page has been created using Balsamiq Wireframes, a tool used to quickly sketch out user interface layouts. These wireframes represent the planned structure and layout of the site’s main landing experience and guide the front-end development process.
+
+![home page wireframe](docs/home-page-wf.png)
+![home page wwireframe 2](docs/home-page-wf2.png)
+
+### Layout Overview
+- Header Section
+Includes a clear logo and brand title “Warrior Tools”
+
+A horizontal navigation menu provides links to:
+
+Products, Profile, Sign In, Sign Up, and Sign Out
+
+Adjusts dynamically depending on the user's authentication state
+
+- Newsletter Signup
+Centrally placed section encouraging users to subscribe to updates
+
+Forms a key part of the marketing strategy by capturing visitor interest early
+
+- Featured Products Section
+A structured product grid displays six featured tools
+
+Each product box will showcase a tool image and basic info
+
+Supports user stories related to browsing and shopping
+
+- Footer
+A simple footer area is included for contact info, legal links, or additional navigation
+
+---
 ## 📋 User Stories (Grouped by Epics)
 
 ### 🏷 Epic: Browsing and Shopping
