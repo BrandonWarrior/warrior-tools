@@ -1,0 +1,170 @@
+[
+    {
+        "pk": 34,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool001",
+            "name": "Heavy Duty Hammer",
+            "description": "Perfect for framing and general construction. Durable and balanced.",
+            "price": 24.99,
+            "category": 6,
+            "rating": 4.5,
+            "image_url": "",
+            "image": "hammer.png"
+        }
+    },
+    {
+        "pk": 35,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool002",
+            "name": "Precision Screwdrivers Set",
+            "description": "Includes multiple heads for electronic and mechanical work.",
+            "price": 18.50,
+            "category": 7,
+            "rating": 4.8,
+            "image_url": "",
+            "image": "screwdrivers.png"
+        }
+    },
+    {
+        "pk": 36,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool003",
+            "name": "Adjustable Wrench",
+            "description": "Chrome finish, ergonomic grip. Ideal for plumbing and automotive tasks.",
+            "price": 14.99,
+            "category": 8,
+            "rating": 4.3,
+            "image_url": "",
+            "image": "wrenches.png"
+        }
+    },
+    {
+        "pk": 37,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool004",
+            "name": "Concrete Saw",
+            "description": "High power motor, designed for heavy-duty cutting jobs.",
+            "price": 399.00,
+            "category": 4,
+            "rating": 4.6,
+            "image_url": "",
+            "image": "concrete-saw.png"
+        }
+    },
+    {
+        "pk": 38,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool005",
+            "name": "Orbital Sander",
+            "description": "Smooth finish guaranteed. Great for woodworking.",
+            "price": 89.99,
+            "category": 5,
+            "rating": 4.4,
+            "image_url": "",
+            "image": "sander.png"
+        }
+    },
+    {
+        "pk": 39,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool006",
+            "name": "Circular Saw",
+            "description": "Precision cuts with easy depth adjustment.",
+            "price": 129.00,
+            "category": 4,
+            "rating": 4.7,
+            "image_url": "",
+            "image": "circular-saw.png"
+        }
+    },
+    {
+        "pk": 40,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool007",
+            "name": "Angle Grinder",
+            "description": "Multi-purpose grinder for cutting, grinding, and polishing.",
+            "price": 74.99,
+            "category": 4,
+            "rating": 4.5,
+            "image_url": "",
+            "image": "grinder.png"
+        }
+    },
+    {
+        "pk": 41,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool008",
+            "name": "Oscillating Multi-Tool",
+            "description": "Perfect for sanding, cutting, and scraping in tight spaces.",
+            "price": 99.99,
+            "category": 4,
+            "rating": 4.6,
+            "image_url": "",
+            "image": "multi-tool.png"
+        }
+    },
+    {
+        "pk": 42,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool009",
+            "name": "Jigsaw",
+            "description": "Precision and curved cuts with ease.",
+            "price": 64.99,
+            "category": 4,
+            "rating": 4.3,
+            "image_url": "",
+            "image": "jigsaw.png"
+        }
+    },
+    {
+        "pk": 43,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool010",
+            "name": "Hammer Drill",
+            "description": "Ideal for masonry and concrete drilling tasks.",
+            "price": 139.99,
+            "category": 3,
+            "rating": 4.6,
+            "image_url": "",
+            "image": "hammer-drill.png"
+        }
+    },
+    {
+        "pk": 44,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool011",
+            "name": "Combi Drill",
+            "description": "All-in-one tool for drilling, hammering, and driving.",
+            "price": 149.99,
+            "category": 3,
+            "rating": 4.8,
+            "image_url": "",
+            "image": "combi.png"
+        }
+    },
+    {
+        "pk": 45,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool012",
+            "name": "Impact Driver",
+            "description": "Delivers powerful torque for heavy-duty screwing tasks.",
+            "price": 119.99,
+            "category": 3,
+            "rating": 4.7,
+            "image_url": "",
+            "image": "impact-driver.png"
+        }
+    }
+]

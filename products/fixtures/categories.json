@@ -1,0 +1,13 @@
+[
+    { "pk": 1, "model": "products.category", "fields": { "name": "power_tools", "friendly_name": "Power Tools" }},
+    { "pk": 2, "model": "products.category", "fields": { "name": "hand_tools", "friendly_name": "Hand Tools" }},
+    { "pk": 3, "model": "products.category", "fields": { "name": "drills", "friendly_name": "Drills" }},
+    { "pk": 4, "model": "products.category", "fields": { "name": "saws", "friendly_name": "Saws" }},
+    { "pk": 5, "model": "products.category", "fields": { "name": "sanders", "friendly_name": "Sanders" }},
+    { "pk": 6, "model": "products.category", "fields": { "name": "hammers", "friendly_name": "Hammers" }},
+    { "pk": 7, "model": "products.category", "fields": { "name": "screwdrivers", "friendly_name": "Screwdrivers" }},
+    { "pk": 8, "model": "products.category", "fields": { "name": "wrenches", "friendly_name": "Wrenches" }},
+    { "pk": 9, "model": "products.category", "fields": { "name": "new_arrivals", "friendly_name": "New Arrivals" }},
+    { "pk": 10, "model": "products.category", "fields": { "name": "deals", "friendly_name": "Deals" }},
+    { "pk": 11, "model": "products.category", "fields": { "name": "clearance", "friendly_name": "Clearance" }}
+]
