@@ -1,51 +1,51 @@
-<!-- Desktop Main Navigation -->
 <div class="collapse navbar-collapse" id="main-nav">
     <ul class="navbar-nav w-auto mx-auto">
+        <!-- All Tools -->
         <li class="nav-item dropdown">
             <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="all-tools-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 All Tools
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-tools-link">
-                <a href="" class="dropdown-item">By Price</a>
-                <a href="" class="dropdown-item">By Rating</a>
-                <a href="" class="dropdown-item">By Category</a>
+                <a href="{% url 'products' %}?sort=price" class="dropdown-item">By Price</a>
+                <a href="{% url 'products' %}?sort=rating" class="dropdown-item">By Rating</a>
+                <a href="{% url 'products' %}?sort=category" class="dropdown-item">By Category</a>
                 <a href="{% url 'products' %}" class="dropdown-item">All Tools</a>
             </div>
         </li>
 
+        <!-- Power Tools -->
         <li class="nav-item dropdown">
             <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="power-tools-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Power Tools
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="power-tools-link">
-                <a href="" class="dropdown-item">Drills</a>
-                <a href="" class="dropdown-item">Saws</a>
-                <a href="" class="dropdown-item">Sanders</a>
-                <a href="" class="dropdown-item">All Power Tools</a>
+                <a href="{% url 'products' %}?category=drills" class="dropdown-item">Drills</a>
+                <a href="{% url 'products' %}?category=saws" class="dropdown-item">Saws</a>
+                <a href="{% url 'products' %}?category=sanders" class="dropdown-item">Sanders</a>
+                <a href="{% url 'products' %}?category=drills,saws,sanders" class="dropdown-item">All Power Tools</a>
             </div>
         </li>
 
+        <!-- Hand Tools -->
         <li class="nav-item dropdown">
             <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="hand-tools-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Hand Tools
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="hand-tools-link">
-                <a href="" class="dropdown-item">Hammers</a>
-                <a href="" class="dropdown-item">Screwdrivers</a>
-                <a href="" class="dropdown-item">Wrenches</a>
-                <a href="" class="dropdown-item">All Hand Tools</a>
+                <a href="{% url 'products' %}?category=hammers" class="dropdown-item">Hammers</a>
+                <a href="{% url 'products' %}?category=screwdrivers" class="dropdown-item">Screwdrivers</a>
+                <a href="{% url 'products' %}?category=wrenches" class="dropdown-item">Wrenches</a>
+                <a href="{% url 'products' %}?category=hammers,screwdrivers,wrenches" class="dropdown-item">All Hand Tools</a>
             </div>
         </li>
 
+        <!-- Specials -->
         <li class="nav-item dropdown">
             <a class="logo-font font-weight-bold nav-link text-black" href="#" id="specials-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Special Offers
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="specials-link">
-                <a href="" class="dropdown-item">New Arrivals</a>
-                <a href="" class="dropdown-item">Deals</a>
-                <a href="" class="dropdown-item">Clearance</a>
-                <a href="" class="dropdown-item">All Specials</a>
+                <a href="{% url 'products' %}?category=new_arrivals" class="dropdown-item">New Arrivals</a>
             </div>
         </li>
     </ul>
