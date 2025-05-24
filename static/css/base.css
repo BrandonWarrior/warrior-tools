@@ -4,7 +4,7 @@ html {
 
 body {
     /* No background image until one is ready */
-    background: #f8f9fa; /* Light neutral background from walkthrough */
+    background: #f8f9fa;
     height: calc(100vh - 164px);
     color: #555;
     font-family: 'Lato', sans-serif;
@@ -39,6 +39,19 @@ body {
     color: white;
 }
 
+.btn-outline-black {
+    background: white;
+    color: black !important; /* override for <a> elements */
+    border: 1px solid black;
+}
+
+.btn-outline-black:hover,
+.btn-outline-black:active,
+.btn-outline-black:focus {
+    background: black;
+    color: white !important;
+}
+
 .shop-now-button:hover,
 .shop-now-button:active,
 .shop-now-button:focus,
@@ -62,13 +75,13 @@ body {
 }
 
 .overlay {
-	height: 100%;
-	width: 100%;
-	top: 0;
-	left: 0;
-	position: fixed;
-	background: white;
-	z-index: -1;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background: white;
+    z-index: -1;
 }
 
 a.category-badge > span.badge:hover {
@@ -83,10 +96,12 @@ a.category-badge > span.badge:hover {
     bottom: 10px;
     right: 10px;
 }
-.btt-link {
+
+.btt-link,
+.update-link,
+.remove-item {
     cursor: pointer;
 }
-
 
 /* -------------------------------- Media Queries */
 
