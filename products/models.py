@@ -23,7 +23,7 @@ class Product(models.Model):
     description = models.TextField()
     has_sizes = models.BooleanField(default=False, null=True, blank=True)
 
-    # ✅ New field to define tool variant types
+    # field to define tool variant types
     variant_type = models.CharField(
         max_length=50,
         null=True,
