@@ -33,3 +33,13 @@ To make the webhook handler more reliable, I updated the code to:
 First attempt to access the charges data from the webhook payload directly (which is faster and doesn't require an API call).
 If charges is not available, fall back to retrieving the charge details using the latest_charge ID via the Stripe API.
 
+### 🐛 Bug Summary
+While working on my Django Stripe integration, I encountered a persistent HTTP 500 error triggered by the payment_intent.succeeded webhook from Stripe. It turned out to be caused by assumptions I made in the webhook handler.
+
+Cause:
+The webhook handler was trying to access billing_details.email directly from intent.charges.data[0], but in some cases, that field wasn’t present in the webhook payload. When that happened, the code threw an AttributeError or failed due to a missing required field (email) for order creation.
+
+I also didn’t have proper fallback logic in place to retrieve the email from other possible sources, like intent.receipt_email, nor did I safeguard against missing charges.
+
+Fix:
+To resolve the issue, I added robust fallback logic in the webhook handler to check if charges exist and safely pull the email address. If the billing email is missing, it now falls back to receipt_email. I also added a guard clause to return a clean error response if an email still isn’t found, avoiding a crash. This fixed the 500 error, and Stripe webhooks are now being handled successfully.
