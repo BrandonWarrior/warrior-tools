@@ -4,7 +4,7 @@
 
     <div class="toast-header bg-white text-dark">
         <strong class="mr-auto">
-            {% if bag_items and product_count %}
+            {% if grand_total and on_profile_page != True %}
                 Tool Added!
             {% elif 'order successfully processed' in message|lower %}
                 Order Confirmed
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        {% if bag_items and product_count %}
+        {% if grand_total and on_profile_page != True %}
             <p class="logo-font bg-white text-black py-1">Your Tool Bag ({{ product_count }})</p>
             <div class="bag-notification-wrapper">
                 {% for item in bag_items %}
@@ -35,7 +35,9 @@
                         </div>
                         <div class="col-9">
                             <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                            <p class="my-0 small">Option: {% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</p>
+                            <p class="my-0 small">
+                                Option: {% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}
+                            </p>
                             <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
                         </div>
                     </div>
