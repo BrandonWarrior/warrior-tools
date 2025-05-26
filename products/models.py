@@ -2,7 +2,6 @@ from django.db import models
 
 
 class Category(models.Model):
-
     class Meta:
         verbose_name_plural = 'Categories'
 
@@ -23,23 +22,36 @@ class Product(models.Model):
     description = models.TextField()
     has_sizes = models.BooleanField(default=False, null=True, blank=True)
 
-    # field to define tool variant types
+    VARIANT_CHOICES = [
+        ('hammer', 'Hammer'),
+        ('sds_drill', 'SDS Drill'),
+        ('drill_driver', 'Drill Driver'),
+        ('impact_driver', 'Impact Driver'),
+        ('jigsaw', 'Jigsaw'),
+        ('circular_saw', 'Circular Saw'),
+        ('orbital_sander', 'Orbital Sander'),
+        ('tape_measure', 'Tape Measure'),
+        ('hand_saw', 'Hand Saw'),
+        ('pipe_cutter', 'Pipe Cutter'),
+        ('pliers', 'Pliers'),
+        ('wood_chisel', 'Wood Chisel'),
+        ('spirit_level', 'Spirit Level'),
+    ]
+
     variant_type = models.CharField(
         max_length=50,
         null=True,
         blank=True,
-        choices=[
-            ('hammer', 'Hammer'),
-            ('drill', 'Drill'),
-            ('saw', 'Saw'),
-            ('sander', 'Sander'),
-        ]
+        choices=VARIANT_CHOICES
     )
 
     price = models.DecimalField(max_digits=6, decimal_places=2)
     rating = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
+
+    # New Arrival flag
+    is_new = models.BooleanField(default=False, help_text="Mark this product as a new arrival")
 
     def __str__(self):
         return self.name

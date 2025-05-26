@@ -4,13 +4,14 @@
         "model": "products.product",
         "fields": {
             "sku": "tool001",
-            "name": "Heavy Duty Hammer",
-            "description": "Perfect for framing and general construction. Durable and balanced.",
+            "name": "Heavy Duty Claw Hammer",
+            "description": "Durable claw hammer perfect for framing and general construction. Balanced for everyday use.",
             "price": 24.99,
             "category": 6,
             "rating": 4.5,
+            "variant_type": "hammer",
             "image_url": "",
-            "image": "hammer.png"
+            "image": "claw-hammer.png"
         }
     },
     {
@@ -19,10 +20,11 @@
         "fields": {
             "sku": "tool002",
             "name": "Precision Screwdrivers Set",
-            "description": "Includes multiple heads for electronic and mechanical work.",
+            "description": "Versatile screwdriver set with multiple precision heads. Great for electronics and small repairs.",
             "price": 18.50,
             "category": 7,
             "rating": 4.8,
+            "variant_type": "",
             "image_url": "",
             "image": "screwdrivers.png"
         }
@@ -33,10 +35,11 @@
         "fields": {
             "sku": "tool003",
             "name": "Adjustable Wrench",
-            "description": "Chrome finish, ergonomic grip. Ideal for plumbing and automotive tasks.",
+            "description": "Adjustable wrench with chrome finish and ergonomic grip. Ideal for plumbing and automotive work.",
             "price": 14.99,
             "category": 8,
             "rating": 4.3,
+            "variant_type": "",
             "image_url": "",
             "image": "wrenches.png"
         }
@@ -47,10 +50,11 @@
         "fields": {
             "sku": "tool004",
             "name": "Concrete Saw",
-            "description": "High power motor, designed for heavy-duty cutting jobs.",
+            "description": "High-powered concrete saw designed for heavy-duty cutting of masonry and stone surfaces.",
             "price": 399.00,
             "category": 4,
             "rating": 4.6,
+            "variant_type": "",
             "image_url": "",
             "image": "concrete-saw.png"
         }
@@ -61,10 +65,11 @@
         "fields": {
             "sku": "tool005",
             "name": "Orbital Sander",
-            "description": "Smooth finish guaranteed. Great for woodworking.",
+            "description": "Ergonomic orbital sander offering smooth finishes for woodworking and refinishing projects.",
             "price": 89.99,
             "category": 5,
             "rating": 4.4,
+            "variant_type": "orbital_sander",
             "image_url": "",
             "image": "sander.png"
         }
@@ -75,10 +80,11 @@
         "fields": {
             "sku": "tool006",
             "name": "Circular Saw",
-            "description": "Precision cuts with easy depth adjustment.",
+            "description": "High-performance circular saw with easy depth adjustment for precise cutting tasks.",
             "price": 129.00,
             "category": 4,
             "rating": 4.7,
+            "variant_type": "circular_saw",
             "image_url": "",
             "image": "circular-saw.png"
         }
@@ -89,10 +95,11 @@
         "fields": {
             "sku": "tool007",
             "name": "Angle Grinder",
-            "description": "Multi-purpose grinder for cutting, grinding, and polishing.",
+            "description": "Powerful angle grinder for cutting, grinding, and polishing with multiple attachments.",
             "price": 74.99,
             "category": 4,
             "rating": 4.5,
+            "variant_type": "",
             "image_url": "",
             "image": "grinder.png"
         }
@@ -103,10 +110,11 @@
         "fields": {
             "sku": "tool008",
             "name": "Oscillating Multi-Tool",
-            "description": "Perfect for sanding, cutting, and scraping in tight spaces.",
+            "description": "Compact and versatile multi-tool for sanding, scraping, and cutting in tight spaces.",
             "price": 99.99,
             "category": 4,
             "rating": 4.6,
+            "variant_type": "",
             "image_url": "",
             "image": "multi-tool.png"
         }
@@ -117,10 +125,11 @@
         "fields": {
             "sku": "tool009",
             "name": "Jigsaw",
-            "description": "Precision and curved cuts with ease.",
+            "description": "Corded jigsaw ideal for precision and curved cuts on wood, metal, and plastic.",
             "price": 64.99,
             "category": 4,
             "rating": 4.3,
+            "variant_type": "jigsaw",
             "image_url": "",
             "image": "jigsaw.png"
         }
@@ -130,11 +139,12 @@
         "model": "products.product",
         "fields": {
             "sku": "tool010",
-            "name": "Hammer Drill",
-            "description": "Ideal for masonry and concrete drilling tasks.",
+            "name": "SDS Drill",
+            "description": "Heavy-duty SDS drill ideal for drilling into concrete, stone, and masonry surfaces.",
             "price": 139.99,
             "category": 3,
             "rating": 4.6,
+            "variant_type": "sds_drill",
             "image_url": "",
             "image": "hammer-drill.png"
         }
@@ -145,10 +155,11 @@
         "fields": {
             "sku": "tool011",
             "name": "Combi Drill",
-            "description": "All-in-one tool for drilling, hammering, and driving.",
+            "description": "Multi-functional combi drill for hammer drilling, screwdriving, and regular drilling tasks.",
             "price": 149.99,
             "category": 3,
             "rating": 4.8,
+            "variant_type": "drill_driver",
             "image_url": "",
             "image": "combi.png"
         }
@@ -159,12 +170,103 @@
         "fields": {
             "sku": "tool012",
             "name": "Impact Driver",
-            "description": "Delivers powerful torque for heavy-duty screwing tasks.",
+            "description": "High-torque impact driver ideal for tough screwing and fastening jobs.",
             "price": 119.99,
             "category": 3,
             "rating": 4.7,
+            "variant_type": "impact_driver",
             "image_url": "",
             "image": "impact-driver.png"
+        }
+    },
+    {
+        "pk": 46,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool013",
+            "name": "Tape Measure",
+            "description": "Compact 5-meter tape measure with clear markings and a durable housing.",
+            "price": 7.99,
+            "category": 9,
+            "rating": 4.4,
+            "variant_type": "tape_measure",
+            "image_url": "",
+            "image": "tape-measure.png"
+        }
+    },
+    {
+        "pk": 47,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool014",
+            "name": "Hand Saw",
+            "description": "General-purpose hand saw with precision-ground teeth for fast, clean wood cuts.",
+            "price": 14.99,
+            "category": 9,
+            "rating": 4.5,
+            "variant_type": "hand_saw",
+            "image_url": "",
+            "image": "hand-saw.png"
+        }
+    },
+    {
+        "pk": 48,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool015",
+            "name": "Pipe Cutter",
+            "description": "Set of pipe cutters suitable for both copper and plastic pipes (15mm & 22mm).",
+            "price": 11.50,
+            "category": 9,
+            "rating": 4.3,
+            "variant_type": "pipe_cutter",
+            "image_url": "",
+            "image": "pipe-cutters.png"
+        }
+    },
+    {
+        "pk": 49,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool016",
+            "name": "Pliers Set",
+            "description": "Comprehensive pliers set including needle nose, slip joint, and diagonal cutters.",
+            "price": 22.00,
+            "category": 9,
+            "rating": 4.7,
+            "variant_type": "pliers",
+            "image_url": "",
+            "image": "pliers.png"
+        }
+    },
+    {
+        "pk": 50,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool017",
+            "name": "Wood Chisels (Set of 4)",
+            "description": "Set of 4 wood chisels with beveled edges, ideal for carpentry and woodworking.",
+            "price": 29.99,
+            "category": 9,
+            "rating": 4.6,
+            "variant_type": "wood_chisel",
+            "image_url": "",
+            "image": "chisels.png"
+        }
+    },
+    {
+        "pk": 51,
+        "model": "products.product",
+        "fields": {
+            "sku": "tool018",
+            "name": "Spirit Level",
+            "description": "aluminum spirit levels with high-visibility vials. Includes multiple sizes in one pack.",
+            "price": 17.99,
+            "category": 9,
+            "rating": 4.8,
+            "variant_type": "spirit_level",
+            "image_url": "",
+            "image": "spirit-levels.png"
         }
     }
 ]

@@ -4,7 +4,9 @@
 
     <div class="toast-header bg-white text-dark">
         <strong class="mr-auto">
-            {% if grand_total and on_profile_page != True %}
+            {% if 'removed' in message|lower %}
+                Tool Removed
+            {% elif 'added' in message|lower %}
                 Tool Added!
             {% elif 'order successfully processed' in message|lower %}
                 Order Confirmed
@@ -31,7 +33,11 @@
                 {% for item in bag_items %}
                     <div class="row">
                         <div class="col-3 my-1">
-                            <img class="w-100" src="{{ item.product.image.url }}">
+                            {% if item.product.image %}
+                                <img class="w-100" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                            {% else %}
+                                <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                            {% endif %}
                         </div>
                         <div class="col-9">
                             <p class="my-0"><strong>{{ item.product.name }}</strong></p>
@@ -43,6 +49,7 @@
                     </div>
                 {% endfor %}
             </div>
+
             <div class="row">
                 <div class="col">
                     <strong>

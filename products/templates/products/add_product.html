@@ -25,7 +25,7 @@
             <div class="col-12 col-md-6">
                 <form method="POST" action="{% url 'add_product' %}" class="form mb-2" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form | crispy }}
+                    {{ form|crispy }}
                     <div class="text-right">
                         <a class="btn btn-outline-black rounded-0" href="{% url 'products' %}">Cancel</a>
                         <button class="btn btn-black rounded-0" type="submit">Add Product</button>
@@ -34,4 +34,37 @@
             </div>            
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+        const variantField = document.getElementById("id_variant_type");
+        const hasSizesCheckbox = document.getElementById("id_has_sizes");
+        const hasSizesRow = hasSizesCheckbox.closest(".form-group") || hasSizesCheckbox.closest(".mb-3");
+
+        // List of variants that require sizes
+        const variantsWithSizes = {{ variant_options|safe }};
+
+        function toggleHasSizesField() {
+            const selected = variantField.value;
+            const shouldShow = variantsWithSizes.includes(selected);
+
+            if (shouldShow) {
+                hasSizesRow.style.display = "block";
+                hasSizesCheckbox.disabled = false;
+            } else {
+                hasSizesCheckbox.checked = false;
+                hasSizesCheckbox.disabled = true;
+                hasSizesRow.style.display = "none";
+            }
+        }
+
+        if (variantField && hasSizesCheckbox && hasSizesRow) {
+            toggleHasSizesField();
+            variantField.addEventListener("change", toggleHasSizesField);
+        }
+    }
+);
+    </script>
 {% endblock %}

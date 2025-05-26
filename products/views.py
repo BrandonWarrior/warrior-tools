@@ -6,6 +6,42 @@ from django.db.models.functions import Lower
 from .models import Product, Category
 from .forms import ProductForm
 
+import json  # Required to pass variant list into JS
+
+# Variant types that use size selection
+variant_options = [
+    'hammer',
+    'sds_drill',
+    'drill_driver',
+    'impact_driver',
+    'jigsaw',
+    'circular_saw',
+    'orbital_sander',
+    'tape_measure',
+    'hand_saw',
+]
+
+# Tool types by category logic
+HAND_TOOL_VARIANTS = [
+    'hammer',
+    'pliers',
+    'tape_measure',
+    'hand_saw',
+    'pipe_cutter',
+    'wood_chisel',
+    'spirit_level',
+]
+
+POWER_TOOL_VARIANTS = [
+    'sds_drill',
+    'drill_driver',
+    'impact_driver',
+    'jigsaw',
+    'circular_saw',
+    'orbital_sander',
+]
+
+
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
     products = Product.objects.all()
@@ -30,9 +66,29 @@ def all_products(request):
             products = products.order_by(sortkey)
 
         if 'category' in request.GET:
-            categories = request.GET['category'].split(',')
-            products = products.filter(category__name__in=categories)
-            categories = Category.objects.filter(name__in=categories)
+            category_filters = request.GET['category'].split(',')
+
+            # Start with base category filter
+            product_filter = Q(category__name__in=category_filters)
+
+            expanded_categories = category_filters.copy()
+
+            if 'hand_tools' in category_filters:
+                product_filter |= Q(
+                    category__name='new_arrivals',
+                    variant_type__in=HAND_TOOL_VARIANTS
+                )
+                expanded_categories += ['new_arrivals']
+
+            if 'power_tools' in category_filters:
+                product_filter |= Q(
+                    category__name='new_arrivals',
+                    variant_type__in=POWER_TOOL_VARIANTS
+                )
+                expanded_categories += ['new_arrivals']
+
+            products = products.filter(product_filter)
+            categories = Category.objects.filter(name__in=expanded_categories)
 
         if 'q' in request.GET:
             query = request.GET['q']
@@ -60,6 +116,7 @@ def product_detail(request, product_id):
 
     context = {
         'product': product,
+        'variant_options': variant_options,
     }
 
     return render(request, 'products/product_detail.html', context)
@@ -67,10 +124,21 @@ def product_detail(request, product_id):
 
 def add_product(request):
     """ Add a product to the store """
-    form = ProductForm()
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully added product!')
+            return redirect(reverse('add_product'))
+        else:
+            messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+    else:
+        form = ProductForm()
+
     template = 'products/add_product.html'
     context = {
         'form': form,
+        'variant_options': json.dumps(variant_options),
     }
 
     return render(request, template, context)
