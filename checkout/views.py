@@ -198,7 +198,7 @@ def checkout_success(request, order_number):
         'order': order,
     }
 
-    # ✅ Send the email here
+    # Send the email here
     send_confirmation_email(order)
 
     return render(request, template, context)
