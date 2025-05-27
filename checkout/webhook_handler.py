@@ -48,14 +48,13 @@ class StripeWH_Handler:
         """
         intent = event.data.object
         pid = intent.id
-        bag = intent.metadata.bag
-        save_info = intent.metadata.save_info
+        
+        # Safely get bag and save_info from metadata
+        bag = intent.metadata.get('bag', '{}')
+        save_info = intent.metadata.get('save_info', 'false')
 
         # Safe access to charges
         charges = getattr(intent, 'charges', None)
-        billing_details = None
-        grand_total = None
-
         if charges and charges.data and len(charges.data) > 0:
             billing_details = charges.data[0].billing_details
             grand_total = round(charges.data[0].amount / 100, 2)
@@ -72,10 +71,10 @@ class StripeWH_Handler:
 
         # Update profile information if save_info was checked
         profile = None
-        username = intent.metadata.username
+        username = intent.metadata.get('username', 'AnonymousUser')
         if username != 'AnonymousUser':
             profile = UserProfile.objects.get(user__username=username)
-            if save_info:
+            if save_info == 'true':
                 profile.default_full_name = shipping_details.name
                 profile.default_phone_number = shipping_details.phone
                 profile.default_country = shipping_details.address.country
@@ -143,7 +142,7 @@ class StripeWH_Handler:
                         )
                         order_line_item.save()
                     else:
-                        for size, quantity in item_data['items_by_size'].items():
+                        for size, quantity in item_data.get('items_by_size', {}).items():
                             order_line_item = OrderLineItem(
                                 order=order,
                                 product=product,

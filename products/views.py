@@ -6,7 +6,7 @@ from django.db.models.functions import Lower
 from .models import Product, Category
 from .forms import ProductForm
 
-import json  # Required to pass variant list into JS
+import json  # To pass variant list into JS
 
 # Variant types that use size selection
 variant_options = [
@@ -41,7 +41,6 @@ POWER_TOOL_VARIANTS = [
     'orbital_sander',
 ]
 
-
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
     products = Product.objects.all()
@@ -68,7 +67,7 @@ def all_products(request):
         if 'category' in request.GET:
             category_filters = request.GET['category'].split(',')
 
-            # Start with base category filter
+            # Base category filter
             product_filter = Q(category__name__in=category_filters)
 
             expanded_categories = category_filters.copy()
@@ -78,14 +77,14 @@ def all_products(request):
                     category__name='new_arrivals',
                     variant_type__in=HAND_TOOL_VARIANTS
                 )
-                expanded_categories += ['new_arrivals']
+                expanded_categories.append('new_arrivals')
 
             if 'power_tools' in category_filters:
                 product_filter |= Q(
                     category__name='new_arrivals',
                     variant_type__in=POWER_TOOL_VARIANTS
                 )
-                expanded_categories += ['new_arrivals']
+                expanded_categories.append('new_arrivals')
 
             products = products.filter(product_filter)
             categories = Category.objects.filter(name__in=expanded_categories)
@@ -135,10 +134,33 @@ def add_product(request):
     else:
         form = ProductForm()
 
-    template = 'products/add_product.html'
     context = {
         'form': form,
         'variant_options': json.dumps(variant_options),
     }
 
-    return render(request, template, context)
+    return render(request, 'products/add_product.html', context)
+
+
+def edit_product(request, product_id):
+    """ Edit a product in the store """
+    product = get_object_or_404(Product, pk=product_id)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully updated product!')
+            return redirect(reverse('product_detail', args=[product.id]))
+        else:
+            messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+    else:
+        form = ProductForm(instance=product)
+        messages.info(request, f'You are editing {product.name}')
+
+    context = {
+        'form': form,
+        'product': product,
+        'variant_options': json.dumps(variant_options),
+    }
+
+    return render(request, 'products/edit_product.html', context)
