@@ -1,6 +1,6 @@
 from django import forms
+from .widgets import CustomClearableFileInput
 from .models import Product, Category
-
 
 class ProductForm(forms.ModelForm):
     VARIANTS_WITH_SIZES = [
@@ -14,6 +14,8 @@ class ProductForm(forms.ModelForm):
         'tape_measure',
         'hand_saw',
     ]
+
+    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)
 
     class Meta:
         model = Product
