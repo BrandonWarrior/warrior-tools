@@ -35,25 +35,24 @@ class StripeWH_Handler:
         )
 
     def handle_event(self, event):
-        """
-        Handle a generic/unknown/unexpected webhook event
-        """
+        """Handle a generic/unknown/unexpected webhook event"""
         return HttpResponse(
             content=f'Unhandled webhook received: {event["type"]}',
             status=200)
 
     def handle_payment_intent_succeeded(self, event):
-        """
-        Handle the payment_intent.succeeded webhook from Stripe
-        """
+        """Handle the payment_intent.succeeded webhook from Stripe"""
         intent = event.data.object
         pid = intent.id
-        
-        # Safely get bag and save_info from metadata
-        bag = intent.metadata.get('bag', '{}')
-        save_info = intent.metadata.get('save_info', 'false')
 
-        # Safe access to charges
+        # Safe metadata access
+        bag = getattr(intent.metadata, 'bag', '{}')
+        save_info = getattr(intent.metadata, 'save_info', 'false')
+        username = getattr(intent.metadata, 'username', 'AnonymousUser')
+
+        print(">>> Metadata received in webhook:", intent.metadata)
+
+        # Safe charges access
         charges = getattr(intent, 'charges', None)
         if charges and charges.data and len(charges.data) > 0:
             billing_details = charges.data[0].billing_details
@@ -62,37 +61,49 @@ class StripeWH_Handler:
             billing_details = getattr(intent, 'billing_details', None)
             grand_total = round(intent.amount / 100, 2)
 
+        # Safe shipping details
         shipping_details = intent.shipping
+        if not shipping_details or not shipping_details.address:
+            return HttpResponse(
+                content='Webhook received but shipping details missing.',
+                status=400
+            )
 
-        # Clean data in the shipping details
+        # Clean shipping address
         for field, value in shipping_details.address.items():
             if value == "":
                 shipping_details.address[field] = None
 
-        # Update profile information if save_info was checked
-        profile = None
-        username = intent.metadata.get('username', 'AnonymousUser')
-        if username != 'AnonymousUser':
-            profile = UserProfile.objects.get(user__username=username)
-            if save_info == 'true':
-                profile.default_full_name = shipping_details.name
-                profile.default_phone_number = shipping_details.phone
-                profile.default_country = shipping_details.address.country
-                profile.default_postcode = shipping_details.address.postal_code
-                profile.default_town_or_city = shipping_details.address.city
-                profile.default_street_address1 = shipping_details.address.line1
-                profile.default_street_address2 = shipping_details.address.line2
-                profile.default_county = shipping_details.address.state
-                profile.save()
+        # Defensive fallback values
+        phone_number = shipping_details.phone or ''
+        email = billing_details.email if billing_details and billing_details.email else ''
 
+        # Update profile if needed
+        profile = None
+        if username != 'AnonymousUser':
+            try:
+                profile = UserProfile.objects.get(user__username=username)
+                if save_info == 'true':
+                    profile.default_phone_number = phone_number
+                    profile.default_country = shipping_details.address.country
+                    profile.default_postcode = shipping_details.address.postal_code
+                    profile.default_town_or_city = shipping_details.address.city
+                    profile.default_street_address1 = shipping_details.address.line1
+                    profile.default_street_address2 = shipping_details.address.line2
+                    profile.default_county = shipping_details.address.state
+                    profile.save()
+            except UserProfile.DoesNotExist:
+                profile = None
+
+        # Check if order already exists
         order_exists = False
         attempt = 1
         while attempt <= 5:
             try:
                 order = Order.objects.get(
                     full_name__iexact=shipping_details.name,
-                    email__iexact=billing_details.email if billing_details else '',
-                    phone_number__iexact=shipping_details.phone,
+                    email__iexact=email,
+                    phone_number__iexact=phone_number,
                     country__iexact=shipping_details.address.country,
                     postcode__iexact=shipping_details.address.postal_code,
                     town_or_city__iexact=shipping_details.address.city,
@@ -120,8 +131,8 @@ class StripeWH_Handler:
                 order = Order.objects.create(
                     full_name=shipping_details.name,
                     user_profile=profile,
-                    email=billing_details.email if billing_details else '',
-                    phone_number=shipping_details.phone,
+                    email=email,
+                    phone_number=phone_number,
                     country=shipping_details.address.country,
                     postcode=shipping_details.address.postal_code,
                     town_or_city=shipping_details.address.city,
@@ -163,9 +174,7 @@ class StripeWH_Handler:
             status=200)
 
     def handle_payment_intent_payment_failed(self, event):
-        """
-        Handle the payment_intent.payment_failed webhook from Stripe
-        """
+        """Handle the payment_intent.payment_failed webhook from Stripe"""
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
             status=200)

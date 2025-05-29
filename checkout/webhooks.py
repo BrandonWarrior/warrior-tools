@@ -6,52 +6,51 @@ from django.views.decorators.csrf import csrf_exempt
 from checkout.webhook_handler import StripeWH_Handler
 
 import stripe
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 @require_POST
 @csrf_exempt
 def webhook(request):
     """Listen for webhooks from Stripe"""
-    # Setup
-    wh_secret = settings.STRIPE_WH_SECRET
     stripe.api_key = settings.STRIPE_SECRET_KEY
-
-    # Get the webhook data and verify its signature
+    wh_secret = settings.STRIPE_WH_SECRET
     payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-    event = None
+    sig_header = request.META.get('HTTP_STRIPE_SIGNATURE', '')
 
     try:
         event = stripe.Webhook.construct_event(
             payload, sig_header, wh_secret
         )
     except ValueError as e:
-        # Invalid payload
+        logger.error("Invalid payload: %s", e)
         return HttpResponse(status=400)
 
     except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
+        logger.warning("Invalid signature: %s", e)
         return HttpResponse(status=400)
 
     except Exception as e:
+        logger.exception("Unknown error during webhook construction")
         return HttpResponse(content=str(e), status=400)
 
     # Set up a webhook handler
     handler = StripeWH_Handler(request)
 
-    # Map webhook events to relevant handler functions
+    # Map webhook events to handler methods
     event_map = {
         'payment_intent.succeeded': handler.handle_payment_intent_succeeded,
         'payment_intent.payment_failed': handler.handle_payment_intent_payment_failed,
     }
 
-    # Get the event type from Stripe
-    event_type = event['type']
+    # Get the type of webhook from the event
+    event_type = event.get('type')
 
-    # If there's a handler for it, get it from the map;
-    # otherwise use the generic one
+    # Get the corresponding handler function or fallback to generic
     event_handler = event_map.get(event_type, handler.handle_event)
 
-    # Call the event handler
+    # Call the appropriate handler function
     response = event_handler(event)
     return response
