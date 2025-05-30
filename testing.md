@@ -43,3 +43,17 @@ I also didn’t have proper fallback logic in place to retrieve the email from o
 
 Fix:
 To resolve the issue, I added robust fallback logic in the webhook handler to check if charges exist and safely pull the email address. If the billing email is missing, it now falls back to receipt_email. I also added a guard clause to return a clean error response if an email still isn’t found, avoiding a crash. This fixed the 500 error, and Stripe webhooks are now being handled successfully.
+
+### 🐞 Bug Summary
+The “Wrenches & Pliers” category did not display any products when selected from the Hand Tools dropdown menu, even though products existed and showed up via search.
+
+Cause:
+The dropdown link was using an outdated category query string:
+?category=wrenches
+However, the actual category name (slug) in the database was updated to wrenches_and_pliers, resulting in no match and an empty product list.
+
+Fix:
+The dropdown link was corrected to use the updated category slug:
+The link in main-nav.html was changed from ?category=wrenches to ?category=wrenches_and_pliers.
+The combined “All Hand Tools” link was also updated to include wrenches_and_pliers in the list of categories.
+
