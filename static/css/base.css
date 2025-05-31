@@ -237,10 +237,10 @@ a.category-badge > span.badge:hover {
 
 @media (max-width: 991px) {
     .header-container {
-        padding-top: 116px;
+        padding-top: 160px; /* Increased from 116px */
     }
 
     body {
-        height: calc(100vh - 116px);
+        height: calc(100vh - 160px); /* Increased to match new padding */
     }
 }
