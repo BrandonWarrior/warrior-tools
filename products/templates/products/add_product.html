@@ -1,81 +1,38 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
-    </div>
+{% block body_class %}form-page{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/account_pages.css' %}">
 {% endblock %}
 
 {% block content %}
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <hr>
-                <h2 class="logo-font mb-4">Product Management</h2>
-                <h5 class="text-muted">Add a Product</h5>
-                <hr>
-            </div>
-        </div>
+<div class="content-wrapper">
+    <div class="form-container">
+        <hr>
+        <h2 class="logo-font mb-2">Add a Product</h2>
+        <h5 class="text-primary mb-4">Product Management</h5>
+        <hr>
 
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <form method="POST" action="{% url 'add_product' %}" class="form mb-2" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {% for field in form %}
-                        {% if field.name != 'image' %}
-                            {{ field|as_crispy_field }}
-                        {% else %}
-                            {{ field }}
-                        {% endif %}
-                    {% endfor %}
-                    <div class="text-right">
-                        <a class="btn btn-outline-black rounded-0" href="{% url 'products' %}">Cancel</a>
-                        <button class="btn btn-black rounded-0" type="submit">Add Product</button>
+        <form method="POST" action="{% url 'add_product' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                {% if field.name != 'image' %}
+                    {{ field|as_crispy_field }}
+                {% else %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label">Image:</label>
+                        {{ field }}
                     </div>
-                </form>
-            </div>            
-        </div>
+                {% endif %}
+            {% endfor %}
+
+            <div class="d-flex justify-content-between mt-4">
+                <a class="btn btn-outline-navy rounded-0" href="{% url 'products' %}">Cancel</a>
+                <button class="btn btn-navy rounded-0" type="submit">Add Product</button>
+            </div>
+        </form>
     </div>
-{% endblock %}
-
-{% block postloadjs %}
-    {{ block.super }}
-    <script type="text/javascript">
-        $('#new-image').change(function() {
-            var file = $('#new-image')[0].files[0];
-            $('#filename').text(`Image will be set to: ${file.name}`);
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const variantField = document.getElementById("id_variant_type");
-            const hasSizesCheckbox = document.getElementById("id_has_sizes");
-            const hasSizesRow = hasSizesCheckbox.closest(".form-group") || hasSizesCheckbox.closest(".mb-3");
-
-            // List of variants that require sizes (passed from context as JSON)
-            const variantsWithSizes = {{ variant_options|safe }};
-
-            function toggleHasSizesField() {
-                const selected = variantField.value;
-                const shouldShow = variantsWithSizes.includes(selected);
-
-                if (shouldShow) {
-                    hasSizesRow.style.display = "block";
-                    hasSizesCheckbox.disabled = false;
-                } else {
-                    hasSizesCheckbox.checked = false;
-                    hasSizesCheckbox.disabled = true;
-                    hasSizesRow.style.display = "none";
-                }
-            }
-
-            if (variantField && hasSizesCheckbox && hasSizesRow) {
-                toggleHasSizesField();
-                variantField.addEventListener("change", toggleHasSizesField);
-            }
-        });
-    </script>
+</div>
 {% endblock %}

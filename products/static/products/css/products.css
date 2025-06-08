@@ -1,0 +1,129 @@
+/* ===============================
+   PRODUCTS PAGE STYLING
+=============================== */
+
+/* Ensure white background */
+.products-page,
+.products-page-content,
+.products-page .container-fluid,
+.product-detail-page,
+.product-detail-content {
+    background-color: #ffffff !important;
+}
+
+/* Typography */
+.products-page .card *,
+.products-page .products-page-content *,
+.products-page .sort-select-wrapper *,
+.products-page .product-meta *,
+.product-detail-page .product-details-container p,
+.product-detail-page .product-details-container label,
+.product-detail-page .product-details-container select,
+.product-detail-page .product-details-container input,
+.product-detail-page .product-details-container small,
+.product-detail-page .product-details-container .product-price,
+.product-detail-page .product-details-container .product-name {
+    color: #1A4C8C !important;
+    font-family: 'Lato', sans-serif;
+}
+
+/* Page spacing */
+.products-page-content,
+.product-detail-content {
+    padding-top: 200px;
+}
+
+/* Headings */
+.products-page h2.products-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #1A4C8C !important;
+    font-family: 'Oswald', sans-serif;
+}
+
+/* Product cards */
+.products-page .card {
+    border: 1px solid #1A4C8C;
+    border-radius: 0;
+    background-color: #ffffff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.products-page .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+.products-page .card-img-top {
+    height: 180px;
+    object-fit: contain;
+    padding: 0.75rem;
+}
+.products-page .card-body {
+    padding: 1rem;
+}
+
+/* Product name */
+.products-page .card .logo-font,
+.product-detail-page .product-name.logo-font {
+    font-size: 1.25rem;
+    color: #1A4C8C !important;
+    font-family: 'Oswald', sans-serif;
+}
+
+/* Price */
+.product-price {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #1A4C8C;
+}
+
+/* Sort dropdown */
+.sort-select-wrapper select {
+    font-size: 0.9rem;
+    border-color: #1A4C8C;
+    color: #1A4C8C;
+    font-family: 'Lato', sans-serif;
+}
+
+/* Quantity Input */
+.product-detail-page .form-control,
+.product-detail-page .custom-select {
+    border: 1px solid #1A4C8C;
+    font-size: 0.95rem;
+    color: #1A4C8C;
+    font-family: 'Lato', sans-serif;
+}
+
+/* Font Awesome icon override */
+.products-page i.fas,
+.products-page i.far,
+.products-page i.fa,
+.product-detail-page i.fas,
+.product-detail-page i.far,
+.product-detail-page i.fa {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+}
+
+/* Back to Top button */
+.btt-button {
+    background-color: #1A4C8C;
+    border: 2px solid #ffffff;
+}
+.btt-link i {
+    color: #ffffff !important;
+    font-size: 1.2rem;
+}
+
+/* Responsive tweaks if needed */
+@media (max-width: 768px) {
+    .products-page .card-img-top {
+        height: 150px;
+    }
+}

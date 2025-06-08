@@ -1,0 +1,42 @@
+/* ==============================
+   INDEX PAGE STYLING
+============================== */
+
+.home-hero-wrapper {
+    padding-top: 100px; /* Adjust as needed to pull content higher */
+    background-color: #0B0F1A;
+    min-height: calc(100vh - 120px); /* optional: prevent hero from being too tall */
+}
+
+/* Optional hero layout tweaks */
+.hero-container {
+    padding: 2rem 1rem;
+}
+
+/* Logo tweaks if needed */
+.hero-logo {
+    max-width: 250px;
+}
+
+/* Hero heading */
+.home-page .logo-font {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #F5F5F5;
+}
+
+/* Shop Now button */
+.shop-now-button {
+    background-color: #000;
+    border: 1px solid #1A4C8C;
+    color: white;
+    padding: 0.75rem 2rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.shop-now-button:hover {
+    background-color: #1A4C8C;
+    color: white;
+}

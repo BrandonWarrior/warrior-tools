@@ -1,0 +1,69 @@
+/* ===============================
+   TOOL BAG PAGE STYLING
+=============================== */
+
+body.bag-page {
+    background-color: #ffffff;
+    color: #0B0F1A;
+    font-family: 'Lato', sans-serif;
+    padding-top: 20px;
+}
+
+/* Apply Oswald font to key elements */
+.bag-page .product-name,
+.bag-page .bag-total-label,
+.bag-page .grand-total-label,
+.bag-page td,
+.bag-page th,
+.bag-page p,
+.bag-page h6,
+.bag-page h4 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+}
+
+/* Top-level content spacing */
+.bag-content {
+    margin-top: 200px;
+}
+
+/* Ensure delivery banner text is visible */
+.delivery-banner h4 {
+    color: #F5F5F5 !important;
+}
+
+/* Table headers */
+.bag-page table th {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #0B0F1A;
+}
+
+/* Product image in bag */
+.bag-page .table img {
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Quantity input */
+.qty_input {
+    max-width: 60px;
+    text-align: center;
+}
+
+/* Update/remove links */
+.update-link {
+    color: #1A4C8C;
+    font-size: 0.85rem;
+}
+.remove-item {
+    color: #dc3545;
+    font-size: 0.85rem;
+}
+
+/* Smaller buttons in quantity controls */
+.bag-page .btn-sm {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.8rem;
+}

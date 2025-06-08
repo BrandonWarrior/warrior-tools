@@ -1,226 +1,302 @@
-html {
+/* ==============================
+   BASE STYLES FOR PROJECT
+============================== */
+
+/* GLOBAL RESET & TYPOGRAPHY */
+html, body {
     height: 100%;
-}
-
-body {
-    background: #f8f9fa; /* No background image yet */
-    height: calc(100vh - 164px);
-    color: #555;
     font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0B0F1A; /* Default fallback for home page */
+    color: #E0E0E0;
 }
 
-/* from Bulma */
-.icon {
-    align-items: center;
-    display: inline-flex;
-    justify-content: center;
-    height: 1.5rem;
-    width: 1.5rem;
+body.home-page {
+    padding-top: 164px;
+    background-color: #0B0F1A;
 }
 
+/* LIGHT PAGE BACKGROUNDS */
+body.products-page,
+body.bag-page,
+body.product-detail-page,
+body.checkout-page {
+    background-color: #ffffff !important;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 80%;
+}
+
+/* TYPOGRAPHY UTILITIES */
 .logo-font {
-    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
     font-weight: 700;
+    text-transform: uppercase;
+    color: #ffffff !important;
 }
 
-.main-logo-link {
-    width: fit-content;
+.products-page .products-page-content .logo-font,
+.bag-page .bag-content .logo-font,
+.product-detail-page .product-details-container .logo-font,
+.checkout-page .checkout-content .logo-font {
+    color: #1A4C8C !important;
 }
 
-.shop-now-button {
-    background: black;
-    color: white;
-    min-width: 260px;
+.text-primary {
+    color: #1A4C8C !important;
+}
+.text-white {
+    color: #ffffff !important;
+}
+.text-muted {
+    color: #6c757d !important;
 }
 
-.btn-black {
-    background: black;
-    color: white;
+/* HEADER & NAVBAR */
+.navbar,
+.delivery-banner,
+.row.pt-lg-2.d-none.d-lg-flex {
+    background-color: #0B0F1A !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #1A4C8C;
 }
 
+.navbar-nav .nav-link,
+.navbar a,
+.nav-link.text-light {
+    color: #ffffff !important;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+.navbar a:hover,
+.navbar-nav .nav-link:hover {
+    color: #ffffff !important;
+}
+
+.header-container {
+    padding-top: 164px;
+}
+
+.delivery-banner {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* ===============================
+   GLOBAL BUTTON STYLING (SHARED)
+=============================== */
+
+/* Core button structure */
+.btn,
+.btn-navy,
+.btn-outline-navy,
+.btn-black,
 .btn-outline-black {
-    background: white;
-    color: black !important;
-    border: 1px solid black;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.95rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0;
+    transition: all 0.2s ease-in-out;
 }
 
-.btn-outline-black:hover,
-.btn-outline-black:active,
-.btn-outline-black:focus {
-    background: black;
+/* Navy Filled */
+.btn-navy {
+    background-color: #1A4C8C;
+    color: white !important;
+    border: 1px solid #1A4C8C;
+}
+.btn-navy:hover {
+    background-color: #163f73;
+    border-color: #163f73;
+}
+
+/* Navy Outline */
+.btn-outline-navy {
+    background-color: white;
+    color: #1A4C8C !important;
+    border: 1px solid #1A4C8C;
+}
+.btn-outline-navy:hover {
+    background-color: #1A4C8C;
     color: white !important;
 }
 
-.shop-now-button:hover,
-.shop-now-button:active,
-.shop-now-button:focus,
+/* Black Filled */
+.btn-black {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
 .btn-black:hover,
-.btn-black:active,
 .btn-black:focus {
-    background: #222;
+    background-color: #1A4C8C;
+    border-color: #1A4C8C;
     color: white;
 }
 
-.text-black {
-    color: #000 !important;
+/* Black Outline */
+.btn-outline-black {
+    background-color: white;
+    color: black !important;
+    border: 1px solid black;
+}
+.btn-outline-black:hover {
+    background-color: #1A4C8C;
+    color: white !important;
+    border-color: #1A4C8C;
 }
 
-.border-black {
-    border: 1px solid black !important;
-}
-
-.bg-black {
-    background: #000 !important;
-}
-
-.overlay {
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    position: fixed;
-    background: white;
-    z-index: -1;
-}
-
-a.category-badge > span.badge:hover {
-    background: #212529 !important;
-    color: #fff !important;
-}
-
-.btt-button {
-    height: 42px;
-    width: 42px;
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-}
-
-.btt-link,
-.update-link,
-.remove-item {
-    cursor: pointer;
-}
-
-/* ------------------------------- bootstrap toasts */
-
-.message-container {
-    position: fixed;
-    top: 72px;
-    right: 15px;
-    z-index: 99999999999;
-}
-
-.custom-toast {
-    overflow: visible;
-}
-
-.toast-capper {
-    height: 2px;
-}
-
-.arrow-up {
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-bottom: 10px solid black;
-    position: absolute;
-    top: -10px;
-    right: 36px;
-}
-
-.arrow-success {
-    border-bottom-color: #28a745 !important;
-}
-
-.bag-notification-wrapper {
-    height: 100px;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-/* -------------------------------- Allauth form styling */
-
-.allauth-form-inner-content p {
-    margin-top: 1.5rem;
-    color: #6c757d;
-}
-
-.allauth-form-inner-content input {
-    border-color: #000;
+/* Small Qty Buttons (used in product/bag pages) */
+.btn-sm.qty-button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
     border-radius: 0;
+    background-color: #1A4C8C;
+    color: white;
+    border: 1px solid #1A4C8C;
 }
 
-.allauth-form-inner-content label:not([for='id_remember']) {
-    display: none;
+.btn-sm.qty-button:hover {
+    background-color: #163f73;
 }
 
-.allauth-form-inner-content input::placeholder {
-    color: #aab7c4;
-}
-
-.allauth-form-inner-content button,
-.allauth-form-inner-content input[type='submit'] {
-    display: inline-block;
-    font-weight: 400;
-    color: #fff;
-    background-color: #000;
-    border: 1px solid #000;
-    padding: .375rem .75rem;
+/* Qty Input field */
+.input-group .form-control.qty_input {
+    max-width: 60px;
+    text-align: center;
     font-size: 1rem;
-    line-height: 1.5;
+    border: 1px solid #1A4C8C;
     border-radius: 0;
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+    color: #1A4C8C;
 }
 
-.allauth-form-inner-content button:hover,
-.allauth-form-inner-content input[type='submit']:hover {
-    background-color: #222;
-    border-color: #222;
+/* ICON COLORS */
+.fa-user,
+.fa-shopping-bag,
+.fa-tag,
+.fa-star,
+.fa-wrench {
+    color: #ffffff !important;
 }
 
-.allauth-form-inner-content a {
-    color: #17a2b8;
+/* CART TOTAL */
+.cart-link {
+    color: #ffffff !important;
+    text-decoration: none;
+}
+.cart-link:hover {
+    color: #ffffff !important;
+}
+.cart-total {
+    color: #ffffff !important;
+    font-weight: bold;
+    font-size: 1rem;
 }
 
-/* Product Form */
-
-.btn-file {
-    position: relative;
-    overflow: hidden;
+/* SEARCH BAR */
+.search-input {
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    padding: 0.375rem 0.75rem;
+    height: 100%;
+    box-shadow: none;
 }
 
-.btn-file input[type="file"] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    opacity: 0;
+.search-button {
+    background-color: #1A4C8C;
+    border: 1px solid #1A4C8C;
+    border-radius: 0 4px 4px 0;
+    color: white !important;
+    padding: 0.375rem 0.75rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.search-button:hover {
+    background-color: #163f73;
+    border-color: #163f73;
+    color: white !important;
+}
+
+/* DROPDOWN MENU */
+.dropdown-menu {
+    background-color: #0B0F1A;
+    border: 1px solid #1A4C8C;
+    border-radius: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    padding: 0;
+}
+
+.dropdown-item {
+    color: #F5F5F5 !important;
+    font-family: 'Lato', sans-serif;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease-in-out;
+}
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #1A4C8C !important;
+    color: #ffffff !important;
+}
+
+/* BACK TO TOP */
+.btt-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    height: 48px;
+    width: 48px;
+    background-color: #1A4C8C;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease-in-out;
     cursor: pointer;
 }
 
-.custom-checkbox .custom-control-label::before {
-    border-radius: 0;
-    border-color: #dc3545;
+.btt-button:hover {
+    background-color: #163f73;
 }
 
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    border-radius: 0;
+.btt-link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 }
 
+.btt-link i {
+    color: #fff;
+    font-size: 1.2rem;
+}
 
-/* -------------------------------- Media Queries */
-
-@media (min-width: 1200px) {
-    .container {
-        max-width: 80%;
+/* RESPONSIVE BUTTON ADJUSTMENTS */
+@media (max-width: 768px) {
+    .btn,
+    .btn-navy,
+    .btn-outline-navy {
+        width: 100%;
+        margin-bottom: 1rem;
     }
 }
 
+/* FIXED HEADER ON DESKTOP */
 @media (min-width: 992px) {
     .fixed-top-desktop-only {
         position: fixed;
@@ -229,18 +305,14 @@ a.category-badge > span.badge:hover {
         left: 0;
         z-index: 1030;
     }
-
-    .header-container {
-        padding-top: 164px;
-    }
 }
 
 @media (max-width: 991px) {
-    .header-container {
-        padding-top: 160px; /* Increased from 116px */
+    body {
+        padding-top: 220px;
     }
 
-    body {
-        height: calc(100vh - 160px); /* Increased to match new padding */
+    .header-container {
+        padding-top: 160px;
     }
 }

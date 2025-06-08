@@ -1,3 +1,72 @@
+/* ===============================
+   CHECKOUT PAGE STYLING
+=============================== */
+
+/* Wrapper fixes full width background */
+.checkout-page-wrapper {
+    background-color: #ffffff;
+    width: 100%;
+}
+
+/* Page content container */
+.checkout-content {
+    margin-top: 100px;
+    padding-bottom: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Scoped Typography: avoid affecting buttons */
+.checkout-page .checkout-content h1,
+.checkout-page .checkout-content h2,
+.checkout-page .checkout-content h3,
+.checkout-page .checkout-content p,
+.checkout-page .checkout-content label,
+.checkout-page .checkout-content legend,
+.checkout-page .checkout-content small,
+.checkout-page .checkout-content .fieldset-label {
+    color: #1A4C8C;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+}
+
+/* Override for button text */
+.checkout-page .btn,
+.checkout-page .btn *,
+.checkout-page .btn-navy,
+.checkout-page .btn-navy *,
+.checkout-page .btn-outline-navy,
+.checkout-page .btn-outline-navy * {
+    color: white !important;
+}
+
+.checkout-page .btn-outline-navy,
+.checkout-page .btn-outline-navy * {
+    color: #1A4C8C !important;
+}
+
+/* Form field styling */
+.checkout-page .form-control,
+.checkout-page select,
+.checkout-page input,
+.checkout-page .StripeElement {
+    background-color: #ffffff;
+    color: #0B0F1A;
+    border: 1px solid #1A4C8C;
+    border-radius: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+.checkout-page .form-control::placeholder {
+    color: #aab7c4;
+}
+
+.checkout-page select:invalid,
+.checkout-page select option[value=""] {
+    color: #aab7c4 !important;
+}
+
+/* Stripe styles */
 .StripeElement,
 .stripe-style-input {
     box-sizing: border-box;
@@ -20,32 +89,12 @@
     background-color: #fefde5 !important;
 }
 
-.stripe-style-input::placeholder {
-    color: #aab7c4;
+/* Submit buttons */
+.submit-button .btn {
+    margin-bottom: 1rem;
 }
 
-.fieldset-label {
-    position: relative;
-    right: .5rem;
-}
-
-#payment-form .form-control,
-#card-element {
-    color: #000;
-    border: 1px solid #000;
-}
-
-select, 
-select option {
-    color: #000000;
-}
-
-select:invalid,
-select option[value=""] {
-    color: #aab7c4 !important;
-}
-
-/* Warrior Tools themed loading overlay */
+/* Loading overlay */
 #loading-overlay {
     display: none;
     position: fixed;
@@ -53,7 +102,7 @@ select option[value=""] {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9); /* darker industrial look */
+    background: rgba(0, 0, 0, 0.9);
     z-index: 9999;
 }
 
@@ -61,18 +110,25 @@ select option[value=""] {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0;
     height: 100%;
     flex-direction: column;
     text-align: center;
 }
 
 .loading-spinner i {
-    color: #ffc107; /* yellow gear */
+    color: #ffc107;
 }
 
 .loading-spinner h4,
 .loading-spinner p {
     color: #fff;
-    margin-top: 15px;
+    margin-top: 200px;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+    .submit-button .btn {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
 }
