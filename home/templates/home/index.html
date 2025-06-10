@@ -15,8 +15,17 @@
             <a href="{% url 'products' %}" class="btn btn-outline-light btn-lg mt-3 shop-now-button">
                 Shop Now
             </a>
+
+            <!-- New CTA buttons below -->
+            <div class="mt-4">
+                <a href="{% url 'create_testimonial' %}" class="btn btn-success btn-lg mx-2 rounded-0">
+                    Leave a Review
+                </a>
+                <a href="{% url 'testimonial_list' %}" class="btn btn-outline-light btn-lg mx-2 rounded-0">
+                    View Testimonials
+                </a>
+            </div>
         </div>
     </div>
 </div>
 {% endblock %}
-

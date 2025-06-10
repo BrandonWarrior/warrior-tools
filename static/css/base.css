@@ -286,6 +286,104 @@ body.checkout-page {
     font-size: 1.2rem;
 }
 
+/* ========== TOAST STYLES ========== */
+
+.message-container {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    z-index: 1055;
+    max-width: 360px;
+}
+
+/* Toast Wrapper */
+.custom-toast {
+    background-color: #0B0F1A;
+    color: #E0E0E0;
+    border: 1px solid #1A4C8C;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+    overflow: visible;
+    border-radius: 4px;
+}
+
+/* Toast Header */
+.toast-header {
+    background-color: #1A4C8C;
+    color: #ffffff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    border-bottom: none;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Toast Title */
+.toast-header strong {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Close Button */
+.toast-header .close {
+    font-size: 1.5rem;
+    color: #ffffff !important;
+    opacity: 1;
+    padding: 0 0.75rem;
+    line-height: 1;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.toast-header .close:hover {
+    color: #ffc107 !important;
+}
+
+/* Toast Body */
+.toast-body {
+    background-color: #0B0F1A;
+    color: #E0E0E0;
+    padding: 1rem;
+}
+
+/* Capper Strip */
+.toast-capper {
+    height: 2px;
+}
+
+/* Triangle Pointer */
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    position: absolute;
+    top: -10px;
+    right: 36px;
+}
+
+/* Color Variants */
+.arrow-success { border-bottom: 10px solid #28a745; }
+.arrow-danger  { border-bottom: 10px solid #dc3545; }
+.arrow-warning { border-bottom: 10px solid #ffc107; }
+.arrow-info    { border-bottom: 10px solid #17a2b8; }
+
+.toast-capper.bg-success { background-color: #28a745; }
+.toast-capper.bg-danger  { background-color: #dc3545; }
+.toast-capper.bg-warning { background-color: #ffc107; }
+.toast-capper.bg-info    { background-color: #17a2b8; }
+
+/* Scrollable bag preview */
+.bag-notification-wrapper {
+    max-height: 120px;
+    overflow-y: auto;
+    border-top: 1px solid #444;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+}
+
 /* RESPONSIVE BUTTON ADJUSTMENTS */
 @media (max-width: 768px) {
     .btn,

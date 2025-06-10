@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}products-page testimonials-page{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'testimonial/css/testimonial.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container products-page-content mt-5 pt-5">
+    <!-- Back to Home Button -->
+    <div class="mb-4">
+        <a href="{% url 'home' %}" class="btn btn-outline-navy">
+            &larr; Back to Home
+        </a>
+    </div>
+
+    <div class="text-center mb-4">
+        <h2 class="logo-font text-primary">Testimonials</h2>
+        <p class="text-muted">Hear what our customers have to say about Warrior Tools.</p>
+    </div>
+
+    {% if messages %}
+        <div class="mb-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        {% for testimonial in testimonials %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">By {{ testimonial.author.username }}</h5>
+
+                        <!-- Star Rating -->
+                        <p class="mb-2 star-rating">
+                            {% with rating=testimonial.rating|add:"0" %}
+                                {% for i in "12345"|make_list %}
+                                    {% if forloop.counter <= rating %}
+                                        <i class="fas fa-star"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endwith %}
+                        </p>
+
+                        <!-- Full Testimonial Content -->
+                        <p class="card-text text-theme-blue">{{ testimonial.content }}</p>
+                        <p class="text-muted">{{ testimonial.created_at|date:"F j, Y" }}</p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12 text-center text-muted">
+                <p>No testimonials yet. Be the first to share your experience!</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'create_testimonial' %}" class="btn btn-navy btn-lg">
+            Submit Your Testimonial
+        </a>
+    </div>
+</div>
+{% endblock %}
