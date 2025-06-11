@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}newsletter-page{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'newsletter/css/newsletter.css' %}">
+{% endblock %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col text-center">
+            <h2 class="logo-font text-uppercase mt-5">Unsubscribe</h2>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="newsletter-page-wrapper">
+    <div class="container newsletter-content">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                <form method="POST" class="mb-5">
+                    {% csrf_token %}
+                    <label for="email">Enter your email to unsubscribe:</label>
+                    <input type="email" name="email" class="form-control mb-3" required>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-danger rounded-0">Unsubscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

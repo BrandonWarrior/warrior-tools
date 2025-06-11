@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 
-from .models import Product, Category
+from .models import Product, Category, WishlistItem
 from .forms import ProductForm
+
 
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
@@ -55,13 +56,21 @@ def all_products(request):
 
     return render(request, 'products/products.html', context)
 
+
 def product_detail(request, product_id):
     """ A view to show individual product details """
     product = get_object_or_404(Product, pk=product_id)
+    in_wishlist = False
+
+    if request.user.is_authenticated:
+        in_wishlist = WishlistItem.objects.filter(user=request.user, product=product).exists()
+
     context = {
         'product': product,
+        'in_wishlist': in_wishlist,
     }
     return render(request, 'products/product_detail.html', context)
+
 
 @login_required
 def add_product(request):
@@ -83,6 +92,7 @@ def add_product(request):
 
     context = {'form': form}
     return render(request, 'products/add_product.html', context)
+
 
 @login_required
 def edit_product(request, product_id):
@@ -110,6 +120,7 @@ def edit_product(request, product_id):
     }
     return render(request, 'products/edit_product.html', context)
 
+
 @login_required
 def delete_product(request, product_id):
     """ Delete a product from the store """
@@ -121,3 +132,18 @@ def delete_product(request, product_id):
     product.delete()
     messages.success(request, 'Product deleted!')
     return redirect(reverse('products'))
+
+
+@login_required
+def toggle_wishlist(request, product_id):
+    """ Add or remove a product from the user's wishlist """
+    product = get_object_or_404(Product, pk=product_id)
+    wishlist_item, created = WishlistItem.objects.get_or_create(user=request.user, product=product)
+
+    if not created:
+        wishlist_item.delete()
+        messages.info(request, f'Removed {product.name} from your wishlist.')
+    else:
+        messages.success(request, f'Added {product.name} to your wishlist.')
+
+    return redirect(request.META.get('HTTP_REFERER', 'products'))

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Warrior Tools!</title>
+    <style>
+        .email-container {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            font-family: Arial, sans-serif;
+        }
+
+        .cta-button {
+            background-color: #1A4C8C;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            display: inline-block;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f4f4f4;">
+    <table align="center" cellpadding="0" cellspacing="0" width="100%" style="padding: 20px;">
+        <tr>
+            <td align="center">
+                <div class="email-container">
+                    <!-- Greeting -->
+                    <p style="font-size: 18px; color: #1A4C8C;">Hello {{ email }},</p>
+
+                    <!-- Message -->
+                    <p style="font-size: 16px; color: #333;">
+                        Thanks for signing up for the <strong>Warrior Tools Newsletter</strong>!
+                    </p>
+                    <p style="font-size: 16px; color: #333;">Here’s what you can expect:</p>
+                    <ul style="font-size: 16px; color: #333;">
+                        <li>🛠️ New product launches</li>
+                        <li>🎯 Tool care and usage tips</li>
+                        <li>💥 Exclusive subscriber discounts</li>
+                    </ul>
+                    <p style="font-size: 16px; color: #333;">We’re excited to have you with us!</p>
+
+                    <!-- CTA Button -->
+                    <div style="text-align: center; margin: 20px 0;">
+                        <a href="https://warrior-tools-21c01546c8bd.herokuapp.com" class="cta-button">Visit Warrior Tools</a>
+                    </div>
+
+                    <!-- Unsubscribe -->
+                    <div class="footer-text">
+                        Don’t want to receive these emails?
+                        <a href="https://warrior-tools-21c01546c8bd.herokuapp.com/newsletter/unsubscribe/?token={{ unsubscribe_token }}" style="color: #999;">Unsubscribe</a>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="footer-text">
+                        {{ contact_email }}
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

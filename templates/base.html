@@ -11,19 +11,15 @@
   {% block extra_meta %}{% endblock %}
 
   {% block corecss %}
-    <!-- Bootstrap + Fonts -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Oswald&display=swap">
-    <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/75fa94fb6a.js" crossorigin="anonymous"></script>
-    <!-- Custom Styles -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}?v=3">
   {% endblock %}
 
   {% block extra_css %}{% endblock %}
 
   {% block corejs %}
-    <!-- Stripe -->
     <script src="https://js.stripe.com/v3/"></script>
   {% endblock %}
 
@@ -113,8 +109,8 @@
     </div>
   </header>
 
-  <!-- Messages -->
-  {% if messages %}
+  <!-- Toast Messages -->
+  {% if messages and request.path != '/newsletter/subscribe/' and request.path != '/newsletter/unsubscribe/' %}
     <div class="message-container">
       {% for message in messages %}
         {% with message.level as level %}

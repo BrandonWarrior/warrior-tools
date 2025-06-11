@@ -1,0 +1,13 @@
+Hi there,
+
+Thanks for signing up to the Warrior Tools Newsletter!
+
+You’ll now receive:
+- Tool launch announcements
+- Exclusive discount codes
+- Tips for sharpening your warrior skills
+
+Stay strong, and thanks for joining us.
+
+– The Warrior Tools Team  
+{{ contact_email }}

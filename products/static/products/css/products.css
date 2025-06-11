@@ -121,6 +121,24 @@
     font-size: 1.2rem;
 }
 
+/* Wishlist Heart Styling */
+.wishlist-btn i {
+    transition: color 0.3s ease;
+    font-size: 1.3rem;
+}
+
+.wishlist-btn i.text-danger {
+    color: #dc3545 !important; /* Bootstrap's red */
+}
+
+.wishlist-btn i.text-muted {
+    color: #6c757d !important; /* Bootstrap's muted gray */
+}
+
+.wishlist-btn:hover i {
+    opacity: 0.8;
+}
+
 /* Responsive tweaks if needed */
 @media (max-width: 768px) {
     .products-page .card-img-top {

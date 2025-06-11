@@ -12,17 +12,22 @@
     <div class="row">
         <div class="col text-center">
             <h1 class="display-4 logo-font text-white mt-3">Welcome to Warrior Tools</h1>
+
+            <!-- Shop Now button -->
             <a href="{% url 'products' %}" class="btn btn-outline-light btn-lg mt-3 shop-now-button">
                 Shop Now
             </a>
 
-            <!-- New CTA buttons below -->
+            <!-- Additional CTA buttons -->
             <div class="mt-4">
                 <a href="{% url 'create_testimonial' %}" class="btn btn-success btn-lg mx-2 rounded-0">
                     Leave a Review
                 </a>
                 <a href="{% url 'testimonial_list' %}" class="btn btn-outline-light btn-lg mx-2 rounded-0">
                     View Testimonials
+                </a>
+                <a href="{% url 'newsletter_signup' %}" class="btn btn-primary btn-lg mx-2 rounded-0">
+                    Newsletter Signup
                 </a>
             </div>
         </div>

@@ -1,21 +1,112 @@
-.order-history {
-    max-height: 416px;
-    overflow-y: auto;
+/* Set full white background for entire page */
+html.profile-page,
+body.profile-page,
+.profile-page-wrapper {
+    background-color: #ffffff !important;
+    color: #0B0F1A;
+    font-family: 'Lato', sans-serif;
 }
 
-#profile-update-form .form-control {
-    color: #000;
+/* Contained profile content */
+.profile-container {
+    margin-top: 160px;
+    padding-bottom: 60px;
+}
+
+/* Headings */
+.profile-container h2,
+.profile-container h4 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #1A4C8C;
+}
+
+/* Form Fields */
+#profile-update-form input,
+#profile-update-form select,
+#profile-update-form textarea {
+    background-color: #ffffff;
+    color: #0B0F1A;
+    border: 1px solid #1A4C8C;
+    border-radius: 0;
+    padding: 10px;
+    margin-bottom: 16px;
+    width: 100%;
+    font-family: 'Lato', sans-serif;
 }
 
 #profile-update-form input::placeholder {
     color: #aab7c4;
 }
 
-#id_default_country,
+/* Country dropdown */
 #id_default_country option:not(:first-child) {
-    color: #000;
+    color: #0B0F1A;
 }
-
 #id_default_country option:first-child {
     color: #aab7c4;
+}
+
+/* Submit button */
+#profile-update-form .btn {
+    background-color: #1A4C8C;
+    color: white;
+    border: 1px solid #1A4C8C;
+    border-radius: 0;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+#profile-update-form .btn:hover {
+    background-color: #163f73;
+    border-color: #163f73;
+}
+
+/* Order History Table */
+.order-history table {
+    width: 100%;
+    font-size: 14px;
+    color: #1A4C8C;
+}
+
+.order-history th {
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+}
+
+.order-history td {
+    vertical-align: top;
+}
+
+.order-history a {
+    color: #1A4C8C;
+    text-decoration: underline;
+}
+
+.order-history {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Wishlist */
+.card-title,
+.card-text {
+    color: #1A4C8C;
+}
+
+.btn-outline-navy {
+    background-color: #fff;
+    color: #1A4C8C;
+    border: 1px solid #1A4C8C;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+}
+
+.btn-outline-navy:hover {
+    background-color: #1A4C8C;
+    color: #ffffff;
 }

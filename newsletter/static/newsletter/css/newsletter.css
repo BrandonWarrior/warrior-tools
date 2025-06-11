@@ -1,0 +1,169 @@
+/* ===============================
+   NEWSLETTER PAGE STYLING
+=============================== */
+
+/* White background for the full newsletter page */
+.newsletter-page {
+    background-color: #ffffff;
+}
+
+/* Main wrapper */
+.newsletter-page-wrapper {
+    background-color: #ffffff;
+    width: 100%;
+}
+
+/* Content layout spacing */
+.newsletter-content {
+    margin-top: 30px; /* Reduced from 100px to close the gap */
+    padding-bottom: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Heading styling - scoped to header + content ONLY */
+.newsletter-page .header-container .logo-font,
+.newsletter-page .newsletter-content .logo-font {
+    color: #1A4C8C !important;
+}
+
+/* Header spacing fix */
+.newsletter-page .header-container h2.logo-font {
+    margin-bottom: 0.5rem;
+}
+
+/* Override text-muted within content only */
+.newsletter-page .newsletter-content .text-muted {
+    color: #1A4C8C !important;
+    font-weight: 500;
+    font-family: 'Oswald', sans-serif;
+}
+
+/* Headings inside newsletter content */
+.newsletter-page .newsletter-content h1,
+.newsletter-page .newsletter-content h2,
+.newsletter-page .newsletter-content h3 {
+    color: #1A4C8C;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Paragraph and form labels */
+.newsletter-page .newsletter-content p,
+.newsletter-page .newsletter-content label,
+.newsletter-page .newsletter-content legend,
+.newsletter-page .newsletter-content small,
+.newsletter-page .newsletter-content .fieldset-label {
+    color: #1A4C8C;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Form input fields */
+.newsletter-page .form-control,
+.newsletter-page input,
+.newsletter-page select {
+    background-color: #ffffff;
+    color: #0B0F1A;
+    border: 1px solid #1A4C8C;
+    border-radius: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+.newsletter-page .form-control::placeholder {
+    color: #aab7c4;
+}
+
+.newsletter-page select:invalid,
+.newsletter-page select option[value=""] {
+    color: #aab7c4 !important;
+}
+
+/* Button styling */
+.newsletter-page .btn,
+.newsletter-page .btn *,
+.newsletter-page .btn-navy,
+.newsletter-page .btn-navy * {
+    color: white !important;
+    background-color: #1A4C8C;
+    border: none;
+}
+
+.newsletter-page .btn-outline-navy,
+.newsletter-page .btn-outline-navy * {
+    color: #1A4C8C !important;
+    border: 1px solid #1A4C8C;
+    background-color: #ffffff;
+}
+
+.newsletter-page .btn-outline-navy:hover,
+.newsletter-page .btn-outline-navy:hover * {
+    background-color: #1A4C8C;
+    color: white !important;
+}
+
+/* Button container */
+.newsletter-page .submit-button .btn {
+    margin-bottom: 1rem;
+    padding: 10px 25px;
+}
+
+/* Back to Home override for placement + style */
+.newsletter-page .back-button-wrapper {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+}
+
+.newsletter-page .back-button-wrapper .btn-outline-navy {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Styled HR line */
+.newsletter-page hr {
+    border: none;
+    border-top: 2px solid #1A4C8C;
+    width: 60%;
+    margin: 1.5rem auto;
+}
+
+/* Flash messages (e.g. subscription success) */
+.newsletter-page .alert {
+    background-color: #e9f0fc;
+    color: #1A4C8C;
+    border-left: 5px solid #1A4C8C;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    padding: 10px 15px;
+    border-radius: 0;
+    text-align: center;
+}
+
+/* Text selection highlight */
+.newsletter-page ::selection {
+    background: #1A4C8C;
+    color: white;
+}
+
+/* Responsive behavior for mobile */
+@media (max-width: 768px) {
+    .newsletter-page .submit-button .btn {
+        width: 100%;
+    }
+
+    .newsletter-page .back-button-wrapper {
+        position: static;
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+}

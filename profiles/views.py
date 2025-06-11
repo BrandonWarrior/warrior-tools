@@ -4,12 +4,14 @@ from django.contrib.auth.decorators import login_required
 
 from .models import UserProfile
 from .forms import UserProfileForm
+from products.models import WishlistItem
 
 from checkout.models import Order
 
+
 @login_required
 def profile(request):
-    """ Display the user's profile. """
+    """ Display the user's profile with delivery info, order history, and wishlist. """
     profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
@@ -21,19 +23,26 @@ def profile(request):
             messages.error(request, 'Update failed. Please ensure the form is valid.')
     else:
         form = UserProfileForm(instance=profile)
+
     orders = profile.orders.all()
+
+    # Fetch wishlist items for this user
+    wishlist_items = request.user.wishlist_items.select_related('product')
 
     template = 'profiles/profile.html'
     context = {
         'form': form,
         'orders': orders,
-        'on_profile_page': True
+        'wishlist_items': wishlist_items,
+        'on_profile_page': True,
     }
 
     return render(request, template, context)
 
 
+@login_required
 def order_history(request, order_number):
+    """ Display the order confirmation again from profile. """
     order = get_object_or_404(Order, order_number=order_number)
 
     messages.info(request, (
