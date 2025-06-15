@@ -139,6 +139,17 @@
     opacity: 0.8;
 }
 
+/* ✅ Wishlist button fix: prevent jump on toggle */
+.wishlist-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 160px;
+    gap: 6px;
+    padding: 0.5rem 1.25rem;
+    text-align: center;
+}
+
 /* Responsive tweaks if needed */
 @media (max-width: 768px) {
     .products-page .card-img-top {

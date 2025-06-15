@@ -60,19 +60,20 @@
         {% endif %}
 
         <!-- Wishlist Toggle -->
-{% if request.user.is_authenticated %}
-<form method="POST" action="{% url 'toggle_wishlist' product.id %}" class="d-inline-block ml-2">
-  {% csrf_token %}
-  <button type="submit" class="btn btn-link p-0 wishlist-btn" title="Toggle Wishlist">
-    {% if in_wishlist %}
-      <i class="fas fa-heart text-danger"></i>
-    {% else %}
-      <i class="far fa-heart text-muted"></i>
-    {% endif %}
-  </button>
-</form>
-{% endif %}
-
+        {% if request.user.is_authenticated %}
+        <form method="POST" action="{% url 'toggle_wishlist' product.id %}" class="d-inline-block mt-3">
+          {% csrf_token %}
+          <button type="submit"
+                  class="btn btn-outline-navy btn-sm rounded-0 wishlist-btn"
+                  title="{% if in_wishlist %}Remove from Wishlist{% else %}Add to Wishlist{% endif %}">
+            {% if in_wishlist %}
+              <i class="fas fa-heart text-danger mr-1"></i> In Wishlist
+            {% else %}
+              <i class="far fa-heart text-muted mr-1"></i> Add to Wishlist
+            {% endif %}
+          </button>
+        </form>
+        {% endif %}
 
         <!-- Description -->
         <p class="mt-3">{{ product.description }}</p>
