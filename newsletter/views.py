@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import NewsletterSignupForm
 from .models import NewsletterSubscriber
-from .email import send_newsletter_confirmation_email
+from .email import send_newsletter_confirmation_email, send_unsubscribe_email  # ✅ Add this import
+
 
 def newsletter_signup(request):
     """
@@ -25,12 +26,16 @@ def newsletter_signup(request):
 def newsletter_unsubscribe(request):
     """
     Allow users to unsubscribe from the newsletter by submitting their email.
+    Sends an unsubscribe confirmation email.
     """
     if request.method == 'POST':
         email = request.POST.get('email')
         try:
             subscriber = NewsletterSubscriber.objects.get(email=email)
             subscriber.delete()
+
+            send_unsubscribe_email(email)  # ✅ Send the unsubscribe email
+
             messages.success(request, "You've been unsubscribed from the Warrior Tools Newsletter.")
         except NewsletterSubscriber.DoesNotExist:
             messages.error(request, "That email is not subscribed.")
