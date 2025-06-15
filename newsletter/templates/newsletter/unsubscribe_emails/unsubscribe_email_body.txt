@@ -1,0 +1,8 @@
+Hi,
+
+You have successfully unsubscribed from the Warrior Tools Newsletter.
+
+If this was a mistake, you can resubscribe any time at:
+https://warrior-tools-21c01546c8bd.herokuapp.com/newsletter/subscribe/
+
+{{ contact_email }}
