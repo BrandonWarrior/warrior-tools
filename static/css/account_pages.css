@@ -93,7 +93,7 @@ body.form-page .form-container .btn-navy:hover {
     border-color: #163f73;
 }
 
-/* Fix: Outline button ("Home") visibility */
+/* Outline button ("Home") visibility */
 body.form-page .form-container .btn-outline-navy {
     background-color: #ffffff !important;
     color: #1A4C8C !important;
@@ -142,4 +142,21 @@ body.form-page .form-container .login-or {
     body.form-page .form-container h2 {
         font-size: 28px;
     }
+}
+
+/* ============================
+   SIGN UP LINK (Inline Style)
+============================ */
+
+.signup-link {
+    color: #17a2b8;               /* Teal (Bootstrap text-info) */
+    font-weight: 600;            /* Slightly bold */
+    font-family: 'Lato', sans-serif;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.signup-link:hover {
+    color: #117a8b;              /* Slightly darker teal on hover */
+    text-decoration: underline;
 }

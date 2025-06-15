@@ -286,7 +286,7 @@ body.checkout-page {
     font-size: 1.2rem;
 }
 
-/* ========== TOAST STYLES ========== */
+/* === TOAST STYLES (CUSTOM) === */
 
 .message-container {
     position: fixed;
@@ -296,7 +296,7 @@ body.checkout-page {
     max-width: 360px;
 }
 
-/* Toast Wrapper */
+/* Toast Box Wrapper */
 .custom-toast {
     background-color: #0B0F1A;
     color: #E0E0E0;
@@ -306,7 +306,7 @@ body.checkout-page {
     border-radius: 4px;
 }
 
-/* Toast Header */
+/* Toast Header Bar */
 .toast-header {
     background-color: #1A4C8C;
     color: #ffffff;
@@ -319,13 +319,13 @@ body.checkout-page {
     justify-content: space-between;
 }
 
-/* Toast Title */
+/* Toast Title Text */
 .toast-header strong {
     font-weight: 700;
     letter-spacing: 0.5px;
 }
 
-/* Close Button */
+/* Close X Button */
 .toast-header .close {
     font-size: 1.5rem;
     color: #ffffff !important;
@@ -336,24 +336,23 @@ body.checkout-page {
     border: none;
     cursor: pointer;
 }
-
 .toast-header .close:hover {
     color: #ffc107 !important;
 }
 
-/* Toast Body */
+/* Toast Content Body */
 .toast-body {
     background-color: #0B0F1A;
     color: #E0E0E0;
     padding: 1rem;
 }
 
-/* Capper Strip */
+/* Toast Capper Strip */
 .toast-capper {
     height: 2px;
 }
 
-/* Triangle Pointer */
+/* Pointer Triangle */
 .arrow-up {
     width: 0;
     height: 0;
@@ -364,7 +363,7 @@ body.checkout-page {
     right: 36px;
 }
 
-/* Color Variants */
+/* Triangle Color Variants */
 .arrow-success { border-bottom: 10px solid #28a745; }
 .arrow-danger  { border-bottom: 10px solid #dc3545; }
 .arrow-warning { border-bottom: 10px solid #ffc107; }
@@ -375,13 +374,28 @@ body.checkout-page {
 .toast-capper.bg-warning { background-color: #ffc107; }
 .toast-capper.bg-info    { background-color: #17a2b8; }
 
-/* Scrollable bag preview */
+/* Bag content scroll area */
 .bag-notification-wrapper {
     max-height: 120px;
     overflow-y: auto;
     border-top: 1px solid #444;
     margin-top: 0.5rem;
     padding-top: 0.5rem;
+}
+
+/* Free Delivery Toast Block — Yellow with Navy Text */
+.free-delivery-toast {
+    background-color: #ffc107;
+    color: #1A4C8C;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+    border-radius: 2px;
+}
+
+/* Override muted text in toast (for Qty) */
+.toast-body .text-muted {
+    color: #ffffff !important;
 }
 
 /* RESPONSIVE BUTTON ADJUSTMENTS */

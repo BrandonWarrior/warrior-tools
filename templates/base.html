@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Oswald&display=swap">
     <script src="https://kit.fontawesome.com/75fa94fb6a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/base.css' %}?v=3">
+    <link rel="stylesheet" href="{% static 'css/account_pages.css' %}?v=1">
   {% endblock %}
 
   {% block extra_css %}{% endblock %}
@@ -67,7 +68,7 @@
                 <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
                 <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
               {% else %}
-                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                <a href="{% url 'account_signup' %}" class="dropdown-item">Sign Up</a>
                 <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
               {% endif %}
             </div>

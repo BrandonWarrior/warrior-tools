@@ -5,14 +5,17 @@
 {% block body_class %}bag-page{% endblock %}
 
 {% block extra_css %}
+<!-- Load custom CSS specific to the bag page -->
 <link rel="stylesheet" href="{% static 'bag/css/bag.css' %}">
 {% endblock %}
 
 {% block content %}
+<!-- Overlay background for UI effects -->
 <div class="overlay"></div>
 
-<!-- ✅ ADDED MARGIN FIX WRAPPER -->
+<!-- BAG PAGE CONTENT SECTION -->
 <div class="container mb-2 bag-content">
+    <!-- Page title -->
     <div class="row">
         <div class="col">
             <hr>
@@ -21,11 +24,14 @@
         </div>
     </div>
 
+    <!-- Tool bag table -->
     <div class="row">
         <div class="col">
             {% if bag_items %}
+            <!-- Responsive table for bag contents -->
             <div class="table-responsive rounded">
                 <table class="table table-sm table-borderless">
+                    <!-- Table headings -->
                     <thead class="text-primary font-weight-bold">
                         <tr>
                             <th scope="col">Tool</th>
@@ -35,9 +41,12 @@
                             <th scope="col">Subtotal</th>
                         </tr>
                     </thead>
+
+                    <!-- Bag item rows -->
                     <tbody>
                         {% for item in bag_items %}
                         <tr>
+                            <!-- Product image -->
                             <td class="p-3 w-25">
                                 {% if item.product.image %}
                                 <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
@@ -45,6 +54,8 @@
                                 <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
                                 {% endif %}
                             </td>
+
+                            <!-- Product details -->
                             <td class="py-3 align-middle">
                                 <p class="mb-1 font-weight-bold text-primary">{{ item.product.name }}</p>
                                 {% if item.product.has_sizes %}
@@ -52,42 +63,61 @@
                                 {% endif %}
                                 <p class="mb-0 text-muted small">SKU: {{ item.product.sku|upper }}</p>
                             </td>
+
+                            <!-- Product price -->
                             <td class="py-3 align-middle">
                                 <p class="my-0">£{{ item.product.price }}</p>
                             </td>
+
+                            <!-- Quantity adjustment controls -->
                             <td class="py-3 w-25 align-middle">
                                 <form class="form update-form" method="POST" action="{% url 'adjust_bag' item.item_id %}">
                                     {% csrf_token %}
                                     <div class="form-group">
                                         <div class="input-group">
+                                            <!-- Decrease quantity -->
                                             <div class="input-group-prepend">
                                                 <button class="decrement-qty btn btn-sm btn-navy rounded-0" data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
                                                     <span><i class="fas fa-minus fa-sm"></i></span>
                                                 </button>
                                             </div>
-                                            <input class="form-control form-control-sm qty_input" type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+
+                                            <!-- Quantity input -->
+                                            <input class="form-control form-control-sm qty_input" type="number" name="quantity"
+                                                value="{{ item.quantity }}" min="1" max="99"
+                                                data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+
+                                            <!-- Increase quantity -->
                                             <div class="input-group-append">
                                                 <button class="increment-qty btn btn-sm btn-navy rounded-0" data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
                                                     <span><i class="fas fa-plus fa-sm"></i></span>
                                                 </button>
                                             </div>
+
                                             {% if item.product.has_sizes %}
+                                            <!-- Preserve size on quantity update -->
                                             <input type="hidden" name="product_size" value="{{ item.size }}">
                                             {% endif %}
                                         </div>
                                     </div>
                                 </form>
+
+                                <!-- Update and remove controls -->
                                 <a class="update-link text-info"><small>Update</small></a>
                                 <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}">
                                     <small><i class="fas fa-trash-alt mr-1"></i>Remove</small>
                                 </a>
                             </td>
+
+                            <!-- Item subtotal -->
                             <td class="py-3 align-middle">
                                 <p class="my-0">£{{ item.product.price|calc_subtotal:item.quantity }}</p>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
+
+                    <!-- Bag totals -->
                     <tfoot>
                         <tr>
                             <td colspan="5" class="pt-5 text-right">
@@ -101,6 +131,8 @@
                                 {% endif %}
                             </td>
                         </tr>
+
+                        <!-- Navigation buttons -->
                         <tr>
                             <td colspan="5" class="text-right">
                                 <a href="{% url 'products' %}" class="btn btn-outline-navy rounded-0 btn-lg">
@@ -117,6 +149,7 @@
                 </table>
             </div>
             {% else %}
+            <!-- Message if bag is empty -->
             <p class="lead mb-5">Your tool bag is empty — let’s fix that!</p>
             <a href="{% url 'products' %}" class="btn btn-navy rounded-0 btn-lg">
                 <span class="icon"><i class="fas fa-chevron-left"></i></span>
@@ -130,12 +163,15 @@
 
 {% block postloadjs %}
 {{ block.super }}
+<!-- Load quantity input script -->
 {% include 'products/includes/quantity_input_script.html' %}
 <script>
+    // Submit form when "Update" is clicked
     $('.update-link').click(function () {
         $(this).prev('.update-form').submit();
     });
 
+    // Handle remove functionality
     $('.remove-item').click(function () {
         const csrfToken = "{{ csrf_token }}";
         const itemId = $(this).attr('id').split('remove_')[1];

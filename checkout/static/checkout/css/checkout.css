@@ -132,3 +132,84 @@
         margin-bottom: 1rem;
     }
 }
+
+/* === Checkout Success Page Styling === */
+
+/* Ensure only the main body of the page is styled — not global header/nav */
+.checkout-success-body {
+    background-color: #ffffff;
+    padding: 32px 0;
+    margin-top: 100px;
+}
+
+.checkout-success-body .checkout-content {
+    background-color: #ffffff;
+    padding: 2rem 1rem;
+    color: #1A4C8C;
+}
+
+/* Match checkout fieldset appearance */
+.order-confirmation-wrapper {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 2rem 1.5rem;
+    color: #1A4C8C;
+    font-size: 0.95rem;
+}
+
+/* Section spacing and dividers */
+.order-confirmation-wrapper hr {
+    border-top: 1px solid #ccc;
+    margin: 2rem 0;
+}
+
+.order-confirmation-wrapper .row {
+    margin-bottom: 1rem;
+}
+
+/* Labels and muted text */
+.order-confirmation-wrapper .col-md-4 {
+    font-weight: 600;
+    color: #1A4C8C;
+}
+
+.order-confirmation-wrapper .col-md-8 {
+    text-align: right;
+}
+
+.order-confirmation-wrapper small,
+.order-confirmation-wrapper .text-muted {
+    color: #1A4C8C !important;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Fieldset legends */
+.fieldset-label {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #1A4C8C;
+}
+
+/* Scoped header styling (avoids affecting main nav/logo) */
+.checkout-success-body .logo-font,
+.checkout-content .logo-font {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #1A4C8C !important;
+}
+
+/* === Preserve header and delivery banner styling === */
+header .logo-font,
+.navbar .logo-font,
+.delivery-banner h4,
+.delivery-banner {
+    color: #ffffff !important;
+    background-color: #0B0F1A !important;
+}

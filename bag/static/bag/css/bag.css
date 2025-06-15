@@ -67,3 +67,20 @@ body.bag-page {
     padding: 0.25rem 0.6rem;
     font-size: 0.8rem;
 }
+
+/* Make update/remove links behave like buttons */
+.update-link,
+.remove-item {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.update-link:hover {
+    text-decoration: underline;
+    color: #117a8b;
+}
+
+.remove-item:hover {
+    text-decoration: underline;
+    color: #c82333;
+}
