@@ -1,53 +1,57 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
-    </div>
+{% block body_class %}form-page{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
 {% endblock %}
 
 {% block content %}
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <hr>
-                <h2 class="logo-font mb-4">Product Management</h2>
-                <h5 class="text-muted">Edit a Product</h5>
-                <hr>
-            </div>
-        </div>
+<main class="content-wrapper" role="main">
+  <section class="form-container container py-4" aria-labelledby="edit-product-heading">
 
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <form method="POST" action="{% url 'edit_product' product.id %}" class="form mb-2" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {% for field in form %}
-                        {% if field.name != 'image' %}
-                            {{ field|as_crispy_field }}
-                        {% else %}
-                            {{ field }}
-                        {% endif %}
-                    {% endfor %}
-                    <div class="text-right">
-                        <a class="btn btn-outline-black rounded-0" href="{% url 'products' %}">Cancel</a>
-                        <button class="btn btn-black rounded-0" type="submit">Update Product</button>
-                    </div>
-                </form>
-            </div>            
-        </div>
-    </div>
+    <!-- Page Heading -->
+    <header>
+      <hr>
+      <h2 id="edit-product-heading" class="logo-font mb-2">Edit Product</h2>
+      <h5 class="text-primary mb-4">Product Management</h5>
+      <hr>
+    </header>
+
+    <!-- Edit Product Form -->
+    <form method="POST" action="{% url 'edit_product' product.id %}" enctype="multipart/form-data" aria-label="Edit product form">
+      {% csrf_token %}
+
+      {% for field in form %}
+        {% if field.name != 'image' %}
+          {{ field|as_crispy_field }}
+        {% else %}
+          <div class="form-group custom-file-field">
+            <label for="{{ field.id_for_label }}" class="form-label font-weight-bold">Image:</label>
+            {{ field }}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <!-- Action Buttons -->
+      <div class="d-flex justify-content-between mt-4">
+        <a class="btn btn-outline-navy" href="{% url 'products' %}">Cancel</a>
+        <button class="btn btn-navy" type="submit">Update Product</button>
+      </div>
+    </form>
+
+  </section>
+</main>
 {% endblock %}
 
 {% block postloadjs %}
-    {{ block.super }}
-    <script type="text/javascript">
-        $('#new-image').change(function() {
-            var file = $('#new-image')[0].files[0];
-            $('#filename').text(`Image will be set to: ${file.name}`);
-        });
-    </script>
+  {{ block.super }}
+  <script type="text/javascript">
+    // Display selected image filename
+    $('#new-image').change(function () {
+      const file = $('#new-image')[0].files[0];
+      $('#filename').text(`Image will be set to: ${file.name}`);
+    });
+  </script>
 {% endblock %}

@@ -1,0 +1,25 @@
+{% comment %} Footer Section - Reusable site footer {% endcomment %}
+<footer class="site-footer {% block footer_theme %}footer-dark{% endblock %}" role="contentinfo">
+  <div class="container text-center py-4">
+
+    {% comment %} Social Media Links {% endcomment %}
+    <section class="footer-social mb-2" aria-label="Social media links">
+      <a href="#" target="_blank" aria-label="Visit our Facebook page" class="mx-2 text-white">
+        <i class="fab fa-facebook fa-lg"></i>
+      </a>
+    </section>
+
+    {% comment %} Testimonial Button {% endcomment %}
+    <section class="footer-cta mb-2">
+      <a href="{% url 'create_testimonial' %}" class="btn btn-success btn-sm rounded-0 text-uppercase">
+        Leave a Review
+      </a>
+    </section>
+
+    {% comment %} Copyright Notice {% endcomment %}
+    <p class="mb-0 small" aria-label="Copyright">
+      &copy; 2025 Warrior Tools. All rights reserved.
+    </p>
+
+  </div>
+</footer>

@@ -1,36 +1,32 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block footer_theme %}footer-light{% endblock %}
 {% block body_class %}home-page{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'home/css/index.css' %}">
 {% endblock %}
 
-{% block page_header %}
-<div class="container header-container">
-    <div class="row">
-        <div class="col text-center">
-            <h1 class="display-4 logo-font text-white mt-3">Welcome to Warrior Tools</h1>
+{% block content %}
+<section class="text-center home-hero-wrapper" role="region" aria-label="Hero Banner">
+  <header>
+    <h1 class="display-4 logo-font hero-heading mt-3">Welcome to Warrior Tools</h1>
+  </header>
 
-            <!-- Shop Now button -->
-            <a href="{% url 'products' %}" class="btn btn-outline-light btn-lg mt-3 shop-now-button">
-                Shop Now
-            </a>
+  <p class="sr-only">Shop a range of power tools, hand tools, and accessories.</p>
 
-            <!-- Additional CTA buttons -->
-            <div class="mt-4">
-                <a href="{% url 'create_testimonial' %}" class="btn btn-success btn-lg mx-2 rounded-0">
-                    Leave a Review
-                </a>
-                <a href="{% url 'testimonial_list' %}" class="btn btn-outline-light btn-lg mx-2 rounded-0">
-                    View Testimonials
-                </a>
-                <a href="{% url 'newsletter_signup' %}" class="btn btn-primary btn-lg mx-2 rounded-0">
-                    Newsletter Signup
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+  <!-- Shop Now Button -->
+  <a href="{% url 'products' %}" class="btn btn-home-cta mt-3">Shop Now</a>
+
+  <!-- CTA Buttons -->
+  <div class="cta-button-group mt-4" role="group" aria-label="Calls to Action">
+    <a href="{% url 'testimonial_list' %}" class="btn btn-home-cta">
+      View Testimonials
+    </a>
+    <a href="{% url 'newsletter_signup' %}" class="btn btn-home-cta">
+      Newsletter Signup
+    </a>
+  </div>
+</section>
 {% endblock %}

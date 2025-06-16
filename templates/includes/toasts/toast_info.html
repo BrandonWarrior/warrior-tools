@@ -1,15 +1,31 @@
-<div class="toast custom-toast rounded-0 border-top-0 bg-dark text-white shadow" data-autohide="true" data-delay="7000">
-    <div class="arrow-up arrow-info"></div>
-    <div class="w-100 toast-capper bg-info"></div>
+{% comment %} Info toast notification (blue theme) {% endcomment %}
+<aside
+  class="toast custom-toast rounded-0 border-top-0 bg-dark text-white shadow"
+  role="alert"
+  aria-live="polite"
+  aria-atomic="true"
+  data-autohide="true"
+  data-delay="7000">
 
-    <div class="toast-header bg-dark text-white border-0">
-        <strong class="me-auto logo-font">Info</strong>
-        <button type="button" class="close text-white ml-2 mb-1" data-dismiss="toast" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+  {% comment %} Decorative pointer for toast appearance {% endcomment %}
+  <div class="arrow-up arrow-info"></div>
 
-    <div class="toast-body bg-dark text-white">
-        {{ message }}
-    </div>
-</div>
+  {% comment %} Visual top cap using Bootstrap info color {% endcomment %}
+  <div class="w-100 toast-capper bg-info"></div>
+
+  {% comment %} Toast header with label and dismiss control {% endcomment %}
+  <header class="toast-header bg-dark text-white border-0">
+    <strong class="me-auto logo-font">Info</strong>
+    <button type="button"
+            class="close text-white ml-2 mb-1"
+            data-dismiss="toast"
+            aria-label="Close info message">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </header>
+
+  {% comment %} Dynamic message passed via Django messages framework {% endcomment %}
+  <div class="toast-body bg-dark text-white">
+    {{ message }}
+  </div>
+</aside>

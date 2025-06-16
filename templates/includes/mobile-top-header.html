@@ -1,30 +1,34 @@
-<!-- Mobile Search -->
+{% comment %} Mobile Search Button and Dropdown {% endcomment %}
 <li class="list-inline-item">
-    <a class="text-light nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <nav class="d-block d-lg-none" aria-label="Mobile product search">
+    <a class="text-light nav-link" href="#" id="mobile-search" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
       <div class="text-center">
         <div><i class="fas fa-search fa-lg"></i></div>
         <p class="my-0">Search</p>
       </div>
     </a>
     <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0 bg-dark" aria-labelledby="mobile-search">
-      <form class="form" method="GET" action="{% url 'products' %}">
+      <form class="form" method="GET" action="{% url 'products' %}" role="search">
         <div class="input-group w-100">
-          <input class="form-control search-input rounded-0" type="text" name="q">
+          <input class="form-control search-input dark-bg rounded-0" type="text" name="q"
+                 placeholder="Search products..." aria-label="Search products">
           <div class="input-group-append">
-            <button class="btn search-button rounded-0" type="submit">
-              <span class="icon">
-                <i class="fas fa-search"></i>
-              </span>
+            <button class="btn search-button dark-search-btn rounded-0" type="submit" aria-label="Submit search">
+              <i class="fas fa-search"></i>
             </button>
           </div>
         </div>
       </form>
     </div>
-  </li>
-  
-  <!-- Mobile Account -->
-  <li class="list-inline-item dropdown">
-    <a class="text-light nav-link d-block d-lg-none" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  </nav>
+</li>
+
+{% comment %} Mobile User Account Dropdown {% endcomment %}
+<li class="list-inline-item dropdown">
+  <nav class="d-block d-lg-none" aria-label="User account menu">
+    <a class="text-light nav-link" href="#" id="user-options" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
       <div class="text-center">
         <div><i class="fas fa-user fa-lg"></i></div>
         <p class="my-0">My Account</p>
@@ -35,21 +39,23 @@
         {% if request.user.is_superuser %}
           <a href="{% url 'add_product' %}" class="dropdown-item text-light">Product Management</a>
         {% endif %}
-        <a href="{% url 'profile' %}" class="dropdown-item text-light">My Profile</a>
+        <a href="#" class="dropdown-item text-light">My Profile</a>
         <a href="{% url 'account_logout' %}" class="dropdown-item text-light">Logout</a>
       {% else %}
         <a href="{% url 'account_signup' %}" class="dropdown-item text-light">Register</a>
         <a href="{% url 'account_login' %}" class="dropdown-item text-light">Login</a>
       {% endif %}
     </div>
-  </li>
-  
-  <!-- Mobile Bag -->
-  <li class="list-inline-item">
-    <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-light{% endif %} nav-link d-block d-lg-none" href="{% url 'view_bag' %}">
+  </nav>
+</li>
+
+{% comment %} Mobile Bag Icon {% endcomment %}
+<li class="list-inline-item">
+  <nav class="d-block d-lg-none" aria-label="Shopping bag">
+    <a class="nav-link" href="{% url 'view_bag' %}">
       <div class="text-center">
         <div><i class="fas fa-shopping-bag fa-lg"></i></div>
-        <p class="my-0">
+        <p class="my-0 oswald-font {% if grand_total %}text-info font-weight-bold{% else %}text-light{% endif %}">
           {% if grand_total %}
             £{{ grand_total|floatformat:2 }}
           {% else %}
@@ -58,5 +64,5 @@
         </p>
       </div>
     </a>
-  </li>
-  
+  </nav>
+</li>

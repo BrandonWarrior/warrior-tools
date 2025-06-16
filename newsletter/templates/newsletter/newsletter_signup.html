@@ -4,62 +4,70 @@
 {% block body_class %}newsletter-page{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'newsletter/css/newsletter.css' %}">
-<link rel="stylesheet" href="{% static 'testimonial/css/testimonial.css' %}">
+  <link rel="stylesheet" href="{% static 'newsletter/css/newsletter.css' %}">
+  <link rel="stylesheet" href="{% static 'testimonial/css/testimonial.css' %}">
 {% endblock %}
 
 {% block page_header %}
-<div class="container header-container mt-5">
-    <!-- Back to Home Button -->
-    <div class="mb-3">
-        <a href="{% url 'home' %}" class="btn btn-outline-navy">
-            &larr; Back to Home
-        </a>
+<!-- Page Header: Back button and title -->
+<header class="container header-container mt-5" role="banner">
+  <nav class="mb-3" aria-label="Back to homepage">
+    <a href="{% url 'home' %}" class="btn btn-outline-navy">
+      &larr; Back to Home
+    </a>
+  </nav>
+  <div class="row">
+    <div class="col text-center">
+      <h2 class="logo-font text-uppercase">Newsletter Signup</h2>
     </div>
-
-    <div class="row">
-        <div class="col text-center">
-            <h2 class="logo-font text-uppercase">Newsletter Signup</h2>
-        </div>
-    </div>
-</div>
+  </div>
+</header>
 {% endblock %}
 
 {% block content %}
-<div class="newsletter-page-wrapper">
-    <div class="container newsletter-content mt-5">
-        <div class="row">
-            <div class="col text-center">
-                <hr>
-                <h3 class="logo-font mb-4 text-uppercase">Stay Sharp with Warrior Tools</h3>
-                <p class="text-primary mb-4">
-                    Join our mailing list to receive exclusive discounts, new tool alerts, and warrior-worthy tips.
-                </p>
-                <hr>
-            </div>
-        </div>
+<!-- Main content: newsletter call-to-action and signup form -->
+<main class="newsletter-page-wrapper" role="main">
+  <section class="container newsletter-content mt-5" aria-labelledby="newsletter-heading">
 
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6">
+    <!-- Section heading and description -->
+    <header class="row">
+      <div class="col text-center">
+        <hr>
+        <h3 id="newsletter-heading" class="logo-font mb-4 text-uppercase">
+          Stay Sharp with Warrior Tools
+        </h3>
+        <p class="text-primary mb-4">
+          Join our mailing list to receive exclusive discounts, new tool alerts, and warrior-worthy tips.
+        </p>
+        <hr>
+      </div>
+    </header>
 
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
+    <!-- Signup form section -->
+    <section class="row justify-content-center" aria-label="Newsletter signup form">
+      <div class="col-12 col-md-8 col-lg-6">
 
-                <form method="POST" class="mb-5">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    <div class="submit-button text-right mt-3">
-                        <button type="submit" class="btn btn-navy rounded-0">
-                            <strong>Subscribe</strong>
-                            <span class="icon"><i class="fas fa-paper-plane ml-1"></i></span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+        <!-- Display any Django messages (success/error) -->
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+
+        <!-- Signup form -->
+        <form method="POST" class="mb-5" aria-label="Newsletter signup">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <div class="submit-button text-right mt-3">
+            <button type="submit" class="btn btn-navy rounded-0">
+              <strong>Subscribe</strong>
+              <span class="icon"><i class="fas fa-paper-plane ml-1"></i></span>
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </section>
+  </section>
+</main>
 {% endblock %}

@@ -1,158 +1,244 @@
-/* ===============================
-   PRODUCTS PAGE STYLING
-=============================== */
+/* ==============================
+   PRODUCTS.CSS – Full Styling
+============================== */
 
-/* Ensure white background */
+/* === Layout Padding Fix === */
+.products-page .products-page-content,
+.product-detail-page .product-detail-content,
+.form-page .content-wrapper {
+  padding-top: 100px;
+  margin-top: 0;
+}
+
+/* === Base Page Styling === */
 .products-page,
-.products-page-content,
-.products-page .container-fluid,
 .product-detail-page,
-.product-detail-content {
-    background-color: #ffffff !important;
-}
-
-/* Typography */
-.products-page .card *,
-.products-page .products-page-content *,
-.products-page .sort-select-wrapper *,
-.products-page .product-meta *,
-.product-detail-page .product-details-container p,
-.product-detail-page .product-details-container label,
-.product-detail-page .product-details-container select,
-.product-detail-page .product-details-container input,
-.product-detail-page .product-details-container small,
-.product-detail-page .product-details-container .product-price,
-.product-detail-page .product-details-container .product-name {
-    color: #1A4C8C !important;
-    font-family: 'Lato', sans-serif;
-}
-
-/* Page spacing */
 .products-page-content,
-.product-detail-content {
-    padding-top: 200px;
+.product-detail-content,
+.form-page {
+  background-color: #ffffff;
+  color: #1A4C8C;
+  font-family: 'Lato', sans-serif;
 }
 
-/* Headings */
-.products-page h2.products-heading {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    color: #1A4C8C !important;
-    font-family: 'Oswald', sans-serif;
+/* === Heading Typography === */
+.products-heading {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1A4C8C;
+  margin: 1.5rem 0;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
 }
 
-/* Product cards */
+/* === Product Cards === */
 .products-page .card {
-    border: 1px solid #1A4C8C;
-    border-radius: 0;
-    background-color: #ffffff;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: #fff;
+  border: 1px solid #1A4C8C;
+  border-radius: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .products-page .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 .products-page .card-img-top {
-    height: 180px;
-    object-fit: contain;
-    padding: 0.75rem;
-}
-.products-page .card-body {
-    padding: 1rem;
+  height: 180px;
+  object-fit: contain;
+  padding: 0.75rem;
 }
 
-/* Product name */
-.products-page .card .logo-font,
-.product-detail-page .product-name.logo-font {
-    font-size: 1.25rem;
-    color: #1A4C8C !important;
-    font-family: 'Oswald', sans-serif;
-}
-
-/* Price */
+/* === Prices === */
 .product-price {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #1A4C8C;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: 'Oswald', sans-serif;
+  color: #1A4C8C;
 }
 
-/* Sort dropdown */
-.sort-select-wrapper select {
-    font-size: 0.9rem;
-    border-color: #1A4C8C;
-    color: #1A4C8C;
-    font-family: 'Lato', sans-serif;
+/* === Detail Images === */
+.product-detail-page .image-container img {
+  max-height: 450px;
+  width: 100%;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
 }
 
-/* Quantity Input */
-.product-detail-page .form-control,
-.product-detail-page .custom-select {
-    border: 1px solid #1A4C8C;
-    font-size: 0.95rem;
-    color: #1A4C8C;
-    font-family: 'Lato', sans-serif;
+/* === Description === */
+.product-description p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
 }
 
-/* Font Awesome icon override */
-.products-page i.fas,
-.products-page i.far,
-.products-page i.fa,
-.product-detail-page i.fas,
-.product-detail-page i.far,
-.product-detail-page i.fa {
-    font-family: "Font Awesome 6 Free" !important;
-    font-weight: 900 !important;
-}
-
-/* Back to Top button */
-.btt-button {
-    background-color: #1A4C8C;
-    border: 2px solid #ffffff;
-}
-.btt-link i {
-    color: #ffffff !important;
-    font-size: 1.2rem;
-}
-
-/* Wishlist Heart Styling */
-.wishlist-btn i {
-    transition: color 0.3s ease;
-    font-size: 1.3rem;
-}
-
-.wishlist-btn i.text-danger {
-    color: #dc3545 !important; /* Bootstrap's red */
-}
-
-.wishlist-btn i.text-muted {
-    color: #6c757d !important; /* Bootstrap's muted gray */
-}
-
-.wishlist-btn:hover i {
-    opacity: 0.8;
-}
-
-/* ✅ Wishlist button fix: prevent jump on toggle */
+/* === Wishlist === */
 .wishlist-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 160px;
-    gap: 6px;
-    padding: 0.5rem 1.25rem;
-    text-align: center;
+  margin: 1rem 0;
+}
+.wishlist-btn i {
+  font-size: 1.3rem;
+  transition: color 0.3s ease;
+}
+.wishlist-btn i.text-danger { color: #dc3545; }
+.wishlist-btn i.text-muted  { color: #6c757d; }
+
+/* === Buttons === */
+.btn-navy,
+.btn-outline-navy {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  border-radius: 0;
+  font-size: 1rem;
+  padding: 0.6rem 1.5rem;
+}
+.btn-navy {
+  background-color: #1A4C8C;
+  border: 1px solid #1A4C8C;
+  color: #ffffff !important;
+}
+.btn-navy:hover {
+  background-color: #163f73;
+  border-color: #163f73;
+}
+.btn-outline-navy {
+  background-color: #ffffff;
+  border: 1px solid #1A4C8C;
+  color: #1A4C8C !important;
+}
+.btn-outline-navy:hover {
+  background-color: #1A4C8C;
+  color: #ffffff !important;
 }
 
-/* Responsive tweaks if needed */
+/* === Quantity Controls === */
+.qty-button {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.9rem;
+  background-color: #1A4C8C;
+  color: white;
+  border: 1px solid #1A4C8C;
+  border-radius: 0;
+}
+.qty-button:hover {
+  background-color: #163f73;
+}
+.qty_input {
+  height: 44px;
+  text-align: center;
+  border: 1px solid #1A4C8C;
+}
+
+/* === Add/Edit Form Containers === */
+.form-page .form-container {
+  margin: 60px auto 40px;
+  background-color: #ffffff;
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  border: 1px solid #dee2e6;
+}
+
+body.form-page main.content-wrapper {
+  padding-top: 0px;
+  margin-top: 0 !important;
+}
+
+.form-page .form-container h2 {
+  color: #1A4C8C;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.form-page .form-container label {
+  color: #1A4C8C;
+}
+.form-page .form-container input,
+.form-page .form-container select,
+.form-page .form-container textarea {
+  border: 1px solid #1A4C8C;
+  border-radius: 0;
+  padding: 8px 12px;
+  width: 100%;
+}
+
+/* === File Input Widget Styling === */
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  background-color: #1A4C8C;
+  color: white;
+  display: inline-block;
+  font-family: 'Oswald', sans-serif;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+}
+.btn-file input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  font-size: 999px;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+#filename {
+  font-size: 0.9rem;
+  color: #dc3545;
+  margin-top: 0.5rem;
+}
+
+/* === Responsive === */
 @media (max-width: 768px) {
-    .products-page .card-img-top {
-        height: 150px;
-    }
+  .products-heading {
+    font-size: 2.25rem;
+    margin-top: 0.5rem;
+    letter-spacing: 0.5px;
+  }
+
+  .product-detail-page .image-container img {
+    max-height: 300px;
+  }
+
+  .product-detail-page .btn,
+  .product-detail-page .btn-navy,
+  .product-detail-page .btn-outline-navy,
+  .wishlist-btn {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .form-page .form-container {
+    margin-top: 120px;
+    padding: 1.5rem;
+  }
+
+  .form-group.w-50,
+  .input-group {
+    width: 100% !important;
+  }
+
+  .input-group .qty_input {
+    height: 44px;
+  }
+
+  .product-description p {
+    font-size: 0.95rem;
+  }
+
+  .product-detail-page .form-row .btn {
+    margin-bottom: 0.75rem;
+  }
 }

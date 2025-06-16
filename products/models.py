@@ -51,9 +51,6 @@ class Product(models.Model):
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
 
-    # New Arrival flag
-    is_new = models.BooleanField(default=False, help_text="Mark this product as a new arrival")
-
     def __str__(self):
         return self.name
 

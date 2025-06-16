@@ -1,15 +1,35 @@
-<div class="toast custom-toast rounded-0 border-top-0 bg-dark text-white shadow" data-autohide="true" data-delay="7000">
-    <div class="arrow-up arrow-warning"></div>
-    <div class="w-100 toast-capper bg-warning"></div>
+{% comment %}
+Warning toast notification (yellow theme) for non-critical alerts.
+Auto-hides after 7 seconds.
+{% endcomment %}
+<aside
+  class="toast custom-toast rounded-0 border-top-0 bg-dark text-white shadow"
+  role="alert"
+  aria-live="polite"
+  aria-atomic="true"
+  data-autohide="true"
+  data-delay="7000">
 
-    <div class="toast-header bg-dark text-white border-0">
-        <strong class="me-auto logo-font">Warning!</strong>
-        <button type="button" class="close text-white ml-2 mb-1" data-dismiss="toast" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+  {% comment %} Visual arrow for context (styled in warning yellow) {% endcomment %}
+  <div class="arrow-up arrow-warning"></div>
 
-    <div class="toast-body bg-dark text-white">
-        {{ message }}
-    </div>
-</div>
+  {% comment %} Highlight strip to indicate warning status {% endcomment %}
+  <div class="w-100 toast-capper bg-warning"></div>
+
+  {% comment %} Toast heading and close button {% endcomment %}
+  <header class="toast-header bg-dark text-white border-0">
+    <strong class="me-auto logo-font">Warning!</strong>
+    <button
+      type="button"
+      class="close text-white ml-2 mb-1"
+      data-dismiss="toast"
+      aria-label="Close warning message">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </header>
+
+  {% comment %} Message body pulled from Django messages framework {% endcomment %}
+  <div class="toast-body bg-dark text-white">
+    {{ message }}
+  </div>
+</aside>

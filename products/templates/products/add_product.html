@@ -4,35 +4,43 @@
 {% block body_class %}form-page{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/account_pages.css' %}">
+  <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="content-wrapper">
-    <div class="form-container">
-        <hr>
-        <h2 class="logo-font mb-2">Add a Product</h2>
-        <h5 class="text-primary mb-4">Product Management</h5>
-        <hr>
+<main class="content-wrapper" role="main">
+  <section class="form-container container py-4" aria-labelledby="add-product-heading">
 
-        <form method="POST" action="{% url 'add_product' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% for field in form %}
-                {% if field.name != 'image' %}
-                    {{ field|as_crispy_field }}
-                {% else %}
-                    <div class="mb-3">
-                        <label for="{{ field.id_for_label }}" class="form-label">Image:</label>
-                        {{ field }}
-                    </div>
-                {% endif %}
-            {% endfor %}
+    <!-- Page Heading -->
+    <header>
+      <hr>
+      <h2 id="add-product-heading" class="logo-font mb-2">Add a Product</h2>
+      <h5 class="text-primary mb-4">Product Management</h5>
+      <hr>
+    </header>
 
-            <div class="d-flex justify-content-between mt-4">
-                <a class="btn btn-outline-navy rounded-0" href="{% url 'products' %}">Cancel</a>
-                <button class="btn btn-navy rounded-0" type="submit">Add Product</button>
-            </div>
-        </form>
-    </div>
-</div>
+    <!-- Add Product Form -->
+    <form method="POST" action="{% url 'add_product' %}" enctype="multipart/form-data" aria-label="Add new product form">
+      {% csrf_token %}
+
+      {% for field in form %}
+        {% if field.name != 'image' %}
+          {{ field|as_crispy_field }}
+        {% else %}
+          <div class="form-group custom-file-field">
+            <label for="{{ field.id_for_label }}" class="form-label font-weight-bold">Image:</label>
+            {{ field }}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <!-- Action Buttons -->
+      <div class="d-flex justify-content-between mt-4">
+        <a class="btn btn-outline-navy" href="{% url 'products' %}">Cancel</a>
+        <button class="btn btn-navy" type="submit">Add Product</button>
+      </div>
+    </form>
+
+  </section>
+</main>
 {% endblock %}

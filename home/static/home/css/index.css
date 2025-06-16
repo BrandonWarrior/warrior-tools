@@ -1,42 +1,94 @@
 /* ==============================
-   INDEX PAGE STYLING
-============================== */
+   INDEX PAGE STYLING – CLEAN + FINAL
+   ============================== */
 
-.home-hero-wrapper {
-    padding-top: 100px; /* Adjust as needed to pull content higher */
-    background-color: #0B0F1A;
-    min-height: calc(100vh - 120px); /* optional: prevent hero from being too tall */
-}
-
-/* Optional hero layout tweaks */
-.hero-container {
-    padding: 2rem 1rem;
-}
-
-/* Logo tweaks if needed */
-.hero-logo {
-    max-width: 250px;
-}
-
-/* Hero heading */
-.home-page .logo-font {
-    font-size: 2.5rem;
+/* === Ensure White Background on Homepage === */
+body.home-page {
+    background-color: #ffffff;
+    color: #1A4C8C;
+  }
+  
+  /* === Hero Section === */
+  .home-hero-wrapper {
+    padding-top: 180px;
+    padding-bottom: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 200px);
+    text-align: center;
+    background-color: #ffffff;
+  }
+  
+  /* === Hero Heading === */
+  .hero-heading {
+    font-size: 2.75rem;
     font-weight: 700;
+    text-transform: uppercase;
     line-height: 1.2;
-    color: #F5F5F5;
-}
-
-/* Shop Now button */
-.shop-now-button {
-    background-color: #000;
-    border: 1px solid #1A4C8C;
-    color: white;
-    padding: 0.75rem 2rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.shop-now-button:hover {
+    color: #1A4C8C;
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 2rem;
+  }
+  
+  /* === CTA Buttons === */
+  .btn-home-cta {
     background-color: #1A4C8C;
-    color: white;
-}
+    color: white !important;
+    border: 1px solid #1A4C8C;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.65rem 2rem;
+    margin: 0.5rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+  .btn-home-cta:hover {
+    background-color: #163f73;
+    border-color: #163f73;
+    color: #ffffff !important;
+  }
+  
+  /* === Button Group === */
+  .cta-button-group {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  /* === Responsive === */
+  @media (max-width: 768px) {
+    .home-hero-wrapper {
+      padding-top: 140px;
+      padding-bottom: 100px;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  
+    .hero-heading {
+      font-size: 2.25rem;
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+      color: #1A4C8C;
+    }
+  
+    .btn-home-cta {
+      width: 100%;
+      max-width: 260px;
+      font-size: 0.9rem;
+      padding: 0.6rem 1rem;
+      margin: 0.5rem auto;
+    }
+  
+    .cta-button-group {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+  

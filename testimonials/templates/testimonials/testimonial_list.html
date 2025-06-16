@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% comment %} Set body class for targeted page styling {% endcomment %}
 {% block body_class %}products-page testimonials-page{% endblock %}
 
 {% block extra_css %}
@@ -9,64 +10,70 @@
 {% endblock %}
 
 {% block content %}
-<div class="container products-page-content mt-5 pt-5">
-    <!-- Back to Home Button -->
-    <div class="mb-4">
-        <a href="{% url 'home' %}" class="btn btn-outline-navy">
-            &larr; Back to Home
-        </a>
-    </div>
+<main class="container products-page-content mt-5 pt-5" role="main">
 
-    <div class="text-center mb-4">
-        <h2 class="logo-font text-primary">Testimonials</h2>
-        <p class="text-theme-blue">Hear what our customers have to say about Warrior Tools.</p>
-    </div>
+  {% comment %} Back Navigation Button {% endcomment %}
+  <nav class="mb-4" aria-label="Back to home">
+    <a href="{% url 'home' %}" class="btn btn-outline-navy">
+      &larr; Back to Home
+    </a>
+  </nav>
 
-    {% if messages %}
-        <div class="mb-3">
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-            {% endfor %}
+  {% comment %} Page Title and Introduction {% endcomment %}
+  <header class="text-center mb-4">
+    <h2 class="logo-font text-primary">Testimonials</h2>
+    <p class="text-theme-blue">Hear what our customers have to say about Warrior Tools.</p>
+  </header>
+
+  {% comment %} Display Django messages if present {% endcomment %}
+  {% if messages %}
+    <section class="mb-3" aria-label="Messages">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </section>
+  {% endif %}
+
+  {% comment %} Testimonials Grid {% endcomment %}
+  <section class="row" aria-label="Customer testimonials">
+    {% for testimonial in testimonials %}
+      <article class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+
+            <h5 class="card-title text-primary">By {{ testimonial.author.username }}</h5>
+
+            {% comment %} Star Rating Visual {% endcomment %}
+            <p class="mb-2 star-rating" aria-label="Rated {{ testimonial.rating }} out of 5">
+              {% with rating=testimonial.rating|add:"0" %}
+                {% for i in "12345"|make_list %}
+                  {% if forloop.counter <= rating %}
+                    <i class="fas fa-star" aria-hidden="true"></i>
+                  {% else %}
+                    <i class="far fa-star" aria-hidden="true"></i>
+                  {% endif %}
+                {% endfor %}
+              {% endwith %}
+            </p>
+
+            <p class="card-text text-theme-blue">{{ testimonial.content }}</p>
+            <p class="text-muted">{{ testimonial.created_at|date:"F j, Y" }}</p>
+          </div>
         </div>
-    {% endif %}
+      </article>
+    {% empty %}
+      <div class="col-12 text-center text-theme-blue">
+        <p>No testimonials yet. Be the first to share your experience!</p>
+      </div>
+    {% endfor %}
+  </section>
 
-    <div class="row">
-        {% for testimonial in testimonials %}
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title text-primary">By {{ testimonial.author.username }}</h5>
+  {% comment %} Call to Action Button {% endcomment %}
+  <div class="text-center mt-4">
+    <a href="{% url 'create_testimonial' %}" class="btn btn-navy btn-lg">
+      Submit Your Testimonial
+    </a>
+  </div>
 
-                        <!-- Star Rating -->
-                        <p class="mb-2 star-rating">
-                            {% with rating=testimonial.rating|add:"0" %}
-                                {% for i in "12345"|make_list %}
-                                    {% if forloop.counter <= rating %}
-                                        <i class="fas fa-star"></i>
-                                    {% else %}
-                                        <i class="far fa-star"></i>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endwith %}
-                        </p>
-
-                        <!-- Full Testimonial Content -->
-                        <p class="card-text text-theme-blue">{{ testimonial.content }}</p>
-                        <p class="text-muted">{{ testimonial.created_at|date:"F j, Y" }}</p>
-                    </div>
-                </div>
-            </div>
-        {% empty %}
-            <div class="col-12 text-center text-theme-blue">
-                <p>No testimonials yet. Be the first to share your experience!</p>
-            </div>
-        {% endfor %}
-    </div>
-
-    <div class="text-center mt-4">
-        <a href="{% url 'create_testimonial' %}" class="btn btn-navy btn-lg">
-            Submit Your Testimonial
-        </a>
-    </div>
-</div>
+</main>
 {% endblock %}
