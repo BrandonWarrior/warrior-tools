@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}form-page testimonial-page{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/account_pages.css' %}">
+  <link rel="stylesheet" href="{% static 'testimonial/css/testimonial.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="content-wrapper" role="main">
+  <section class="form-container">
+
+    <!-- Page Heading -->
+    <header>
+      <hr>
+      <h2 class="logo-font mb-2">Update Your Testimonial</h2>
+      <h5 class="text-primary mb-4">Edit your feedback below</h5>
+      <hr>
+    </header>
+
+    <!-- Update Form -->
+    <form method="POST" aria-label="Testimonial update form">
+      {% csrf_token %}
+      {{ form|crispy }}
+
+      <div class="d-flex justify-content-between mt-4">
+        <a class="btn btn-outline-navy rounded-0" href="{% url 'testimonial_list' %}">Cancel</a>
+        <button class="btn btn-navy rounded-0" type="submit">Update</button>
+      </div>
+    </form>
+
+    <!-- Back to Home -->
+    <div class="text-center mt-3">
+      <a href="{% url 'home' %}" class="btn btn-outline-navy">
+        &larr; Back to Home
+      </a>
+    </div>
+
+  </section>
+</main>
+{% endblock %}

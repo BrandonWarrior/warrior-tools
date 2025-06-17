@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="content-wrapper mt-5 text-center">
+  <section class="form-container">
+    <h2 class="logo-font text-danger">Delete Testimonial</h2>
+    <p>Are you sure you want to delete this testimonial?</p>
+    <p><em>"{{ testimonial.content }}"</em></p>
+    <form method="POST">
+      {% csrf_token %}
+      <button class="btn btn-danger" type="submit">Yes, delete</button>
+      <a href="{% url 'testimonial_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </section>
+</main>
+{% endblock %}

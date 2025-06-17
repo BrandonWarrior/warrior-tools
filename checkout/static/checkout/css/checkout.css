@@ -37,12 +37,36 @@
 .checkout-page .btn-navy *,
 .checkout-page .btn-outline-navy,
 .checkout-page .btn-outline-navy * {
-    color: white !important;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: 0;
 }
 
-.checkout-page .btn-outline-navy,
-.checkout-page .btn-outline-navy * {
+/* Navy Button Styles */
+.checkout-page .btn-navy {
+    background-color: #1A4C8C !important;
+    color: #ffffff !important;
+    border: none !important;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.checkout-page .btn-navy:hover {
+    background-color: #163f73 !important;
+}
+
+/* Outline Navy Button Styles */
+.checkout-page .btn-outline-navy {
+    background-color: transparent !important;
     color: #1A4C8C !important;
+    border: 1px solid #1A4C8C !important;
+    transition: all 0.2s ease-in-out;
+}
+
+.checkout-page .btn-outline-navy:hover {
+    background-color: #1A4C8C !important;
+    color: #ffffff !important;
 }
 
 /* Form field styling */
@@ -135,7 +159,6 @@
 
 /* === Checkout Success Page Styling === */
 
-/* Ensure only the main body of the page is styled — not global header/nav */
 .checkout-success-body {
     background-color: #ffffff;
     padding: 32px 0;
@@ -148,7 +171,6 @@
     color: #1A4C8C;
 }
 
-/* Match checkout fieldset appearance */
 .order-confirmation-wrapper {
     background-color: #ffffff;
     border: 1px solid #dee2e6;
@@ -158,7 +180,6 @@
     font-size: 0.95rem;
 }
 
-/* Section spacing and dividers */
 .order-confirmation-wrapper hr {
     border-top: 1px solid #ccc;
     margin: 2rem 0;
@@ -168,7 +189,6 @@
     margin-bottom: 1rem;
 }
 
-/* Labels and muted text */
 .order-confirmation-wrapper .col-md-4 {
     font-weight: 600;
     color: #1A4C8C;
@@ -187,29 +207,10 @@
     letter-spacing: 0.5px;
 }
 
-/* Fieldset legends */
 .fieldset-label {
     font-family: 'Oswald', sans-serif;
     font-weight: 600;
     font-size: 0.9rem;
     text-transform: uppercase;
     color: #1A4C8C;
-}
-
-/* Scoped header styling (avoids affecting main nav/logo) */
-.checkout-success-body .logo-font,
-.checkout-content .logo-font {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #1A4C8C !important;
-}
-
-/* === Preserve header and delivery banner styling === */
-header .logo-font,
-.navbar .logo-font,
-.delivery-banner h4,
-.delivery-banner {
-    color: #ffffff !important;
-    background-color: #0B0F1A !important;
 }

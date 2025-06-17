@@ -123,12 +123,10 @@
             <div class="col-12 col-lg-7 text-right">
                 {% if from_profile %}
                 <a href="{% url 'profile' %}" class="btn btn-navy rounded-0 my-2 font-weight-bold">
-                    <span class="icon mr-2"><i class="fas fa-angle-left"></i></span>
                     Back to Profile
                 </a>
                 {% else %}
-                <a href="{% url 'products' %}?category=new_arrivals,deals,clearance" class="btn btn-navy rounded-0 my-2 font-weight-bold">
-                    <span class="icon mr-2"><i class="fas fa-wrench"></i></span>
+                <a href="{% url 'products' %}" class="btn btn-navy rounded-0 my-2 font-weight-bold">
                     Continue Shopping Tools
                 </a>
                 {% endif %}

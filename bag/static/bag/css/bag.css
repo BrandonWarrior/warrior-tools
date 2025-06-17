@@ -1,86 +1,284 @@
 /* ===============================
-   TOOL BAG PAGE STYLING
+   TOOL BAG PAGE STYLING (SCOPED)
 =============================== */
 
-body.bag-page {
+.bag-page .bag-content {
     background-color: #ffffff;
-    color: #0B0F1A;
     font-family: 'Lato', sans-serif;
-    padding-top: 20px;
+    color: #0B0F1A;
+    padding-top: 160px;
+    padding-bottom: 80px;
 }
 
-/* Apply Oswald font to key elements */
-.bag-page .product-name,
-.bag-page .bag-total-label,
-.bag-page .grand-total-label,
-.bag-page td,
-.bag-page th,
-.bag-page p,
-.bag-page h6,
-.bag-page h4 {
+/* Typography */
+.bag-page .bag-content h2,
+.bag-page .bag-content h4,
+.bag-page .bag-content h6,
+.bag-page .bag-content th,
+.bag-page .bag-content td,
+.bag-page .bag-content p {
     font-family: 'Oswald', sans-serif;
     font-weight: 500;
+    color: #1A4C8C;
 }
 
-/* Top-level content spacing */
-.bag-content {
-    margin-top: 200px;
-}
-
-/* Ensure delivery banner text is visible */
-.delivery-banner h4 {
-    color: #F5F5F5 !important;
-}
-
-/* Table headers */
-.bag-page table th {
+/* Table Headers */
+.bag-page .bag-content table th {
     font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: #0B0F1A;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #dee2e6;
 }
 
-/* Product image in bag */
-.bag-page .table img {
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+/* Product Image */
+.bag-page .bag-content .table img {
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    max-width: 80px;
 }
 
-/* Quantity input */
-.qty_input {
-    max-width: 60px;
+/* Quantity Controls */
+.bag-page .bag-content .quantity-controls {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.bag-page .bag-content .quantity-controls .btn {
+    background-color: #1A4C8C;
+    color: white;
+    border: 1px solid #1A4C8C;
+    border-radius: 0;
+    font-weight: bold;
+    height: 38px;
+    width: 38px;
+    padding: 0;
+}
+
+.bag-page .bag-content .quantity-controls .btn:hover {
+    background-color: #163f73;
+}
+
+.bag-page .bag-content .qty_input {
+    width: 60px;
+    height: 38px;
     text-align: center;
-}
-
-/* Update/remove links */
-.update-link {
+    font-size: 1rem;
+    font-weight: bold;
+    border: 1px solid #1A4C8C;
+    border-left: none;
+    border-right: none;
+    padding: 0;
+    margin: 0;
     color: #1A4C8C;
-    font-size: 0.85rem;
-}
-.remove-item {
-    color: #dc3545;
-    font-size: 0.85rem;
 }
 
-/* Smaller buttons in quantity controls */
-.bag-page .btn-sm {
-    padding: 0.25rem 0.6rem;
-    font-size: 0.8rem;
+/* Action Links */
+.bag-page .bag-content .action-links {
+    margin-top: 0.5rem;
 }
 
-/* Make update/remove links behave like buttons */
-.update-link,
-.remove-item {
-    cursor: pointer;
+.bag-page .bag-content .update-link,
+.bag-page .bag-content .remove-item {
+    font-size: 0.85rem;
     text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
 }
 
-.update-link:hover {
-    text-decoration: underline;
+.bag-page .bag-content .update-link {
+    color: #1A4C8C;
+}
+.bag-page .bag-content .update-link:hover {
     color: #117a8b;
+    text-decoration: underline;
 }
 
-.remove-item:hover {
-    text-decoration: underline;
+.bag-page .bag-content .remove-item {
+    color: #dc3545;
+}
+.bag-page .bag-content .remove-item:hover {
     color: #c82333;
+    text-decoration: underline;
+}
+
+/* Override Bootstrap .text-info locally */
+.bag-page .bag-content .text-info {
+    color: #1A4C8C !important;
+}
+
+/* Totals and Buttons */
+.bag-page .bag-content .bag-summary,
+.bag-page .bag-content .bag-nav-buttons {
+    text-align: right;
+    margin-top: 30px;
+}
+
+.bag-page .bag-content .bag-nav-buttons .btn {
+    margin-left: 10px;
+    font-size: 1rem;
+    padding: 0.75rem 1.25rem;
+}
+
+/* ===============================
+   BUTTON STYLES (SCOPED + OVERRIDDEN)
+=============================== */
+
+.bag-page .btn-navy {
+    background-color: #1A4C8C !important;
+    color: #ffffff !important;
+    border: none !important;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.5px;
+    border-radius: 0;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.bag-page .btn-navy:hover {
+    background-color: #163f73 !important;
+    color: #ffffff !important;
+}
+
+.bag-page .btn-outline-navy {
+    background-color: transparent !important;
+    color: #1A4C8C !important;
+    border: 1px solid #1A4C8C !important;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.5px;
+    border-radius: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.bag-page .btn-outline-navy:hover {
+    background-color: #1A4C8C !important;
+    color: #ffffff !important;
+}
+
+/* Optional: ensure btn-lg looks consistent */
+.bag-page .btn-lg {
+    padding: 0.75rem 1.25rem !important;
+    font-size: 1rem !important;
+}
+
+/* ===============================
+   RESPONSIVE STYLING (SCOPED)
+=============================== */
+
+@media (max-width: 992px) {
+    .bag-page .bag-content {
+        padding-top: 130px;
+        padding-bottom: 60px;
+    }
+
+    .bag-page .bag-content .bag-nav-buttons {
+        text-align: center;
+    }
+
+    .bag-page .bag-content .bag-nav-buttons .btn {
+        margin: 10px 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .bag-page .bag-content {
+        padding-top: 110px;
+    }
+
+    .bag-page .bag-content .table td {
+        font-size: 0.9rem;
+    }
+
+    .bag-page .bag-content .qty_input {
+        max-width: 50px;
+        font-size: 0.9rem;
+    }
+
+    .bag-page .bag-content .btn-sm {
+        padding: 0.3rem 0.6rem;
+    }
+
+    .bag-page .bag-content .update-link,
+    .bag-page .bag-content .remove-item {
+        font-size: 0.8rem;
+    }
+
+    .bag-page .bag-content .bag-nav-buttons .btn {
+        font-size: 0.95rem;
+        padding: 0.6rem 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .bag-page .bag-content .table-responsive {
+        overflow-x: auto;
+    }
+
+    .bag-page .bag-content .table {
+        display: block;
+        width: 100%;
+    }
+
+    .bag-page .bag-content .table thead {
+        display: none;
+    }
+
+    .bag-page .bag-content .table tr {
+        display: block;
+        margin-bottom: 1.5rem;
+        background-color: #f8f9fa;
+        border-radius: 0.25rem;
+        padding: 1rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .bag-page .bag-content .table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: none;
+        font-size: 0.85rem;
+        padding: 0.5rem 0;
+    }
+
+    .bag-page .bag-content .quantity-controls .btn,
+    .bag-page .bag-content .qty_input {
+        height: 36px;
+        font-size: 0.9rem;
+    }
+
+    .bag-page .bag-content .qty_input {
+        width: 50px;
+    }
+
+    .bag-page .bag-content .action-links {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .bag-page .bag-content .action-links a {
+        flex: 1 1 45%;
+        text-align: center;
+        padding: 0.4rem 0.5rem;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    .bag-page .bag-content .bag-nav-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: stretch;
+    }
+
+    .bag-page .bag-content .bag-nav-buttons .btn {
+        display: block;
+        width: 100%;
+        margin: 0;
+    }
 }

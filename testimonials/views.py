@@ -1,13 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import TestimonialForm
 from .models import Testimonial
 
+
 @login_required
 def create_testimonial(request):
     """
-    Handles testimonial creation with standard form submission.
+    Handle testimonial creation.
     """
     if request.method == "POST":
         form = TestimonialForm(request.POST)
@@ -24,9 +25,42 @@ def create_testimonial(request):
 
     return render(request, 'testimonials/create_testimonial.html', {'form': form})
 
+
 def testimonial_list(request):
     """
-    Displays approved testimonials.
+    Display a list of approved testimonials.
     """
     testimonials = Testimonial.objects.filter(approved=True).order_by('-created_at')
     return render(request, 'testimonials/testimonial_list.html', {'testimonials': testimonials})
+
+
+@login_required
+def update_testimonial(request, pk):
+    """
+    Allow a user to update their own testimonial.
+    """
+    testimonial = get_object_or_404(Testimonial, pk=pk, author=request.user)
+    if request.method == "POST":
+        form = TestimonialForm(request.POST, instance=testimonial)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your testimonial has been updated.")
+            return redirect('testimonial_list')
+    else:
+        form = TestimonialForm(instance=testimonial)
+
+    return render(request, 'testimonials/update_testimonial.html', {'form': form})
+
+
+@login_required
+def delete_testimonial(request, pk):
+    """
+    Allow a user to delete their own testimonial.
+    """
+    testimonial = get_object_or_404(Testimonial, pk=pk, author=request.user)
+    if request.method == "POST":
+        testimonial.delete()
+        messages.success(request, "Your testimonial has been deleted.")
+        return redirect('testimonial_list')
+
+    return render(request, 'testimonials/delete_testimonial.html', {'testimonial': testimonial})

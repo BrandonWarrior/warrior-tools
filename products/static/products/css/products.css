@@ -41,10 +41,12 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
 .products-page .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
+
 .products-page .card-img-top {
   height: 180px;
   object-fit: contain;
@@ -79,12 +81,19 @@
 .wishlist-btn {
   margin: 1rem 0;
 }
+
 .wishlist-btn i {
   font-size: 1.3rem;
   transition: color 0.3s ease;
 }
-.wishlist-btn i.text-danger { color: #dc3545; }
-.wishlist-btn i.text-muted  { color: #6c757d; }
+
+.wishlist-btn i.text-danger {
+  color: #dc3545;
+}
+
+.wishlist-btn i.text-muted {
+  color: #6c757d;
+}
 
 /* === Buttons === */
 .btn-navy,
@@ -97,41 +106,68 @@
   font-size: 1rem;
   padding: 0.6rem 1.5rem;
 }
+
 .btn-navy {
   background-color: #1A4C8C;
   border: 1px solid #1A4C8C;
   color: #ffffff !important;
 }
+
 .btn-navy:hover {
   background-color: #163f73;
   border-color: #163f73;
 }
+
 .btn-outline-navy {
   background-color: #ffffff;
   border: 1px solid #1A4C8C;
   color: #1A4C8C !important;
 }
+
 .btn-outline-navy:hover {
   background-color: #1A4C8C;
   color: #ffffff !important;
 }
 
-/* === Quantity Controls === */
+/* === Quantity Controls (Fixed Alignment) === */
+.qty-wrapper {
+  display: flex;
+  align-items: stretch;
+  width: fit-content;
+  margin: 0.5rem 0 1rem;
+}
+
 .qty-button {
-  font-size: 0.9rem;
-  padding: 0.4rem 0.9rem;
+  width: 48px;
+  height: 48px;
+  padding: 0;
   background-color: #1A4C8C;
   color: white;
+  font-size: 1.2rem;
   border: 1px solid #1A4C8C;
   border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .qty-button:hover {
   background-color: #163f73;
 }
+
 .qty_input {
-  height: 44px;
+  width: 64px;
+  height: 48px;
   text-align: center;
-  border: 1px solid #1A4C8C;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1A4C8C;
+  border-top: 1px solid #1A4C8C;
+  border-bottom: 1px solid #1A4C8C;
+  border-left: none;
+  border-right: none;
+  padding: 0;
+  margin: 0;
 }
 
 /* === Add/Edit Form Containers === */
@@ -141,7 +177,7 @@
   padding: 2rem;
   max-width: 600px;
   width: 100%;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   border: 1px solid #dee2e6;
 }
 
@@ -156,9 +192,11 @@ body.form-page main.content-wrapper {
   text-transform: uppercase;
   font-weight: 700;
 }
+
 .form-page .form-container label {
   color: #1A4C8C;
 }
+
 .form-page .form-container input,
 .form-page .form-container select,
 .form-page .form-container textarea {
@@ -183,6 +221,7 @@ body.form-page main.content-wrapper {
   border: none;
   cursor: pointer;
 }
+
 .btn-file input[type="file"] {
   position: absolute;
   top: 0;
@@ -194,6 +233,7 @@ body.form-page main.content-wrapper {
   cursor: pointer;
   z-index: 1;
 }
+
 #filename {
   font-size: 0.9rem;
   color: #dc3545;
