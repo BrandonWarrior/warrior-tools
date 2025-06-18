@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% comment %} Apply body class for custom styling {% endcomment %}
 {% block body_class %}form-page testimonial-page{% endblock %}
 
 {% block extra_css %}
@@ -13,7 +12,7 @@
 <main class="content-wrapper" role="main">
   <section class="form-container">
 
-    {% comment %} Testimonial Form Heading {% endcomment %}
+    <!-- Heading -->
     <header>
       <hr>
       <h2 class="logo-font mb-2">Submit a Testimonial</h2>
@@ -21,18 +20,19 @@
       <hr>
     </header>
 
-    {% comment %} Testimonial Submission Form {% endcomment %}
+    <!-- Testimonial Form -->
     <form method="POST" aria-label="Testimonial submission form">
       {% csrf_token %}
       {{ form|crispy }}
 
-      <div class="d-flex justify-content-between mt-4">
+      <!-- Button Group -->
+      <div class="form-button-group mt-4">
         <a class="btn btn-outline-navy rounded-0" href="{% url 'products' %}">Cancel</a>
         <button class="btn btn-navy rounded-0" type="submit">Submit</button>
       </div>
     </form>
 
-    {% comment %} Navigation Back to Home {% endcomment %}
+    <!-- Back to Home -->
     <div class="text-center mt-3">
       <a href="{% url 'home' %}" class="btn btn-outline-navy">
         &larr; Back to Home

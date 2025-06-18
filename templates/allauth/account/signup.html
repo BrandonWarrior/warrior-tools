@@ -6,19 +6,19 @@
 {% block body_class %}form-page{% endblock %}
 
 {% block content %}
-<div class="content-wrapper">
-  <div class="form-container">
+<main class="content-wrapper" role="main">
+  <section class="form-container" aria-labelledby="signup-heading">
     <hr>
-    <h2 class="logo-font mb-4 text-uppercase">{% trans "Sign Up" %}</h2>
+    <h2 id="signup-heading" class="logo-font mb-4 text-uppercase">{% trans "Sign Up" %}</h2>
     <hr>
 
     <p>
       {% blocktrans %}
-        Already have an account? Then please <a class="text-info" href="{{ login_url }}">SIGN IN</a>.
+        Already have an account? Then please <a href="{{ login_url }}" class="signup-link">SIGN IN</a>.
       {% endblocktrans %}
     </p>
 
-    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}" aria-label="Sign Up Form">
       {% csrf_token %}
       {{ form|crispy }}
 
@@ -35,6 +35,6 @@
         </button>
       </div>
     </form>
-  </div>
-</div>
+  </section>
+</main>
 {% endblock %}

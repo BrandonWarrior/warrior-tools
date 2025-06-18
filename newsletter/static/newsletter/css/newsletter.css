@@ -2,44 +2,32 @@
    NEWSLETTER PAGE STYLING
 =============================== */
 
-/* White background for the full newsletter page */
 .newsletter-page {
     background-color: #ffffff;
 }
 
-/* Main wrapper */
 .newsletter-page-wrapper {
     background-color: #ffffff;
     width: 100%;
 }
 
-/* Content layout spacing */
 .newsletter-content {
-    margin-top: 30px; /* Reduced from 100px to close the gap */
+    margin-top: 30px;
     padding-bottom: 4rem;
     position: relative;
     z-index: 1;
 }
 
-/* Heading styling - scoped to header + content ONLY */
+/* Scoped heading styles */
 .newsletter-page .header-container .logo-font,
 .newsletter-page .newsletter-content .logo-font {
     color: #1A4C8C !important;
 }
 
-/* Header spacing fix */
 .newsletter-page .header-container h2.logo-font {
     margin-bottom: 0.5rem;
 }
 
-/* Override text-muted within content only */
-.newsletter-page .newsletter-content .text-muted {
-    color: #1A4C8C !important;
-    font-weight: 500;
-    font-family: 'Oswald', sans-serif;
-}
-
-/* Headings inside newsletter content */
 .newsletter-page .newsletter-content h1,
 .newsletter-page .newsletter-content h2,
 .newsletter-page .newsletter-content h3 {
@@ -50,7 +38,6 @@
     margin-bottom: 1rem;
 }
 
-/* Paragraph and form labels */
 .newsletter-page .newsletter-content p,
 .newsletter-page .newsletter-content label,
 .newsletter-page .newsletter-content legend,
@@ -64,7 +51,7 @@
     margin-bottom: 1.5rem;
 }
 
-/* Form input fields */
+/* Inputs */
 .newsletter-page .form-control,
 .newsletter-page input,
 .newsletter-page select {
@@ -79,57 +66,31 @@
     color: #aab7c4;
 }
 
-.newsletter-page select:invalid,
-.newsletter-page select option[value=""] {
-    color: #aab7c4 !important;
-}
-
-/* Button styling */
-.newsletter-page .btn,
-.newsletter-page .btn *,
-.newsletter-page .btn-navy,
-.newsletter-page .btn-navy * {
-    color: white !important;
+/* === ✅ Updated button scope === */
+.newsletter-page .submit-button .btn,
+.newsletter-page .submit-button .btn-navy {
     background-color: #1A4C8C;
+    color: white !important;
     border: none;
+    font-weight: 600;
 }
 
-.newsletter-page .btn-outline-navy,
-.newsletter-page .btn-outline-navy * {
+.newsletter-page .submit-button .btn:hover {
+    background-color: #163f73;
+}
+
+/* Back button */
+.newsletter-page .btn-outline-navy {
     color: #1A4C8C !important;
     border: 1px solid #1A4C8C;
     background-color: #ffffff;
 }
-
-.newsletter-page .btn-outline-navy:hover,
-.newsletter-page .btn-outline-navy:hover * {
+.newsletter-page .btn-outline-navy:hover {
     background-color: #1A4C8C;
     color: white !important;
 }
 
-/* Button container */
-.newsletter-page .submit-button .btn {
-    margin-bottom: 1rem;
-    padding: 10px 25px;
-}
-
-/* Back to Home override for placement + style */
-.newsletter-page .back-button-wrapper {
-    position: absolute;
-    top: 30px;
-    left: 40px;
-}
-
-.newsletter-page .back-button-wrapper .btn-outline-navy {
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    font-size: 0.95rem;
-    padding: 0.5rem 1.25rem;
-    border-radius: 0;
-    transition: all 0.2s ease-in-out;
-}
-
-/* Styled HR line */
+/* HR style */
 .newsletter-page hr {
     border: none;
     border-top: 2px solid #1A4C8C;
@@ -137,7 +98,7 @@
     margin: 1.5rem auto;
 }
 
-/* Flash messages (e.g. subscription success) */
+/* Flash messages */
 .newsletter-page .alert {
     background-color: #e9f0fc;
     color: #1A4C8C;
@@ -149,84 +110,22 @@
     text-align: center;
 }
 
-/* Text selection highlight */
-.newsletter-page ::selection {
-    background: #1A4C8C;
-    color: white;
-}
-
+/* Mobile tweaks */
 @media (max-width: 768px) {
-    /* Push header down to clear nav + banner */
     .newsletter-page .header-container {
-      padding-top: 120px;
+        padding-top: 120px;
     }
-  
-    /* Full-width submit button for mobile */
+
     .newsletter-page .submit-button .btn {
-      width: 100%;
-      font-size: 0.9rem;
-      padding: 0.75rem;
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 0.75rem;
     }
-  
-    /* Responsive layout for back button */
+
     .newsletter-page .back-button-wrapper {
-      position: static;
-      text-align: left;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
+        position: static;
+        text-align: left;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
     }
-  
-    /* Mobile-friendly form fields */
-    .newsletter-page input,
-    .newsletter-page select,
-    .newsletter-page .form-control {
-      font-size: 1rem;
-      padding: 0.6rem 0.75rem;
-    }
-  
-    /* Scaled headings */
-    .newsletter-page .newsletter-content h1,
-    .newsletter-page .newsletter-content h2,
-    .newsletter-page .newsletter-content h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.75rem;
-      text-align: center;
-    }
-  
-    /* Paragraphs and labels */
-    .newsletter-page .newsletter-content p,
-    .newsletter-page .newsletter-content label,
-    .newsletter-page .newsletter-content small {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-  
-    /* Adjust styled HR spacing */
-    .newsletter-page hr {
-      width: 80%;
-      margin: 1.25rem auto;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .newsletter-page .header-container {
-      padding-top: 80px;
-    }
-  
-    .newsletter-page .back-button-wrapper {
-      margin-top: 1rem;
-      margin-bottom: 1.5rem;
-    }
-  
-    .newsletter-page .newsletter-content {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-  
-    .newsletter-page .submit-button .btn {
-      padding: 0.75rem;
-      font-size: 1rem;
-    }
-  }
-  
+}

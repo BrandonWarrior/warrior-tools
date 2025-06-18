@@ -1,7 +1,3 @@
-{% comment %} 
-Success toast notification (green theme) with dynamic messaging, 
-cart preview, and checkout CTA.
-{% endcomment %}
 <aside
   class="toast custom-toast rounded-0 border-top-0 shadow"
   role="alert"
@@ -9,14 +5,14 @@ cart preview, and checkout CTA.
   aria-atomic="true"
   data-autohide="false">
 
-  {% comment %} Decorative arrow for visual cue (green) {% endcomment %}
+  <!-- Decorative arrow -->
   <div class="arrow-up arrow-success"></div>
 
-  {% comment %} Top accent bar for success theme {% endcomment %}
+  <!-- Top green accent bar -->
   <div class="w-100 toast-capper bg-success"></div>
 
-  {% comment %} Toast header with dynamic title based on message content {% endcomment %}
-  <header class="toast-header bg-success text-white border-0">
+  <!-- Header with dynamic success text -->
+  <header class="toast-header bg-success border-0">
     <strong class="me-auto logo-font">
       {% if 'removed' in message|lower %}
         Tool Removed
@@ -30,20 +26,19 @@ cart preview, and checkout CTA.
         Success
       {% endif %}
     </strong>
-    <button type="button" class="close text-white" data-dismiss="toast" aria-label="Close success message">
+    <button type="button" class="close" data-dismiss="toast" aria-label="Close success message">
       <span aria-hidden="true">&times;</span>
     </button>
   </header>
 
-  {% comment %} Toast message body and cart summary if available {% endcomment %}
+  <!-- Body content -->
   <div class="toast-body">
-    {{ message }}
+    <p class="mb-1"><strong>{{ message }}</strong></p>
     <hr class="mt-1 mb-3 border-light">
 
     {% if grand_total and not on_profile_page %}
       <p class="logo-font py-1">Your Tool Bag ({{ product_count }})</p>
 
-      {% comment %} Display each item in the mini-cart summary {% endcomment %}
       <div class="bag-notification-wrapper">
         {% for item in bag_items %}
           <div class="row mb-2">
@@ -57,13 +52,12 @@ cart preview, and checkout CTA.
             <div class="col-9">
               <p class="mb-1"><strong>{{ item.product.name }}</strong></p>
               <p class="mb-1 small">Option: {% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</p>
-              <p class="mb-1 small text-white">Qty: {{ item.quantity }}</p>
+              <p class="mb-1 small">Qty: {{ item.quantity }}</p>
             </div>
           </div>
         {% endfor %}
       </div>
 
-      {% comment %} Bag total and free delivery indicator {% endcomment %}
       <div class="row">
         <div class="col">
           <p class="mt-3 mb-1 font-weight-bold">
@@ -72,13 +66,13 @@ cart preview, and checkout CTA.
           </p>
 
           {% if free_delivery_delta > 0 %}
-            <p class="free-delivery-toast mb-0 p-2 text-center shadow-sm">
+            <p class="free-delivery-toast alert-spend-more">
+              <i class="fas fa-exclamation-triangle me-1"></i>
               Add <strong>£{{ free_delivery_delta|floatformat:2 }}</strong> more for free delivery!
             </p>
           {% endif %}
 
-          {% comment %} CTA to go to checkout {% endcomment %}
-          <a href="{% url 'view_bag' %}" class="btn btn-navy btn-block rounded-0 mt-3">
+          <a href="{% url 'view_bag' %}" class="toast-checkout-btn mt-3">
             <span class="text-uppercase">Go To Secure Checkout</span>
             <span class="icon"><i class="fas fa-lock"></i></span>
           </a>

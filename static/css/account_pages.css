@@ -1,8 +1,7 @@
 /* ===============================
-   ACCOUNT FORM PAGES STYLES
+   Account Form Pages Styles
 =============================== */
 
-/* Ensure white background fills screen */
 html, body.form-page {
     background-color: #ffffff !important;
     height: 100%;
@@ -11,11 +10,10 @@ html, body.form-page {
     padding: 0;
 }
 
-/* Push content down from fixed navbar */
 body.form-page .content-wrapper {
     width: 100%;
     background-color: #ffffff;
-    margin-top: 150px; /* Adjust if your header is taller/shorter */
+    margin-top: 60px;
     min-height: calc(100vh - 200px);
     display: flex;
     align-items: center;
@@ -23,19 +21,17 @@ body.form-page .content-wrapper {
     flex-direction: column;
 }
 
-/* Main form container */
 body.form-page .form-container {
     background-color: #ffffff;
     color: #0B0F1A;
     padding: 32px;
-    margin: 200px 32px 32px;
+    margin: 0 32px 32px;
     max-width: 500px;
     width: 100%;
     border: 1px solid #dee2e6;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* Typography */
 body.form-page .form-container .logo-font {
     color: #1A4C8C !important;
 }
@@ -54,7 +50,6 @@ body.form-page .form-container small {
     font-family: 'Lato', sans-serif;
 }
 
-/* Input fields */
 body.form-page .form-container input,
 body.form-page .form-container select,
 body.form-page .form-container textarea {
@@ -71,14 +66,14 @@ body.form-page .form-container input::placeholder {
     color: #aab7c4;
 }
 
-/* Button base */
+/* === Buttons (vibrant blue for better contrast) === */
 body.form-page .form-container .btn,
 body.form-page .form-container button,
 body.form-page .form-container .btn-navy,
 body.form-page .form-container button.primaryAction {
-    background-color: #1A4C8C !important;
+    background-color: #0056b3 !important;
     color: white !important;
-    border: 1px solid #1A4C8C;
+    border: 1px solid #0056b3;
     border-radius: 0;
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
@@ -86,14 +81,14 @@ body.form-page .form-container button.primaryAction {
     font-size: 15px;
 }
 
-/* Button hover */
 body.form-page .form-container .btn:hover,
 body.form-page .form-container .btn-navy:hover {
-    background-color: #163f73;
-    border-color: #163f73;
+    background-color: #00408d !important;
+    border-color: #00408d;
+    color: white !important;
 }
 
-/* Outline button ("Home") visibility */
+/* === Outline Buttons === */
 body.form-page .form-container .btn-outline-navy {
     background-color: #ffffff !important;
     color: #1A4C8C !important;
@@ -108,7 +103,7 @@ body.form-page .form-container .btn-outline-navy span {
     color: #1A4C8C !important;
 }
 
-/* Links */
+/* === Links === */
 body.form-page .form-container a {
     color: #1A4C8C;
     text-decoration: none;
@@ -117,7 +112,7 @@ body.form-page .form-container a:hover {
     text-decoration: underline;
 }
 
-/* Social login styling */
+/* === Social login + helper text === */
 body.form-page .form-container .socialaccount_ballot {
     margin-bottom: 24px;
 }
@@ -127,11 +122,11 @@ body.form-page .form-container .login-or {
     color: #6c757d;
 }
 
-/* Responsive adjustments */
+/* === Responsive === */
 @media (max-width: 768px) {
     body.form-page .form-container {
         padding: 24px;
-        margin: 80px 16px 32px;
+        margin: 0 16px 32px;
     }
 
     body.form-page .form-container .btn {
@@ -144,19 +139,15 @@ body.form-page .form-container .login-or {
     }
 }
 
-/* ============================
-   SIGN UP LINK (Inline Style)
-============================ */
-
+/* === Sign In / Up Text Links === */
 .signup-link {
-    color: #17a2b8;               /* Teal (Bootstrap text-info) */
-    font-weight: 600;            /* Slightly bold */
+    color: #1A4C8C;
+    font-weight: 600;
     font-family: 'Lato', sans-serif;
     text-decoration: none;
     transition: color 0.2s ease-in-out;
 }
-
 .signup-link:hover {
-    color: #117a8b;              /* Slightly darker teal on hover */
+    color: #163f73;
     text-decoration: underline;
 }

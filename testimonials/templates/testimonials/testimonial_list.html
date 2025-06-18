@@ -9,46 +9,42 @@
 {% endblock %}
 
 {% block content %}
-<main class="container products-page-content mt-5 pt-5" role="main">
+<main class="container products-page-content" role="main">
 
-  <!-- Back Navigation Button -->
+  <!-- Back Navigation -->
   <nav class="mb-4" aria-label="Back to home">
     <a href="{% url 'home' %}" class="btn btn-outline-navy">
       &larr; Back to Home
     </a>
   </nav>
 
-  <!-- Page Title and Intro -->
+  <!-- Page Header -->
   <header class="text-center mb-4">
     <h2 class="logo-font text-primary">Testimonials</h2>
     <p class="text-theme-blue">Hear what our customers have to say about Warrior Tools.</p>
   </header>
 
-  <!-- Testimonial Grid -->
+  <!-- Testimonial List -->
   <section class="row" aria-label="Customer testimonials">
     {% for testimonial in testimonials %}
       <article class="col-md-4 mb-4">
         <div class="card h-100 shadow-sm">
           <div class="card-body">
             <h5 class="card-title text-primary">By {{ testimonial.author.username }}</h5>
-
-            <!-- Star Rating -->
             <p class="mb-2 star-rating" aria-label="Rated {{ testimonial.rating }} out of 5">
               {% with rating=testimonial.rating|add:"0" %}
                 {% for i in "12345"|make_list %}
                   {% if forloop.counter <= rating %}
-                    <i class="fas fa-star" aria-hidden="true"></i>
+                    <i class="fas fa-star"></i>
                   {% else %}
-                    <i class="far fa-star" aria-hidden="true"></i>
+                    <i class="far fa-star"></i>
                   {% endif %}
                 {% endfor %}
               {% endwith %}
             </p>
-
             <p class="card-text text-theme-blue">{{ testimonial.content }}</p>
             <p class="text-muted">{{ testimonial.created_at|date:"F j, Y" }}</p>
 
-            <!-- Edit/Delete Actions -->
             {% if testimonial.author == request.user %}
               <div class="mt-3 d-flex gap-2">
                 <a href="{% url 'update_testimonial' testimonial.pk %}" class="btn btn-sm btn-outline-navy">Edit</a>
@@ -65,9 +61,9 @@
     {% endfor %}
   </section>
 
-  <!-- Submit CTA -->
+  <!-- Submit CTA Button -->
   <div class="text-center mt-4">
-    <a href="{% url 'create_testimonial' %}" class="btn btn-navy btn-lg">
+    <a href="{% url 'create_testimonial' %}" class="btn btn-testimonial btn-lg">
       Submit Your Testimonial
     </a>
   </div>

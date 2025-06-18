@@ -2,209 +2,96 @@
    TESTIMONIAL LIST PAGE STYLES
 ================================*/
 
-/* Top spacing fix for list page */
+/* Page spacing */
 body.testimonials-page .products-page-content {
-    margin-top: px !important;
+    margin-top: 40px !important;
+    padding-top: 20px;
     padding-bottom: 60px;
 }
 
-/* Card styles */
-.card {
-    border: 1px solid #dee2e6;
-    border-radius: 4px;
-}
-
-/* Enhanced card polish */
-.card.h-100.shadow-sm {
-    transition: transform 0.2s ease;
-    border-radius: 4px;
-    border: 1px solid #dee2e6;
-    background-color: #ffffff;
-}
-
-.card.h-100.shadow-sm:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-/* Author/title styling */
-.card-body .card-title,
-.card-title.text-primary {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 0.25rem;
-    color: #1A4C8C;
-}
-
-/* Testimonial content */
-.card-body .card-text,
-.card-text.text-theme-blue {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    overflow-wrap: break-word;
-    color: #1A4C8C;
-    margin-bottom: 0.75rem;
-}
-
-/* Timestamp */
-.card-body .text-muted {
-    font-size: 0.85rem;
-}
-
-/* Star Rating */
-.star-rating i.fas.fa-star,
-.star-rating i.far.fa-star {
-    font-size: 16px;
-    margin-right: 2px;
-    color: #FFC107 !important;
-}
-
-/* Blue text utility */
+/* Typography */
 .text-theme-blue {
     color: #1A4C8C;
 }
 
-/* Back Button Styling */
-.testimonials-page nav.mb-4 {
-    margin-bottom: 2rem !important;
+/* Star rating */
+.star-rating i {
+    font-size: 16px;
+    margin-right: 2px;
+    color: #FFC107;
 }
 
+/* Card Styling */
+.card {
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+.card.h-100.shadow-sm {
+    background-color: #ffffff;
+    transition: transform 0.2s ease;
+}
+.card.h-100.shadow-sm:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.card-title.text-primary {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #1A4C8C;
+}
+.card-text.text-theme-blue {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    color: #1A4C8C;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+.text-muted {
+    font-size: 0.85rem;
+}
+
+/* Back button */
 .testimonials-page .btn-outline-navy {
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     font-size: 0.95rem;
     padding: 0.5rem 1.25rem;
     border-radius: 0;
-    transition: all 0.2s ease-in-out;
     background-color: #ffffff;
     color: #1A4C8C;
     border: 1px solid #1A4C8C;
+    transition: all 0.2s ease-in-out;
 }
-
 .testimonials-page .btn-outline-navy:hover {
     background-color: #1A4C8C;
     color: #ffffff;
 }
 
-/* Submit Testimonial Button */
-.testimonials-page .btn-navy {
-    background-color: #1A4C8C;
-    color: #ffffff;
-    border: 1px solid #1A4C8C;
+/* Submit Testimonial CTA Button */
+.testimonials-page .btn-testimonial {
+    background-color: #004f86;
+    color: #ffffff !important;
+    padding: 0.75rem 1.75rem;
+    font-size: 1.05rem;
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
-    font-size: 0.95rem;
-    padding: 0.6rem 1.25rem;
-    border-radius: 0;
+    border: none;
+    border-radius: 4px;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.2s ease-in-out;
+}
+.testimonials-page .btn-testimonial:hover {
+    background-color: #003b66;
+    color: #ffffff !important;
+    text-decoration: none;
 }
 
-.testimonials-page .btn-navy:hover {
-    background-color: #163f73;
-    border-color: #163f73;
-    color: #ffffff;
-}
-
-
-/* ===============================
-   TESTIMONIAL FORM PAGE STYLES
-================================*/
-
-body.testimonial-page .content-wrapper {
-    margin-top: 160px !important;
-}
-
-body.testimonial-page .form-container {
-    background-color: #ffffff;
-    color: #0B0F1A;
-    padding: 24px 32px;
-    max-width: 600px;
-    width: 100%;
-    border: 1px solid #dee2e6;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    margin: 0 auto;
-}
-
-/* Headings */
-body.testimonial-page .form-container h2.logo-font {
-    color: #1A4C8C;
-}
-
-body.testimonial-page .form-container h5 {
-    color: #1A4C8C;
-    font-family: 'Lato', sans-serif;
-}
-
-/* Inputs */
-body.testimonial-page .form-container input,
-body.testimonial-page .form-container select,
-body.testimonial-page .form-container textarea {
-    border: 1px solid #1A4C8C;
-    border-radius: 0;
-    font-family: 'Lato', sans-serif;
-    padding: 8px 12px;
-    margin-bottom: 16px;
-    width: 100%;
-    color: #0B0F1A;
-}
-
-body.testimonial-page .form-container textarea::placeholder {
-    color: #aab7c4;
-}
-
-/* Buttons */
-body.testimonial-page .form-container .btn {
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    border-radius: 0;
-    padding: 8px 20px;
-    font-size: 14px;
-}
-
-body.testimonial-page .form-container .btn-navy {
-    background-color: #1A4C8C;
-    color: #fff;
-    border: 1px solid #1A4C8C;
-}
-
-body.testimonial-page .form-container .btn-navy:hover {
-    background-color: #163f73;
-    border-color: #163f73;
-}
-
-body.testimonial-page .form-container .btn-outline-navy {
-    background-color: #ffffff;
-    color: #1A4C8C;
-    border: 1px solid #1A4C8C;
-}
-
-body.testimonial-page .form-container .btn-outline-navy:hover {
-    background-color: #1A4C8C;
-    color: #ffffff;
-}
-
-/* Success/error message container */
-#baseMessages {
-    max-width: 600px;
-    margin: 0 auto 20px auto;
-}
-
-/* ===============================
-   RESPONSIVE TWEAKS
-================================*/
-
+/* Responsive */
 @media (max-width: 768px) {
-    body.testimonial-page .form-container {
-        padding: 16px;
-    }
-
-    #baseMessages {
-        padding: 0 16px;
-    }
-
     body.testimonials-page .products-page-content {
-        margin-top: 140px !important;
+        margin-top: 30px !important;
         padding-left: 1rem;
         padding-right: 1rem;
     }
@@ -212,7 +99,7 @@ body.testimonial-page .form-container .btn-outline-navy:hover {
 
 @media (max-width: 576px) {
     body.testimonials-page .products-page-content {
-        padding-top: 80px !important;
-        margin-top: 0 !important;
+        margin-top: 50px !important;
+        padding-top: 20px !important;
     }
-  }
+}

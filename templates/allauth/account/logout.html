@@ -6,23 +6,24 @@
 {% block body_class %}form-page{% endblock %}
 
 {% block content %}
-<div class="content-wrapper">
-  <div class="form-container">
+<main class="content-wrapper" role="main">
+  <section class="form-container" aria-labelledby="sign-out-heading">
     <hr>
-    <h2 class="logo-font mb-4 text-uppercase">{% trans "Sign Out" %}</h2>
+    <h2 id="sign-out-heading" class="logo-font mb-4 text-uppercase">{% trans "Sign Out" %}</h2>
     <hr>
-    <p class="mb-4">{% trans 'Are you sure you want to sign out?' %}</p>
 
-    <form method="post" action="{% url 'account_logout' %}">
+    <p class="mb-4">{% trans "Are you sure you want to sign out?" %}</p>
+
+    <form method="post" action="{% url 'account_logout' %}" aria-label="Sign Out Form">
       {% csrf_token %}
       {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
       <div class="d-flex flex-wrap justify-content-between align-items-center">
         <a class="btn btn-outline-navy rounded-0 mb-2" href="{% url 'home' %}">{% trans "Cancel" %}</a>
         <button class="btn btn-navy rounded-0 mb-2" type="submit">{% trans "Sign Out" %}</button>
       </div>
     </form>
-  </div>
-</div>
+  </section>
+</main>
 {% endblock %}

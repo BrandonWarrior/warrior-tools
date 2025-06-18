@@ -7,10 +7,10 @@
 {% block body_class %}form-page{% endblock %}
 
 {% block content %}
-<div class="content-wrapper">
-  <div class="form-container">
+<main class="content-wrapper" role="main">
+  <section class="form-container" aria-labelledby="sign-in-heading">
     <hr>
-    <h2 class="logo-font mb-4 text-uppercase">{% trans "Sign In" %}</h2>
+    <h2 id="sign-in-heading" class="logo-font mb-4 text-uppercase">{% trans "Sign In" %}</h2>
     <hr>
 
     {% get_providers as socialaccount_providers %}
@@ -30,7 +30,7 @@
       </p>
     {% endif %}
 
-    <form method="POST" action="{% url 'account_login' %}">
+    <form method="POST" action="{% url 'account_login' %}" aria-label="Sign In Form">
       {% csrf_token %}
       {{ form|crispy }}
 
@@ -44,9 +44,9 @@
       </div>
 
       <div class="text-right mt-2">
-        <a class="text-info" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+        <a class="signup-link" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
       </div>
     </form>
-  </div>
-</div>
+  </section>
+</main>
 {% endblock %}
