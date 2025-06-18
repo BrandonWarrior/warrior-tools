@@ -135,24 +135,6 @@ main.page-content {
     color: #ffffff !important;
 }
 
-/* === Footer Green CTA Button === */
-.site-footer .btn-green {
-    background-color: #28a745 !important;
-    border: 1px solid #28a745 !important;
-    color: #ffffff !important;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    font-size: 0.85rem;
-    padding: 0.4rem 1rem;
-    border-radius: 0;
-    transition: all 0.2s ease-in-out;
-}
-.site-footer .btn-green:hover {
-    background-color: #218838 !important;
-    border-color: #218838 !important;
-    color: #ffffff !important;
-}
-
 /* === Quantity Buttons === */
 .btn-sm.qty-button {
     font-size: 0.8rem;
@@ -246,6 +228,24 @@ main.page-content {
     color: #1877F2;
 }
 
+/* === Footer Green CTA Button === */
+.site-footer .btn-green {
+    background-color: #1e7e34 !important;
+    border: 1px solid #1e7e34 !important;
+    color: #ffffff;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+    border-radius: 0;
+    transition: all 0.2s ease-in-out;
+}
+.site-footer .btn-green:hover {
+    background-color: #218838 !important;
+    border-color: #218838 !important;
+    color: #ffffff !important;
+}
+
 /* === Toast Notifications === */
 .message-container {
     position: fixed;
@@ -269,7 +269,7 @@ main.page-content {
     font-size: 1rem;
     font-weight: 700;
     padding: 0.5rem 1rem;
-    background-color: #28a745 !important;
+    background-color: #1e7e34 !important;
     color: #ffffff !important;
     border: none;
     display: flex;
@@ -362,6 +362,29 @@ main.page-content {
 .fa-tag,
 .fa-star,
 .fa-wrench {
+    color: #ffffff !important;
+}
+
+/* === Dropdown Menu Fix === */
+.dropdown-menu {
+    background-color: #0B0F1A !important;
+    border: 1px solid #1A4C8C;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-item {
+    color: #ffffff !important;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #1A4C8C !important;
     color: #ffffff !important;
 }
 

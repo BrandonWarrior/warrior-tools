@@ -1,94 +1,129 @@
 /* ==============================
    INDEX PAGE STYLING – CLEAN + FINAL
-   ============================== */
+============================== */
 
 /* === Ensure White Background on Homepage === */
 body.home-page {
-    background-color: #ffffff;
-    color: #1A4C8C;
+  background-color: #ffffff;
+  color: #1A4C8C;
+}
+
+/* ===============================
+ Hero Logo on Home Page
+=============================== */
+.hero-logo {
+  max-width: 320px;
+  width: 80%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+}
+
+/* Responsive scaling for smaller devices */
+@media (max-width: 768px) {
+  .hero-logo {
+      max-width: 240px;
+      margin-top: 1rem;
   }
-  
-  /* === Hero Section === */
+}
+
+/* === Hero Section === */
+.home-hero-wrapper {
+  padding-top: 50px;
+  padding-bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+  text-align: center;
+  background-color: #ffffff;
+}
+
+/* Optional fix for extra height on larger screens */
+@media (min-width: 992px) {
   .home-hero-wrapper {
-    padding-top: 180px;
-    padding-bottom: 120px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: calc(100vh - 200px);
-    text-align: center;
-    background-color: #ffffff;
+      min-height: auto;
   }
-  
-  /* === Hero Heading === */
-  .hero-heading {
-    font-size: 2.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    line-height: 1.2;
-    color: #1A4C8C;
-    font-family: 'Oswald', sans-serif;
-    margin-bottom: 2rem;
-  }
-  
-  /* === CTA Buttons === */
-  .btn-home-cta {
-    background-color: #1A4C8C;
-    color: white !important;
-    border: 1px solid #1A4C8C;
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 0.65rem 2rem;
-    margin: 0.5rem;
-    transition: background-color 0.2s ease-in-out;
-  }
-  .btn-home-cta:hover {
-    background-color: #163f73;
-    border-color: #163f73;
-    color: #ffffff !important;
-  }
-  
-  /* === Button Group === */
-  .cta-button-group {
-    margin-top: 1.5rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-  }
-  
-  /* === Responsive === */
-  @media (max-width: 768px) {
-    .home-hero-wrapper {
+}
+
+/* === Hero Heading === */
+.hero-heading {
+  font-size: 2.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: #1A4C8C;
+  font-family: 'Oswald', sans-serif;
+  margin-bottom: 2rem;
+}
+
+/* === CTA Buttons === */
+.btn-home-cta {
+  background-color: #1A4C8C;
+  color: white !important;
+  border: 1px solid #1A4C8C;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.65rem 2rem;
+  margin: 0.5rem auto;
+  transition: background-color 0.2s ease-in-out;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Hover & Focus styles */
+.btn-home-cta:hover {
+  background-color: #163f73;
+  border-color: #163f73;
+  color: #ffffff !important;
+}
+
+.btn-home-cta:focus {
+  outline: 2px dashed #ffc107;
+  outline-offset: 3px;
+}
+
+/* === Button Group === */
+.cta-button-group {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .home-hero-wrapper {
       padding-top: 140px;
       padding-bottom: 100px;
       padding-left: 1.5rem;
       padding-right: 1.5rem;
-    }
-  
-    .hero-heading {
+  }
+
+  .hero-heading {
       font-size: 2.25rem;
       line-height: 1.3;
       margin-bottom: 1.5rem;
       color: #1A4C8C;
-    }
-  
-    .btn-home-cta {
+  }
+
+  .btn-home-cta {
       width: 100%;
       max-width: 260px;
       font-size: 0.9rem;
       padding: 0.6rem 1rem;
-      margin: 0.5rem auto;
-    }
-  
-    .cta-button-group {
+  }
+
+  .cta-button-group {
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
-    }
   }
-  
+}

@@ -28,28 +28,35 @@
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
-<div class="d-flex flex-column min-vh-100"><!-- ✅ full height flex wrapper -->
+<div class="d-flex flex-column min-vh-100">
 
+  <!-- HEADER -->
   <header class="container-fluid fixed-top warrior-header">
-    <!-- Top Bar -->
+
+    <!-- Top Bar (Desktop) -->
     <section class="row pt-lg-2 d-none d-lg-flex">
       <div class="col-12 col-lg-4 text-center text-lg-left my-auto py-1">
-        <a href="{% url 'home' %}" class="nav-link main-logo-link">
+        <a href="{% url 'home' %}" class="nav-link main-logo-link" aria-label="Go to homepage">
           <h2 class="logo-font my-0"><strong>Warrior</strong> Tools</h2>
         </a>
       </div>
+
+      <!-- SEARCH -->
       <div class="col-12 col-lg-4 my-auto py-1">
-        <form method="GET" action="{% url 'products' %}">
+        <form method="GET" action="{% url 'products' %}" role="search">
+          <label for="desktop-search-input" class="sr-only">Search for products</label>
           <div class="input-group w-100">
-            <input class="form-control search-input" type="text" name="q" placeholder="Search products...">
+            <input id="desktop-search-input" class="form-control search-input" type="text" name="q"
+                   placeholder="Search products..." aria-label="Search products">
             <div class="input-group-append">
-              <button class="btn search-button" type="submit">
+              <button class="btn search-button" type="submit" aria-label="Submit search">
                 <i class="fas fa-search"></i>
               </button>
             </div>
           </div>
         </form>
       </div>
+
       <nav class="col-12 col-lg-4 my-auto py-1 text-center text-lg-right">
         <ul class="list-inline list-unstyled my-0">
           <li class="list-inline-item dropdown">
@@ -85,7 +92,7 @@
     <!-- Main Navigation -->
     <nav class="row" aria-label="Main navigation">
       <div class="navbar navbar-expand-lg navbar-dark w-100">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="navbar-nav d-lg-none flex-row w-100 justify-content-around my-2">
@@ -135,7 +142,7 @@
     {% include 'includes/footer.html' %}
   </footer>
 
-</div> <!-- end flex wrapper -->
+</div>
 
 {% block postloadjs %}
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -16,7 +16,7 @@
     z-index: 1;
 }
 
-/* Scoped Typography: avoid affecting buttons */
+/* Headings and labels */
 .checkout-page .checkout-content h1,
 .checkout-page .checkout-content h2,
 .checkout-page .checkout-content h3,
@@ -30,147 +30,7 @@
     font-weight: 500;
 }
 
-/* Override for button text */
-.checkout-page .btn,
-.checkout-page .btn *,
-.checkout-page .btn-navy,
-.checkout-page .btn-navy *,
-.checkout-page .btn-outline-navy,
-.checkout-page .btn-outline-navy * {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    border-radius: 0;
-}
-
-/* Navy Button Styles */
-.checkout-page .btn-navy {
-    background-color: #1A4C8C !important;
-    color: #ffffff !important;
-    border: none !important;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.checkout-page .btn-navy:hover {
-    background-color: #163f73 !important;
-}
-
-/* Outline Navy Button Styles */
-.checkout-page .btn-outline-navy {
-    background-color: transparent !important;
-    color: #1A4C8C !important;
-    border: 1px solid #1A4C8C !important;
-    transition: all 0.2s ease-in-out;
-}
-
-.checkout-page .btn-outline-navy:hover {
-    background-color: #1A4C8C !important;
-    color: #ffffff !important;
-}
-
-/* Form field styling */
-.checkout-page .form-control,
-.checkout-page select,
-.checkout-page input,
-.checkout-page .StripeElement {
-    background-color: #ffffff;
-    color: #0B0F1A;
-    border: 1px solid #1A4C8C;
-    border-radius: 0;
-    font-family: 'Lato', sans-serif;
-}
-
-.checkout-page .form-control::placeholder {
-    color: #aab7c4;
-}
-
-.checkout-page select:invalid,
-.checkout-page select option[value=""] {
-    color: #aab7c4 !important;
-}
-
-/* Stripe styles */
-.StripeElement,
-.stripe-style-input {
-    box-sizing: border-box;
-    height: 40px;
-    padding: 10px 12px;
-    border: 1px solid transparent;
-    border-radius: 0;
-    background-color: white;
-    box-shadow: 0 1px 3px 0 #e6ebf1;
-    transition: box-shadow 150ms ease;
-}
-
-.StripeElement--focus,
-.stripe-style-input:focus,
-.stripe-style-input:active {
-    box-shadow: 0 1px 3px 0 #cfd7df;
-}
-
-.StripeElement--webkit-autofill {
-    background-color: #fefde5 !important;
-}
-
-/* Submit buttons */
-.submit-button .btn {
-    margin-bottom: 1rem;
-}
-
-/* Loading overlay */
-#loading-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    z-index: 9999;
-}
-
-.loading-spinner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    flex-direction: column;
-    text-align: center;
-}
-
-.loading-spinner i {
-    color: #ffc107;
-}
-
-.loading-spinner h4,
-.loading-spinner p {
-    color: #fff;
-    margin-top: 200px;
-}
-
-/* Responsive Fix */
-@media (max-width: 768px) {
-    .submit-button .btn {
-        width: 100%;
-        margin-bottom: 1rem;
-    }
-}
-
-/* === Checkout Success Page Styling === */
-
-.checkout-success-body {
-    background-color: #ffffff;
-    padding: 32px 0;
-    margin-top: 100px;
-}
-
-.checkout-success-body .checkout-content {
-    background-color: #ffffff;
-    padding: 2rem 1rem;
-    color: #1A4C8C;
-}
-
+/* Order Confirmation Section */
 .order-confirmation-wrapper {
     background-color: #ffffff;
     border: 1px solid #dee2e6;
@@ -178,6 +38,8 @@
     padding: 2rem 1.5rem;
     color: #1A4C8C;
     font-size: 0.95rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .order-confirmation-wrapper hr {
@@ -192,10 +54,12 @@
 .order-confirmation-wrapper .col-md-4 {
     font-weight: 600;
     color: #1A4C8C;
+    word-break: break-word;
 }
 
 .order-confirmation-wrapper .col-md-8 {
     text-align: right;
+    word-break: break-word;
 }
 
 .order-confirmation-wrapper small,
@@ -213,4 +77,17 @@
     font-size: 0.9rem;
     text-transform: uppercase;
     color: #1A4C8C;
+}
+
+/* Responsive Fixes */
+@media (max-width: 768px) {
+    .submit-button .btn {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .order-confirmation-wrapper .col-md-4,
+    .order-confirmation-wrapper .col-md-8 {
+        text-align: left;
+    }
 }
