@@ -38,13 +38,16 @@ def testimonial_list(request):
 def update_testimonial(request, pk):
     """
     Allow a user to update their own testimonial.
+    Resets approval status so it must be reviewed again by admin.
     """
     testimonial = get_object_or_404(Testimonial, pk=pk, author=request.user)
     if request.method == "POST":
         form = TestimonialForm(request.POST, instance=testimonial)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Your testimonial has been updated.")
+            testimonial = form.save(commit=False)
+            testimonial.approved = False  # Unapprove on edit
+            testimonial.save()
+            messages.success(request, "Your testimonial has been updated and is pending approval.")
             return redirect('testimonial_list')
     else:
         form = TestimonialForm(instance=testimonial)

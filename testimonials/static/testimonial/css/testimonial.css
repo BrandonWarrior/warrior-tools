@@ -14,11 +14,12 @@ body.testimonials-page .products-page-content {
     color: #1A4C8C;
 }
 
-/* Star rating */
-.star-rating i {
+/* Star rating — FIXED to ensure gold stars */
+.testimonials-page .star-rating i.fas,
+.testimonials-page .star-rating i.far {
     font-size: 16px;
     margin-right: 2px;
-    color: #FFC107;
+    color: #FFC107 !important; /* Bright gold */
 }
 
 /* Card Styling */
