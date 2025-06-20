@@ -20,3 +20,5 @@ Warrior Tools currently operates as a B2C (Business to Consumer) e-commerce plat
 While the site is presently geared toward individual consumers, it is built with scalability in mind. There is a clear roadmap for evolving Warrior Tools into a B2B (Business to Business) model—serving construction firms, contractors, and trade suppliers with bulk ordering, trade accounts, and personalized procurement solutions.
 
 This future adaptability makes Warrior Tools not just a final project, but the foundation of a real, scalable business opportunity.
+
+## Content Planning & SEO Strategy
