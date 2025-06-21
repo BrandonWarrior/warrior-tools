@@ -1,10 +1,15 @@
 from django import forms
-from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from .models import Order
 
 
 class OrderForm(forms.ModelForm):
+    """
+    Form for capturing user order and delivery details.
+    Includes placeholder text, custom CSS classes,
+    and accessible labels for screen readers.
+    """
+
     class Meta:
         model = Order
         fields = (
@@ -18,13 +23,26 @@ class OrderForm(forms.ModelForm):
                 'class': 'stripe-style-input',
             }),
         }
+        labels = {
+            'full_name': 'Full Name',
+            'email': 'Email Address',
+            'phone_number': 'Phone Number',
+            'postcode': 'Postal Code',
+            'town_or_city': 'Town or City',
+            'street_address1': 'Street Address 1',
+            'street_address2': 'Street Address 2',
+            'county': 'County',
+            'country': 'Country',
+        }
 
     def __init__(self, *args, **kwargs):
         """
-        Add placeholders and classes, remove auto-generated
-        labels and set autofocus on the first field
+        Add placeholders and classes to fields.
+        Set autofocus on the first input.
+        Labels are preserved for accessibility.
         """
         super().__init__(*args, **kwargs)
+
         placeholders = {
             'full_name': 'Full Name',
             'email': 'Email Address',
@@ -47,4 +65,3 @@ class OrderForm(forms.ModelForm):
                 self.fields[field].widget.attrs['placeholder'] = placeholder
 
             self.fields[field].widget.attrs['class'] = 'stripe-style-input'
-            self.fields[field].label = False

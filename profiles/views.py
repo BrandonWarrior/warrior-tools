@@ -1,17 +1,21 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from .models import UserProfile
 from .forms import UserProfileForm
 from products.models import WishlistItem
-
 from checkout.models import Order
 
 
 @login_required
 def profile(request):
-    """ Display the user's profile with delivery info, order history, and wishlist. """
+    """
+    Display the user's profile page.
+    Includes delivery information form, order history, and wishlist items.
+    """
     profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
@@ -25,8 +29,6 @@ def profile(request):
         form = UserProfileForm(instance=profile)
 
     orders = profile.orders.all()
-
-    # Fetch wishlist items for this user
     wishlist_items = request.user.wishlist_items.select_related('product')
 
     template = 'profiles/profile.html'
@@ -42,7 +44,10 @@ def profile(request):
 
 @login_required
 def order_history(request, order_number):
-    """ Display the order confirmation again from profile. """
+    """
+    Display the order confirmation details from a past order.
+    Accessible from the user's profile page.
+    """
     order = get_object_or_404(Order, order_number=order_number)
 
     messages.info(request, (
@@ -57,3 +62,18 @@ def order_history(request, order_number):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def remove_from_wishlist(request, item_id):
+    """
+    Remove a product from the user's wishlist.
+    """
+    try:
+        item = get_object_or_404(WishlistItem, id=item_id, user=request.user)
+        item.delete()
+        messages.success(request, "Item removed from your wishlist.")
+    except WishlistItem.DoesNotExist:
+        messages.error(request, "Item could not be found in your wishlist.")
+
+    return HttpResponseRedirect(reverse('profile'))
