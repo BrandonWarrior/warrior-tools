@@ -29,7 +29,7 @@
     <div class="col-12 col-md-6 col-lg-4">
       <article class="product-details-container mb-5 mt-md-5">
         <h1 class="product-name logo-font text-uppercase font-weight-bold">
-          <i class="fas fa-screwdriver-wrench text-primary mr-2"></i>{{ product.name }}
+          <i class="fas fa-tools text-primary mr-2"></i>{{ product.name }}
         </h1>
 
         <p class="lead mb-0 product-price">£{{ product.price }}</p>
@@ -40,15 +40,15 @@
           </p>
         {% endif %}
 
-        {% if product.rating %}
-          <small class="text-muted">
-            <i class="fas fa-star text-warning mr-1"></i>{{ product.rating }} / 5
-          </small>
-        {% else %}
-          <small class="text-muted">
-            <i class="fas fa-star text-muted mr-1"></i>No Rating
-          </small>
-        {% endif %}
+        <div class="product-star-rating mb-2">
+          {% if product.rating %}
+            <i class="fas fa-star"></i>
+            <span>{{ product.rating }} / 5</span>
+          {% else %}
+            <i class="far fa-star text-muted"></i>
+            <span>No Rating</span>
+          {% endif %}
+        </div>        
 
         {% if request.user.is_superuser %}
           <small class="ml-3">
