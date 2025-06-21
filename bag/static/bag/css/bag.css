@@ -74,8 +74,12 @@
 }
 
 /* Action Links */
+/* Action Links - aligned below quantity controls and spaced */
 .bag-page .bag-content .action-links {
-    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.75rem;
 }
 
 .bag-page .bag-content .update-link,
@@ -121,7 +125,7 @@
 }
 
 /* ===============================
-   BUTTON STYLES (SCOPED + OVERRIDDEN)
+   BUTTON STYLES
 =============================== */
 
 .bag-page .btn-navy {
@@ -164,8 +168,13 @@
     font-size: 1rem !important;
 }
 
+.update-link,
+.remove-item {
+  cursor: pointer;
+}
+
 /* ===============================
-   RESPONSIVE STYLING (SCOPED)
+   RESPONSIVE STYLING
 =============================== */
 
 @media (max-width: 992px) {
@@ -254,12 +263,11 @@
         width: 50px;
     }
 
-    .bag-page .bag-content .action-links {
-        display: flex;
-        justify-content: center;
-        gap: 8px;
-        flex-wrap: wrap;
-    }
+        .bag-page .bag-content .action-links {
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
     .bag-page .bag-content .action-links a {
         flex: 1 1 45%;

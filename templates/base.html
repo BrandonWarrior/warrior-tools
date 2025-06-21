@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
   {% block meta %}
+    <!-- 🧱 Basic Meta Tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,17 +11,18 @@
 
   {% block extra_meta %}{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'css/favicon/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'css/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'css/favicon/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'css/favicon/site.webmanifest' %}">
-    <link rel="shortcut icon" href="{% static 'css/favicon/favicon.ico' %}">
-    
+  <!-- ⭐️ Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'css/favicon/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'css/favicon/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'css/favicon/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'css/favicon/site.webmanifest' %}">
+  <link rel="shortcut icon" href="{% static 'css/favicon/favicon.ico' %}">
+
   {% block corecss %}
+    <!-- 🎨 Core Stylesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Oswald&display=swap">
-    <script src="https://kit.fontawesome.com/75fa94fb6a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/base.css' %}?v=3">
     <link rel="stylesheet" href="{% static 'css/account_pages.css' %}?v=1">
   {% endblock %}
@@ -28,27 +30,30 @@
   {% block extra_css %}{% endblock %}
 
   {% block corejs %}
+    <!-- 💳 Stripe JS -->
     <script src="https://js.stripe.com/v3/"></script>
   {% endblock %}
 
+  <!-- 🧭 Page Title -->
   <title>Warrior Tools {% block extra_title %}{% endblock %}</title>
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
 <div class="d-flex flex-column min-vh-100">
 
-  <!-- HEADER -->
+  <!-- 🔝 HEADER START -->
   <header class="container-fluid fixed-top warrior-header">
 
-    <!-- Top Bar (Desktop) -->
+    <!-- 💻 Desktop Top Bar -->
     <section class="row pt-lg-2 d-none d-lg-flex">
+      <!-- 🔗 Logo -->
       <div class="col-12 col-lg-4 text-center text-lg-left my-auto py-1">
         <a href="{% url 'home' %}" class="nav-link main-logo-link" aria-label="Go to homepage">
           <h2 class="logo-font my-0"><strong>Warrior</strong> Tools</h2>
         </a>
       </div>
 
-      <!-- SEARCH -->
+      <!-- 🔍 Desktop Search Bar -->
       <div class="col-12 col-lg-4 my-auto py-1">
         <form method="GET" action="{% url 'products' %}" role="search">
           <label for="desktop-search-input" class="sr-only">Search for products</label>
@@ -64,13 +69,17 @@
         </form>
       </div>
 
+      <!-- 👤 Account & 🛍️ Cart (Desktop) -->
       <nav class="col-12 col-lg-4 my-auto py-1 text-center text-lg-right">
         <ul class="list-inline list-unstyled my-0">
+          <!-- 👤 Account Dropdown -->
           <li class="list-inline-item dropdown">
             <a class="nav-link text-light" href="#" id="user-options" data-toggle="dropdown">
-              <i class="fas fa-user fa-lg"></i><br>
-              <span>My Account</span>
-            </a>
+              <div class="text-center">
+                <div><i class="fas fa-user fa-lg"></i></div>
+                <p class="my-0 oswald-font font-weight-bold">My Account</p>
+              </div>
+            </a>            
             <div class="dropdown-menu border-0" aria-labelledby="user-options">
               {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}
@@ -84,32 +93,40 @@
               {% endif %}
             </div>
           </li>
+
+          <!-- 🛍️ Shopping Bag Icon -->
           <li class="list-inline-item">
             <a class="nav-link cart-link" href="{% url 'view_bag' %}">
-              <i class="fas fa-shopping-bag fa-lg"></i><br>
-              <span class="cart-total oswald-font">
-                {% if grand_total %}£{{ grand_total|floatformat:2 }}{% else %}£0.00{% endif %}
-              </span>
-            </a>
+              <div class="text-center">
+                <div><i class="fas fa-shopping-bag fa-lg"></i></div>
+                <p class="my-0 oswald-font font-weight-bold">
+                  {% if grand_total %}£{{ grand_total|floatformat:2 }}{% else %}£0.00{% endif %}
+                </p>
+              </div>
+            </a>            
           </li>
         </ul>
       </nav>
     </section>
 
-    <!-- Main Navigation -->
+    <!-- 📱 Main Navigation (inc. Mobile Menu) -->
     <nav class="row" aria-label="Main navigation">
       <div class="navbar navbar-expand-lg navbar-dark w-100">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- 📱 Mobile Nav Content -->
         <ul class="navbar-nav d-lg-none flex-row w-100 justify-content-around my-2">
           {% include 'includes/mobile-top-header.html' %}
         </ul>
+
+        <!-- 📁 Include Main Nav Links -->
         {% include 'includes/main-nav.html' %}
       </div>
     </nav>
 
-    <!-- Delivery Banner -->
+    <!-- 🚚 Delivery Banner -->
     <section class="row delivery-banner text-center" aria-label="Free delivery offer">
       <div class="col">
         <h4 class="logo-font my-1">
@@ -118,8 +135,9 @@
       </div>
     </section>
   </header>
+  <!-- 🔚 HEADER END -->
 
-  <!-- Toast Messages -->
+  <!-- 🔔 Toast Notification Area -->
   {% if messages and request.path != '/newsletter/subscribe/' and request.path != '/newsletter/unsubscribe/' %}
     <aside class="message-container" aria-live="polite">
       {% for message in messages %}
@@ -138,19 +156,20 @@
     </aside>
   {% endif %}
 
-  <!-- Main Content -->
+  <!-- 📄 Main Page Content -->
   <main class="page-content">
     {% block page_header %}{% endblock %}
     {% block content %}{% endblock %}
   </main>
 
-  <!-- Footer -->
+  <!-- 👣 Footer Section -->
   <footer class="{% block footer_theme %}footer-dark{% endblock %}">
     {% include 'includes/footer.html' %}
   </footer>
 
 </div>
 
+<!-- 🔌 JS Scripts -->
 {% block postloadjs %}
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>

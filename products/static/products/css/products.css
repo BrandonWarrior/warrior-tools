@@ -61,6 +61,14 @@
   color: #1A4C8C;
 }
 
+/* === Star Icon === */
+.product-star-rating i.fas,
+.product-star-rating i.far {
+    color: #FFC107 !important; /* gold for rating stars */
+    font-size: 1rem;
+    margin-right: 4px;
+}
+
 /* === Detail Images === */
 .product-detail-page .image-container img {
   max-height: 450px;
@@ -130,44 +138,42 @@
 }
 
 /* === Quantity Controls (Fixed Alignment) === */
+
+/* Fix quantity control alignment across all screen sizes */
 .qty-wrapper {
   display: flex;
-  align-items: stretch;
-  width: fit-content;
-  margin: 0.5rem 0 1rem;
+  align-items: center;
+  gap: 0;
 }
 
-.qty-button {
-  width: 48px;
+.qty-button,
+.qty_input {
   height: 48px;
+  width: 48px;
   padding: 0;
-  background-color: #1A4C8C;
-  color: white;
   font-size: 1.2rem;
+  font-weight: 600;
   border: 1px solid #1A4C8C;
-  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
+}
+
+.qty-button {
+  background-color: #1A4C8C;
+  color: white;
+}
+
+.qty_input {
+  text-align: center;
+  color: #1A4C8C;
+  border-left: none;
+  border-right: none;
 }
 
 .qty-button:hover {
   background-color: #163f73;
-}
-
-.qty_input {
-  width: 64px;
-  height: 48px;
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #1A4C8C;
-  border-top: 1px solid #1A4C8C;
-  border-bottom: 1px solid #1A4C8C;
-  border-left: none;
-  border-right: none;
-  padding: 0;
-  margin: 0;
 }
 
 /* === Add/Edit Form Containers === */
@@ -281,4 +287,22 @@ body.form-page main.content-wrapper {
   .product-detail-page .form-row .btn {
     margin-bottom: 0.75rem;
   }
+
+  .products-page .product-container .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .input-group.qty-wrapper {
+    flex-wrap: nowrap;
+  }
+  
+  .input-group .qty-button {
+    flex: 0 0 48px;
+  }
+  
+  .input-group .qty_input {
+    flex: 0 0 64px;
+  }
 }
+
