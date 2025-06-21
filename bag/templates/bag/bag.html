@@ -97,13 +97,15 @@
 
             <tfoot>
               <tr>
-                <td colspan="5" class="text-right pt-4">
-                  <h6><strong>Bag Total: £{{ total|floatformat:2 }}</strong></h6>
-                  <h6>Delivery: £{{ delivery|floatformat:2 }}</h6>
-                  <h4 class="text-primary mt-3"><strong>Grand Total: £{{ grand_total|floatformat:2 }}</strong></h4>
-                  {% if free_delivery_delta > 0 %}
-                    <p class="text-danger">Spend £{{ free_delivery_delta|floatformat:2 }} more for free delivery!</p>
-                  {% endif %}
+                <td colspan="5" class="pt-4">
+                  <div class="bag-totals-summary text-right text-md-right">
+                    <h6><strong>Bag Total: £{{ total|floatformat:2 }}</strong></h6>
+                    <h6>Delivery: £{{ delivery|floatformat:2 }}</h6>
+                    <h4 class="text-primary mt-3"><strong>Grand Total: £{{ grand_total|floatformat:2 }}</strong></h4>
+                    {% if free_delivery_delta > 0 %}
+                      <p class="text-danger mt-2">Spend £{{ free_delivery_delta|floatformat:2 }} more for free delivery!</p>
+                    {% endif %}
+                  </div>
                 </td>
               </tr>
               <tr>

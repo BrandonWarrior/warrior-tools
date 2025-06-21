@@ -382,7 +382,7 @@ main.page-content {
     color: #ffffff !important;
 }
 
-/* === Dropdown Menu Fix === */
+/* === Dropdown Menu === */
 .dropdown-menu {
     background-color: #0B0F1A !important;
     border: 1px solid #1A4C8C;
@@ -411,3 +411,38 @@ main.page-content {
         padding-top: 140px;
     }
 }
+
+/* === Mobile Header Logo Styling === */
+@media (max-width: 991.98px) {
+    /* Target mobile logo container */
+    .navbar-nav.d-lg-none {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+}
+
+/* Fix mobile logo text style to match desktop */
+@media (max-width: 991.98px) {
+    .mobile-header-logo .logo-font {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 1.5rem;
+      color: #ffffff !important;
+      margin-bottom: 0;
+    }
+  
+    .mobile-header-logo a.nav-link {
+      padding: 0;
+      margin: 0;
+      text-decoration: none;
+    }
+  
+    .mobile-header-logo {
+      background-color: #0B0F1A;
+      padding: 0.5rem 0;
+      text-align: center;
+    }
+  }
+  

@@ -223,70 +223,96 @@
 
 @media (max-width: 576px) {
     .bag-page .bag-content .table-responsive {
-        overflow-x: auto;
+      overflow-x: auto;
     }
-
+  
     .bag-page .bag-content .table {
-        display: block;
-        width: 100%;
+      display: block;
+      width: 100%;
     }
-
+  
     .bag-page .bag-content .table thead {
-        display: none;
+      display: none;
     }
-
+  
     .bag-page .bag-content .table tr {
-        display: block;
-        margin-bottom: 1.5rem;
-        background-color: #f8f9fa;
-        border-radius: 0.25rem;
-        padding: 1rem;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      display: block;
+      margin-bottom: 1.5rem;
+      background-color: #f8f9fa;
+      border-radius: 0.25rem;
+      padding: 1rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
-
+  
     .bag-page .bag-content .table td {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border: none;
-        font-size: 0.85rem;
-        padding: 0.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: none;
+      font-size: 0.85rem;
+      padding: 0.5rem 0;
     }
-
+  
     .bag-page .bag-content .quantity-controls .btn,
     .bag-page .bag-content .qty_input {
-        height: 36px;
-        font-size: 0.9rem;
+      height: 36px;
+      font-size: 0.9rem;
     }
-
+  
     .bag-page .bag-content .qty_input {
-        width: 50px;
+      width: 50px;
     }
-
-        .bag-page .bag-content .action-links {
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
+  
+    .bag-page .bag-content .action-links {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  
     .bag-page .bag-content .action-links a {
-        flex: 1 1 45%;
-        text-align: center;
-        padding: 0.4rem 0.5rem;
-        font-size: 0.85rem;
-        white-space: nowrap;
+      flex: 1 1 45%;
+      text-align: center;
+      padding: 0.4rem 0.5rem;
+      font-size: 0.85rem;
+      white-space: nowrap;
     }
-
+  
     .bag-page .bag-content .bag-nav-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items: stretch;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: stretch;
     }
-
+  
     .bag-page .bag-content .bag-nav-buttons .btn {
-        display: block;
-        width: 100%;
-        margin: 0;
+      display: block;
+      width: 100%;
+      margin: 0;
     }
-}
+  
+    /* ✅ Grand Total Summary Section */
+    .bag-page .bag-content .bag-totals-summary {
+      text-align: center !important;
+      padding: 1rem;
+      background-color: #f8f9fa;
+      border-radius: 0.5rem;
+      margin-top: 1rem;
+    }
+  
+    .bag-page .bag-content .bag-totals-summary h6,
+    .bag-page .bag-content .bag-totals-summary h4,
+    .bag-page .bag-content .bag-totals-summary p {
+      margin-bottom: 0.5rem;
+    }
+  
+    .bag-page .bag-content .bag-totals-summary h4 {
+      font-size: 1.4rem;
+    }
+  
+    .bag-page .bag-content .bag-totals-summary p.text-danger {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #dc3545;
+    }
+  }
+  
