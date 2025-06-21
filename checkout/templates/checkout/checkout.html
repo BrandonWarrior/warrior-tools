@@ -10,29 +10,21 @@
 {% endblock %}
 
 {% block page_header %}
-<div class="container header-container">
+<header class="container header-container">
     <div class="row">
         <div class="col"></div>
     </div>
-</div>
+</header>
 {% endblock %}
 
 {% block content %}
 <div class="overlay"></div>
 
-<div class="checkout-page-wrapper">
+<main class="checkout-page-wrapper" role="main">
     <div class="container checkout-content">
         <div class="row">
-            <div class="col">
-                <hr>
-                <h2 class="logo-font mb-4 text-uppercase">Checkout</h2>
-                <hr>
-            </div>
-        </div>
-
-        <div class="row">
             <!-- Right: Order summary -->
-            <div class="col-12 col-lg-6 order-lg-last mb-5">
+            <aside class="col-12 col-lg-6 order-lg-last mb-5" aria-label="Order Summary">
                 <p class="text-muted">Order Summary ({{ product_count }})</p>
                 <div class="row">
                     <div class="col-7 offset-2">
@@ -79,12 +71,12 @@
                         <p class="my-0"><strong>£{{ grand_total|floatformat:2 }}</strong></p>
                     </div>
                 </div>
-            </div>
+            </aside>
 
             <!-- Left: Checkout form -->
-            <div class="col-12 col-lg-6">
+            <section class="col-12 col-lg-6" aria-label="Checkout Form">
                 <p class="text-muted">Please fill out the form below to complete your order</p>
-                <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+                <form action="{% url 'checkout' %}" method="POST" id="payment-form" novalidate>
                     {% csrf_token %}
 
                     <fieldset class="rounded px-3 mb-5">
@@ -134,13 +126,13 @@
                         </p>
                     </div>
                 </form>
-            </div>
+            </section>
         </div>
     </div>
-</div>
+</main>
 
 <!-- Loading overlay with spinning cog -->
-<div id="loading-overlay" class="loading-spinner justify-content-center align-items-center">
+<div id="loading-overlay" class="loading-spinner justify-content-center align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="text-center">
         <i class="fas fa-cog fa-spin fa-4x text-light mb-3"></i>
         <h4 class="text-light logo-font">Processing Your Tool Order...</h4>

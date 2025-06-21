@@ -12,28 +12,28 @@
 <!-- ========== Tool Bag Page ========== -->
 <div class="overlay"></div>
 
-<div class="container bag-content">
-  <div class="row">
+<main class="container bag-content" role="main">
+  <header class="row">
     <div class="col">
       <hr>
       <h2 class="logo-font text-primary mb-4">Your Tool Bag</h2>
       <hr>
     </div>
-  </div>
+  </header>
 
-  <div class="row">
-    <div class="col">
+  <section class="row">
+    <article class="col">
       {% if bag_items %}
-        <div class="table-responsive rounded">
+        <div class="table-responsive rounded" role="region" aria-label="Bag Items Table">
           <table class="table table-sm table-borderless">
             <!-- === Table Header for Desktop === -->
             <thead class="text-primary font-weight-bold d-none d-md-table-header-group">
               <tr>
-                <th>Tool</th>
-                <th></th>
-                <th>Price</th>
-                <th>Qty</th>
-                <th>Subtotal</th>
+                <th scope="col">Tool</th>
+                <th scope="col"></th>
+                <th scope="col">Price</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Subtotal</th>
               </tr>
             </thead>
 
@@ -64,7 +64,6 @@
 
                 <!-- === Quantity Controls + Action Buttons Column === -->
                 <td class="align-middle">
-                  <!-- Quantity Form -->
                   <form class="update-form" method="POST" action="{% url 'adjust_bag' item.item_id %}">
                     {% csrf_token %}
                     <div class="quantity-controls mb-2">
@@ -81,7 +80,6 @@
                       {% endif %}
                     </div>
 
-                    <!-- Update and Remove Buttons Below Quantity -->
                     <div class="action-links d-flex justify-content-center gap-3">
                       <a class="update-link small">Update</a>
                       <a class="remove-item text-danger small" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}">
@@ -97,7 +95,6 @@
               {% endfor %}
             </tbody>
 
-            <!-- === Totals and Checkout Buttons === -->
             <tfoot>
               <tr>
                 <td colspan="5" class="text-right pt-4">
@@ -123,15 +120,14 @@
           </table>
         </div>
       {% else %}
-        <!-- === If Bag is Empty === -->
         <p class="lead mb-5">Your tool bag is empty — let’s fix that!</p>
         <a href="{% url 'products' %}" class="btn btn-navy rounded-0 btn-lg">
           <i class="fas fa-chevron-left"></i> Back to Tools
         </a>
       {% endif %}
-    </div>
-  </div>
-</div>
+    </article>
+  </section>
+</main>
 {% endblock %}
 
 {% block postloadjs %}
