@@ -57,3 +57,7 @@ The dropdown link was corrected to use the updated category slug:
 The link in main-nav.html was changed from ?category=wrenches to ?category=wrenches_and_pliers.
 The combined “All Hand Tools” link was also updated to include wrenches_and_pliers in the list of categories.
 
+### Code Style
+- Flake8 was used for linting with a `.flake8` config file
+- Black was used for autoformatting (88 character line length)
+- All code passes linting except for lines longer than 88 where readability benefits

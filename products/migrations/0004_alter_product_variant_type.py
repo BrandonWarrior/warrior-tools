@@ -6,13 +6,27 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0003_product_variant_type'),
+        ("products", "0003_product_variant_type"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='product',
-            name='variant_type',
-            field=models.CharField(blank=True, choices=[('hammer_drill', 'Hammer Drill'), ('claw_hammer', 'Claw Hammer'), ('sledgehammer', 'Sledgehammer'), ('drill_driver', 'Drill Driver'), ('impact_driver', 'Impact Driver'), ('jigsaw', 'Jigsaw'), ('circular_saw', 'Circular Saw'), ('orbital_sander', 'Orbital Sander')], max_length=50, null=True),
+            model_name="product",
+            name="variant_type",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("hammer_drill", "Hammer Drill"),
+                    ("claw_hammer", "Claw Hammer"),
+                    ("sledgehammer", "Sledgehammer"),
+                    ("drill_driver", "Drill Driver"),
+                    ("impact_driver", "Impact Driver"),
+                    ("jigsaw", "Jigsaw"),
+                    ("circular_saw", "Circular Saw"),
+                    ("orbital_sander", "Orbital Sander"),
+                ],
+                max_length=50,
+                null=True,
+            ),
         ),
     ]

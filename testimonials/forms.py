@@ -9,22 +9,18 @@ class TestimonialForm(forms.ModelForm):
 
     class Meta:
         model = Testimonial
-        fields = ['content', 'rating']
+        fields = ["content", "rating"]
         widgets = {
-            'content': forms.Textarea(attrs={
-                'rows': 4,
-                'placeholder': 'Share your experience...',
-                'class': 'form-control testimonial-content'
-            }),
-            'rating': forms.Select(attrs={
-                'class': 'form-control testimonial-rating'
-            }),
+            "content": forms.Textarea(
+                attrs={
+                    "rows": 4,
+                    "placeholder": "Share your experience...",
+                    "class": "form-control testimonial-content",
+                }
+            ),
+            "rating": forms.Select(attrs={"class": "form-control testimonial-rating"}),
         }
-        error_messages = {
-            'content': {
-                'required': 'A testimonial is required.'
-            }
-        }
+        error_messages = {"content": {"required": "A testimonial is required."}}
 
     def __init__(self, *args, **kwargs):
         """
@@ -33,4 +29,4 @@ class TestimonialForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
-            field.widget.attrs.pop('required', None)
+            field.widget.attrs.pop("required", None)

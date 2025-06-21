@@ -6,13 +6,32 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0004_alter_product_variant_type'),
+        ("products", "0004_alter_product_variant_type"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='product',
-            name='variant_type',
-            field=models.CharField(blank=True, choices=[('hammer', 'Hammer'), ('sds_drill', 'SDS Drill'), ('drill_driver', 'Drill Driver'), ('impact_driver', 'Impact Driver'), ('jigsaw', 'Jigsaw'), ('circular_saw', 'Circular Saw'), ('orbital_sander', 'Orbital Sander'), ('tape_measure', 'Tape Measure'), ('hand_saw', 'Hand Saw'), ('pipe_cutter', 'Pipe Cutter'), ('pliers', 'Pliers'), ('wood_chisel', 'Wood Chisel'), ('spirit_level', 'Spirit Level')], max_length=50, null=True),
+            model_name="product",
+            name="variant_type",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("hammer", "Hammer"),
+                    ("sds_drill", "SDS Drill"),
+                    ("drill_driver", "Drill Driver"),
+                    ("impact_driver", "Impact Driver"),
+                    ("jigsaw", "Jigsaw"),
+                    ("circular_saw", "Circular Saw"),
+                    ("orbital_sander", "Orbital Sander"),
+                    ("tape_measure", "Tape Measure"),
+                    ("hand_saw", "Hand Saw"),
+                    ("pipe_cutter", "Pipe Cutter"),
+                    ("pliers", "Pliers"),
+                    ("wood_chisel", "Wood Chisel"),
+                    ("spirit_level", "Spirit Level"),
+                ],
+                max_length=50,
+                null=True,
+            ),
         ),
     ]

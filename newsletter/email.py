@@ -4,33 +4,34 @@ from django.conf import settings
 import logging
 
 # Set up logging
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("newsletter.email")
+
 
 def send_newsletter_confirmation_email(email):
     """
-    Sends a styled HTML + plain text confirmation email to the new newsletter subscriber.
-    Includes error handling and logging.
+    Sends a styled HTML + plain text confirmation email to the new newsletter
+    subscriber. Includes error handling and logging.
     """
     try:
         subject = render_to_string(
-            'newsletter/confirmation_emails/confirmation_email_subject.txt'
+            "newsletter/confirmation_emails/confirmation_email_subject.txt"
         ).strip()
 
         text_body = render_to_string(
-            'newsletter/confirmation_emails/confirmation_email_body.txt',
-            {'contact_email': settings.DEFAULT_FROM_EMAIL}
+            "newsletter/confirmation_emails/confirmation_email_body.txt",
+            {"contact_email": settings.DEFAULT_FROM_EMAIL},
         )
 
         html_body = render_to_string(
-            'newsletter/confirmation_emails/confirmation_email_body.html',
-            {'contact_email': settings.DEFAULT_FROM_EMAIL}
+            "newsletter/confirmation_emails/confirmation_email_body.html",
+            {"contact_email": settings.DEFAULT_FROM_EMAIL},
         )
 
         msg = EmailMultiAlternatives(
             subject,
             text_body,
             settings.DEFAULT_FROM_EMAIL,
-            [email]
+            [email],
         )
         msg.attach_alternative(html_body, "text/html")
         msg.send()
@@ -45,24 +46,24 @@ def send_unsubscribe_email(email):
     """
     try:
         subject = render_to_string(
-            'newsletter/unsubscribe_emails/unsubscribe_email_subject.txt'
+            "newsletter/unsubscribe_emails/unsubscribe_email_subject.txt"
         ).strip()
 
         text_body = render_to_string(
-            'newsletter/unsubscribe_emails/unsubscribe_email_body.txt',
-            {'contact_email': settings.DEFAULT_FROM_EMAIL}
+            "newsletter/unsubscribe_emails/unsubscribe_email_body.txt",
+            {"contact_email": settings.DEFAULT_FROM_EMAIL},
         )
 
         html_body = render_to_string(
-            'newsletter/unsubscribe_emails/unsubscribe_email_body.html',
-            {'contact_email': settings.DEFAULT_FROM_EMAIL}
+            "newsletter/unsubscribe_emails/unsubscribe_email_body.html",
+            {"contact_email": settings.DEFAULT_FROM_EMAIL},
         )
 
         msg = EmailMultiAlternatives(
             subject,
             text_body,
             settings.DEFAULT_FROM_EMAIL,
-            [email]
+            [email],
         )
         msg.attach_alternative(html_body, "text/html")
         msg.send()

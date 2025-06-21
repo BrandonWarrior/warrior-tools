@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0005_alter_product_variant_type'),
+        ("products", "0005_alter_product_variant_type"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='product',
-            name='is_new',
-            field=models.BooleanField(default=False, help_text='Mark this product as a new arrival'),
+            model_name="product",
+            name="is_new",
+            field=models.BooleanField(
+                default=False, help_text="Mark this product as a new arrival"
+            ),
         ),
     ]

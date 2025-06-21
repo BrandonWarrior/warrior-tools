@@ -7,13 +7,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0008_remove_product_is_new'),
+        ("products", "0008_remove_product_is_new"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='product',
-            name='rating',
-            field=models.DecimalField(blank=True, decimal_places=1, max_digits=3, null=True, validators=[django.core.validators.MinValueValidator(1.0), django.core.validators.MaxValueValidator(5.0)]),
+            model_name="product",
+            name="rating",
+            field=models.DecimalField(
+                blank=True,
+                decimal_places=1,
+                max_digits=3,
+                null=True,
+                validators=[
+                    django.core.validators.MinValueValidator(1.0),
+                    django.core.validators.MaxValueValidator(5.0),
+                ],
+            ),
         ),
     ]

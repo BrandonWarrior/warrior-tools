@@ -6,13 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0002_auto_20250520_1849'),
+        ("products", "0002_auto_20250520_1849"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='product',
-            name='variant_type',
-            field=models.CharField(blank=True, choices=[('hammer', 'Hammer'), ('drill', 'Drill'), ('saw', 'Saw'), ('sander', 'Sander')], max_length=50, null=True),
+            model_name="product",
+            name="variant_type",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("hammer", "Hammer"),
+                    ("drill", "Drill"),
+                    ("saw", "Saw"),
+                    ("sander", "Sander"),
+                ],
+                max_length=50,
+                null=True,
+            ),
         ),
     ]
