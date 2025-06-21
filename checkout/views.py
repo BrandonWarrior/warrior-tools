@@ -18,6 +18,10 @@ import json
 
 @require_POST
 def cache_checkout_data(request):
+    """
+    Update Stripe PaymentIntent metadata with bag and user info
+    before payment is processed.
+    """
     try:
         pid = request.POST.get("client_secret").split("_secret")[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -44,6 +48,10 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
+    """
+    Process checkout form: on POST validate form and create order,
+    on GET display checkout form with Stripe payment intent.
+    """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
@@ -162,7 +170,9 @@ def checkout(request):
 
 
 def send_confirmation_email(order):
-    """Send the user a confirmation email"""
+    """
+    Send a confirmation email to the user after a successful order.
+    """
     cust_email = order.email
     subject = render_to_string(
         "checkout/confirmation_emails/confirmation_email_subject.txt",
@@ -177,17 +187,19 @@ def send_confirmation_email(order):
 
 
 def checkout_success(request, order_number):
-    """Handle successful checkouts"""
+    """
+    Handle checkout success: attach user profile to order,
+    save profile info if requested, send confirmation email,
+    and clear the bag from session.
+    """
     save_info = request.session.get("save_info")
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
-        # Attach the user's profile to the order
         order.user_profile = profile
         order.save()
 
-        # Save the user's info
         if save_info:
             profile_data = {
                 "default_full_name": order.full_name,

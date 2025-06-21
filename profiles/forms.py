@@ -1,16 +1,30 @@
+"""
+Forms module for the profiles app.
+
+Defines a ModelForm for editing user profile information,
+including custom placeholder text and CSS classes.
+"""
+
 from django import forms
 from .models import UserProfile
 
 
 class UserProfileForm(forms.ModelForm):
+    """
+    Form for updating the UserProfile model.
+
+    Excludes the user field and sets custom placeholders,
+    autofocus, and styling for all form fields.
+    """
+
     class Meta:
         model = UserProfile
         exclude = ("user",)
 
     def __init__(self, *args, **kwargs):
         """
-        Add placeholders and classes, remove auto-generated
-        labels and set autofocus on first field
+        Customize form fields by adding placeholders, CSS classes,
+        removing labels, and setting autofocus on the first field.
         """
         super().__init__(*args, **kwargs)
         placeholders = {

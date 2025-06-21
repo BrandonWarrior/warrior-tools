@@ -2,24 +2,25 @@ import os
 import dj_database_url
 from pathlib import Path
 
-# Base directory
+# Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load environment variables
+# Load environment variables if env.py file exists
 if os.path.isfile("env.py"):
     import env
 
-# Security
+# Security key and debug mode
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = "DEVELOPMENT" in os.environ
 
+# Allowed hosts for the project
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "warrior-tools-21c01546c8bd.herokuapp.com",
 ]
 
-# Installed apps
+# Installed Django and third-party apps plus local apps
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -28,7 +29,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
-    # Third-party
+    # Third-party apps
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
     "newsletter",
 ]
 
-# Middleware
+# Middleware layers
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -61,7 +62,7 @@ WSGI_APPLICATION = "warrior_tools.wsgi.application"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 SITE_ID = 1
 
-# Templates
+# Template configuration including custom context processors
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -87,23 +88,27 @@ TEMPLATES = [
     },
 ]
 
+# Message storage backend
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
-# Authentication
+# Authentication backends including django-allauth
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
+# django-allauth configuration
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
+
+# Login URLs
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 
-# Database
+# Database configuration
 if "DATABASE_URL" in os.environ:
     DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
 else:
@@ -114,7 +119,7 @@ else:
         }
     }
 
-# Password validation
+# Password validators for security
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": (
@@ -133,23 +138,22 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Localization
+# Internationalization
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# Static and media files
+# Static and media files paths
 STATIC_URL = "/static/"
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# AWS S3 configuration
+# AWS S3 storage configuration if used
 if "USE_AWS" in os.environ:
     AWS_S3_OBJECT_PARAMETERS = {
         "Expires": "Thu, 31 Dec 2099 20:00:00 GMT",
@@ -169,7 +173,7 @@ if "USE_AWS" in os.environ:
     STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/"
     MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/"
 
-# Stripe
+# Stripe payment settings
 FREE_DELIVERY_THRESHOLD = 40
 STANDARD_DELIVERY_PERCENTAGE = 10
 STRIPE_CURRENCY = "gbp"
@@ -177,7 +181,7 @@ STRIPE_PUBLIC_KEY = os.getenv("STRIPE_PUBLIC_KEY")
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
 STRIPE_WH_SECRET = os.getenv("STRIPE_WH_SECRET", "")
 
-# Email
+# Email backend configuration
 if "DEVELOPMENT" in os.environ:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
     DEFAULT_FROM_EMAIL = "warriortools@example.com"

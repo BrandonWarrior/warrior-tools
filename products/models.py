@@ -4,6 +4,10 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Category(models.Model):
+    """
+    Model representing a product category.
+    """
+
     class Meta:
         verbose_name_plural = "Categories"
 
@@ -14,10 +18,15 @@ class Category(models.Model):
         return self.name
 
     def get_friendly_name(self):
+        """Return the friendly name of the category."""
         return self.friendly_name
 
 
 class Product(models.Model):
+    """
+    Model representing a product in the store.
+    """
+
     category = models.ForeignKey(
         "Category", null=True, blank=True, on_delete=models.SET_NULL
     )
@@ -67,6 +76,11 @@ class Product(models.Model):
 
 
 class WishlistItem(models.Model):
+    """
+    Model representing a user's wishlist item.
+    Ensures uniqueness of user-product pairs.
+    """
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

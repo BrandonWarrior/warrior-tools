@@ -1,15 +1,41 @@
+"""
+Views for managing the shopping bag.
+
+Includes views to display bag contents, add items, adjust quantities,
+and remove items from the bag.
+"""
+
 from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
 from django.contrib import messages
 from products.models import Product
 
 
 def view_bag(request):
-    """A view that renders the bag contents page"""
+    """
+    Render the shopping bag contents page.
+
+    Args:
+        request (HttpRequest): The incoming HTTP request.
+
+    Returns:
+        HttpResponse: Rendered bag contents page.
+    """
     return render(request, "bag/bag.html")
 
 
 def add_to_bag(request, item_id):
-    """Add a quantity of the specified product to the shopping bag"""
+    """
+    Add a quantity of a specified product to the shopping bag.
+
+    Handles products with and without sizes.
+
+    Args:
+        request (HttpRequest): The incoming HTTP request.
+        item_id (str): ID of the product to add.
+
+    Returns:
+        HttpResponseRedirect: Redirect to the provided URL after adding.
+    """
     product = get_object_or_404(Product, pk=item_id)
 
     quantity = int(request.POST.get("quantity"))
@@ -65,7 +91,18 @@ def add_to_bag(request, item_id):
 
 
 def adjust_bag(request, item_id):
-    """Adjust the quantity of a specified product"""
+    """
+    Adjust the quantity of a specified product in the bag.
+
+    Handles removal if quantity is zero or less.
+
+    Args:
+        request (HttpRequest): The incoming HTTP request.
+        item_id (str): ID of the product to adjust.
+
+    Returns:
+        HttpResponseRedirect: Redirects to the bag view page.
+    """
     product = get_object_or_404(Product, pk=item_id)
 
     quantity = int(request.POST.get("quantity"))
@@ -108,7 +145,16 @@ def adjust_bag(request, item_id):
 
 
 def remove_from_bag(request, item_id):
-    """Remove the specified product from the shopping bag"""
+    """
+    Remove a product or a specific size of a product from the shopping bag.
+
+    Args:
+        request (HttpRequest): The incoming HTTP request.
+        item_id (str): ID of the product to remove.
+
+    Returns:
+        HttpResponse: HTTP status 200 if successful, 500 if error occurs.
+    """
     product = get_object_or_404(Product, pk=item_id)
 
     try:

@@ -1,3 +1,9 @@
+"""
+URL patterns for the newsletter app.
+
+Includes routes for subscribing and unsubscribing to the newsletter.
+"""
+
 from django.urls import path
 from . import views
 

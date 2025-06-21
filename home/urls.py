@@ -1,4 +1,8 @@
-from django.contrib import admin
+"""
+URL configuration for the Home app.
+Defines the URL pattern for the home page.
+"""
+
 from django.urls import path
 from . import views
 

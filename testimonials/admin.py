@@ -5,10 +5,9 @@ from .models import Testimonial
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
     """
-    Custom ModelAdmin for the Testimonial model.
+    Admin config for Testimonial model.
 
-    Displays key fields in the list view and provides an action to approve
-    selected testimonials.
+    Shows key fields in list view and provides action to approve testimonials.
     """
 
     list_display = ("author", "content", "created_at", "approved")
@@ -17,11 +16,11 @@ class TestimonialAdmin(admin.ModelAdmin):
 
     def approve_testimonials(self, request, queryset):
         """
-        Approves selected testimonials by setting their approved field to True.
+        Mark selected testimonials as approved.
 
         Args:
-            request: The current HttpRequest object.
-            queryset: A QuerySet of Testimonial instances to be approved.
+            request: Current HttpRequest.
+            queryset: Testimonial queryset to update.
         """
         queryset.update(approved=True)
         self.message_user(request, "Selected testimonials have been approved.")

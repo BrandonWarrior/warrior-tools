@@ -1,6 +1,12 @@
 from django.urls import path
 from . import views
 
+"""
+URL patterns for the products app.
+
+Includes product listing, detail, add/edit/delete views, and wishlist toggle.
+"""
+
 urlpatterns = [
     path("", views.all_products, name="products"),
     path("add/", views.add_product, name="add_product"),

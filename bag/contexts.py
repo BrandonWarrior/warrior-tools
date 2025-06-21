@@ -1,3 +1,10 @@
+"""
+Context processor for the shopping bag.
+
+Calculates the total cost, product count, delivery charges,
+and prepares detailed bag item data for use in templates.
+"""
+
 from decimal import Decimal
 from django.conf import settings
 from django.shortcuts import get_object_or_404
@@ -5,6 +12,20 @@ from products.models import Product
 
 
 def bag_contents(request):
+    """
+    Retrieve shopping bag contents from session and calculate totals.
+
+    Args:
+        request (HttpRequest): The incoming HTTP request object.
+
+    Returns:
+        dict: Context dictionary containing bag items,
+        totals, delivery info, and thresholds.
+
+    This function supports products with and without sizes, calculating
+    the total price and product count accordingly. It also computes delivery
+    fees based on a free delivery threshold.
+    """
     bag_items = []
     total = 0
     product_count = 0

@@ -4,6 +4,12 @@ from .models import Product, Category
 
 
 class ProductForm(forms.ModelForm):
+    """
+    Form for creating and updating Product instances,
+    with custom widget for image upload and dynamic
+    category choices.
+    """
+
     VARIANTS_WITH_SIZES = [
         "hammer",
         "sds_drill",
@@ -17,7 +23,9 @@ class ProductForm(forms.ModelForm):
     ]
 
     image = forms.ImageField(
-        label="Image", required=False, widget=CustomClearableFileInput
+        label="Image",
+        required=False,
+        widget=CustomClearableFileInput,
     )
 
     class Meta:
@@ -36,18 +44,19 @@ class ProductForm(forms.ModelForm):
         ]
 
     def __init__(self, *args, **kwargs):
+        """
+        Initialize form, dynamically set category choices
+        and apply CSS classes. Automatically uncheck
+        has_sizes if variant does not require sizes.
+        """
         super().__init__(*args, **kwargs)
-
-        # Populate category choices using friendly names
         categories = Category.objects.all()
         friendly_names = [(c.id, c.get_friendly_name()) for c in categories]
         self.fields["category"].choices = friendly_names
 
-        # Apply consistent styling
         for field_name, field in self.fields.items():
             field.widget.attrs["class"] = "border-black rounded-0"
 
-        # Automatically uncheck has_sizes if the variant type doesn’t require it
         instance = kwargs.get("instance")
         if instance and instance.variant_type not in self.VARIANTS_WITH_SIZES:
             self.initial["has_sizes"] = False

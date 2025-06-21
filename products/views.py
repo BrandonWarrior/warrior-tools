@@ -9,7 +9,7 @@ from .forms import ProductForm
 
 
 def all_products(request):
-    """A view to show all products, including sorting and search queries"""
+    """Show all products with optional sorting, filtering, and search."""
     products = Product.objects.all()
     query = None
     categories = None
@@ -57,7 +57,7 @@ def all_products(request):
 
 
 def product_detail(request, product_id):
-    """A view to show individual product details"""
+    """Show details for a single product, including wishlist status."""
     product = get_object_or_404(Product, pk=product_id)
     in_wishlist = False
 
@@ -75,7 +75,7 @@ def product_detail(request, product_id):
 
 @login_required
 def add_product(request):
-    """Add a product to the store"""
+    """Allow superusers to add a new product via a form."""
     if not request.user.is_superuser:
         messages.error(request, "Sorry, only store owners can do that.")
         return redirect(reverse("home"))
@@ -100,7 +100,7 @@ def add_product(request):
 
 @login_required
 def edit_product(request, product_id):
-    """Edit a product in the store"""
+    """Allow superusers to edit an existing product."""
     if not request.user.is_superuser:
         messages.error(request, "Sorry, only store owners can do that.")
         return redirect(reverse("home"))
@@ -130,7 +130,7 @@ def edit_product(request, product_id):
 
 @login_required
 def delete_product(request, product_id):
-    """Delete a product from the store"""
+    """Allow superusers to delete a product."""
     if not request.user.is_superuser:
         messages.error(request, "Sorry, only store owners can do that.")
         return redirect(reverse("home"))
@@ -143,7 +143,7 @@ def delete_product(request, product_id):
 
 @login_required
 def toggle_wishlist(request, product_id):
-    """Add or remove a product from the user's wishlist"""
+    """Toggle the presence of a product in the user's wishlist."""
     product = get_object_or_404(Product, pk=product_id)
     wishlist_item, created = WishlistItem.objects.get_or_create(
         user=request.user, product=product

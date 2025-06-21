@@ -1,3 +1,10 @@
+"""
+URL configuration for the profiles app.
+
+Defines URL patterns for user profile, order history,
+and wishlist item removal views.
+"""
+
 from django.urls import path
 from . import views
 

@@ -3,13 +3,12 @@ from django.template.loader import render_to_string
 from django.conf import settings
 import logging
 
-# Set up logging
 logger = logging.getLogger("newsletter.email")
 
 
 def send_newsletter_confirmation_email(email):
     """
-    Sends a styled HTML + plain text confirmation email to the new newsletter
+    Send a styled HTML + plain text confirmation email to the new newsletter
     subscriber. Includes error handling and logging.
     """
     try:
@@ -42,7 +41,7 @@ def send_newsletter_confirmation_email(email):
 
 def send_unsubscribe_email(email):
     """
-    Sends an unsubscribe confirmation email to the user.
+    Send an unsubscribe confirmation email to the user.
     """
     try:
         subject = render_to_string(

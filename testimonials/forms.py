@@ -4,7 +4,7 @@ from .models import Testimonial
 
 class TestimonialForm(forms.ModelForm):
     """
-    Form for creating and updating a Testimonial.
+    Form for creating and updating a Testimonial instance.
     """
 
     class Meta:
@@ -24,8 +24,8 @@ class TestimonialForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         """
-        Initialise TestimonialForm and remove the native HTML5 'required'
-        attribute from widget attributes.
+        Initialise the form and remove the native HTML5 'required'
+        attribute from all widgets.
         """
         super().__init__(*args, **kwargs)
         for field in self.fields.values():

@@ -1,13 +1,32 @@
+"""
+Admin configuration for the checkout app.
+
+Registers the Order model with a customized admin interface that
+displays order details and inline order line items.
+"""
+
 from django.contrib import admin
 from .models import Order, OrderLineItem
 
 
 class OrderLineItemAdminInline(admin.TabularInline):
+    """
+    Inline admin descriptor for OrderLineItem model.
+
+    Displays line item details in a tabular inline form within the Order admin page.
+    The lineitem_total field is read-only.
+    """
     model = OrderLineItem
     readonly_fields = ("lineitem_total",)
 
 
 class OrderAdmin(admin.ModelAdmin):
+    """
+    Admin interface for the Order model.
+
+    Displays order information with inline editing of associated order line items.
+    Several fields are marked read-only for data integrity.
+    """
     inlines = (OrderLineItemAdminInline,)
 
     readonly_fields = (

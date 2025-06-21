@@ -1,3 +1,10 @@
+"""
+URL routing for the checkout app.
+
+Defines paths for checkout, success page, caching data,
+and Stripe webhook endpoint.
+"""
+
 from django.urls import path
 from . import views
 from .webhooks import webhook

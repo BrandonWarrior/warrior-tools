@@ -8,7 +8,11 @@ from .models import Testimonial
 @login_required
 def create_testimonial(request):
     """
-    Handle testimonial creation.
+    Handle creation of a new testimonial by an authenticated user.
+
+    On POST, validates form data, sets the testimonial author, saves it,
+    and redirects to the testimonial list with a success message.
+    On GET, displays a blank testimonial form.
     """
     if request.method == "POST":
         form = TestimonialForm(request.POST)
@@ -30,7 +34,9 @@ def create_testimonial(request):
 
 def testimonial_list(request):
     """
-    Display a list of approved testimonials.
+    Display all testimonials that have been approved.
+
+    Testimonials are ordered by creation date descending.
     """
     testimonials = Testimonial.objects.filter(approved=True).order_by("-created_at")
 
@@ -42,8 +48,9 @@ def testimonial_list(request):
 @login_required
 def update_testimonial(request, pk):
     """
-    Allow a user to update their own testimonial.
-    Resets approval status so it must be reviewed again by admin.
+    Allow an authenticated user to update their testimonial.
+
+    Resets approval status upon edit to require admin review again.
     """
     testimonial = get_object_or_404(Testimonial, pk=pk, author=request.user)
 
@@ -51,7 +58,7 @@ def update_testimonial(request, pk):
         form = TestimonialForm(request.POST, instance=testimonial)
         if form.is_valid():
             testimonial = form.save(commit=False)
-            testimonial.approved = False  # Unapprove on edit
+            testimonial.approved = False  # Mark as unapproved after editing
             testimonial.save()
             messages.success(
                 request, "Your testimonial has been updated and is pending approval."
@@ -66,7 +73,10 @@ def update_testimonial(request, pk):
 @login_required
 def delete_testimonial(request, pk):
     """
-    Allow a user to delete their own testimonial.
+    Allow an authenticated user to delete their testimonial.
+
+    On POST, deletes the testimonial and redirects to the testimonial list.
+    On GET, displays a confirmation page.
     """
     testimonial = get_object_or_404(Testimonial, pk=pk, author=request.user)
 

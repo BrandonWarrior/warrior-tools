@@ -1,3 +1,10 @@
+"""
+URL configuration for the bag app.
+
+Defines URL patterns for viewing the bag, adding, adjusting,
+and removing items from the shopping bag.
+"""
+
 from django.urls import path
 from . import views
 
