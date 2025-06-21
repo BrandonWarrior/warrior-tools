@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/accounts/signup/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/accounts/login/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/bag/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?sort=price&amp;direction=asc</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?sort=rating&amp;direction=desc</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?sort=category&amp;direction=asc</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?category=drills</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?category=saws</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?category=sanders</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?category=drills,saws,sanders</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?category=hammers</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?category=screwdrivers</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?category=wrenches_and_pliers</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?category=chisels</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?category=pipe_cutter</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?category=spirit_level</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?category=tape_measure</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?category=hand_saw</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/?category=hammers,screwdrivers,wrenches_and_pliers,chisels,pipe_cutter,spirit_level,tape_measure,hand_saw</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/testimonials/list/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/newsletter/subscribe/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/accounts/login/?next=/testimonials/testimonial/create/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/accounts/password/reset/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/46/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/48/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/36/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/47/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/51/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/35/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/49/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/34/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/50/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/42/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/40/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/38/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/41/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/45/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/39/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/43/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/44/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/products/37/</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/accounts/signup/?next=%2Ftestimonials%2Ftestimonial%2Fcreate%2F</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://warrior-tools-21c01546c8bd.herokuapp.com/accounts/login/?next=%2Ftestimonials%2Ftestimonial%2Fcreate%2F</loc>
+  <lastmod>2025-06-21T16:59:54+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
+</urlset>
