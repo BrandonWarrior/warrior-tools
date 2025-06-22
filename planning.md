@@ -1,3 +1,5 @@
+🔙 [Back to README.md](README.md)
+
 # Warrior Tools – Project Planning
 
 ## 🔍 Overview
@@ -21,38 +23,43 @@ The application is being developed using the Django web framework and will inclu
 
 ---
 
-## Wireframes
+## 🖼️ Wireframes
 
-A wireframe mockup of the Warrior Tools home page has been created using Balsamiq Wireframes, a tool used to quickly sketch out user interface layouts. These wireframes represent the planned structure and layout of the site’s main landing experience and guide the front-end development process.
+Wireframes were created using Balsamiq to visualise the structure and layout of key pages on the Warrior Tools website. These helped guide the site’s design, user flow, and feature planning.
 
-![home page wireframe](docs/home-page-wf.png)
-![home page wwireframe 2](docs/home-page-wf2.png)
+### 🏠 Home Page  
+![Home Page Wireframe](docs/wf-home.png)
 
-### Layout Overview
-- Header Section
-Includes a clear logo and brand title “Warrior Tools”
+### 🛒 Product Listings  
+![Product Listings Wireframe](docs/wf-products.png)
 
-A horizontal navigation menu provides links to:
+### 📦 Shopping Bag  
+![Bag Wireframe](docs/wf-bag.png)
 
-Products, Profile, Sign In, Sign Up, and Sign Out
+### 💳 Checkout  
+![Checkout Wireframe](docs/wf-cehckout.png)
 
-Adjusts dynamically depending on the user's authentication state
+### 👤 User Profile  
+![Profile Wireframe](docs/wf-profile.png)
 
-- Newsletter Signup
-Centrally placed section encouraging users to subscribe to updates
+### 💌 Newsletter  
+![Newsletter Wireframe](docs/wf-newsletter.png)
 
-Forms a key part of the marketing strategy by capturing visitor interest early
+### 📝 Testimonials  
+![Testimonial Wireframe](docs/wf-testimonial.png)
 
-- Featured Products Section
-A structured product grid displays six featured tools
+### 🔎 Summary
+Each wireframe served as a visual blueprint for core templates during development:
 
-Each product box will showcase a tool image and basic info
+The home page wireframe prioritised branding and a strong welcome message.
 
-Supports user stories related to browsing and shopping
+Bag and checkout flows were mapped to minimise user friction and maintain clarity.
 
-- Footer
-A simple footer area is included for contact info, legal links, or additional navigation
+Product-related pages focused on visual hierarchy and clean filtering.
 
+Profile and testimonial views were designed to enhance personalisation and engagement.
+
+The newsletter signup was given prominent space as part of the site’s marketing strategy.
 ---
 ## 📋 User Stories (Grouped by Epics)
 
@@ -78,54 +85,77 @@ A simple footer area is included for contact info, legal links, or additional na
 
 ---
 
-### 🏷 Epic: User Accounts
+#### 🏷 Epic: User Accounts
+- Register for a Customer Account  
+- Log In and Access My Account  
+- Reset Forgotten Password  
+- Receive Registration Confirmation  
 
-- **Register for a Customer Account**  
-  As a new user, I want to create an account, so that I can place orders and track my purchases.
+#### 🏷 Epic: Newsletter and Marketing
+- Sign Up for the Newsletter  
 
-- **Log In and Access My Account**  
-  As a returning user, I want to log in securely, so that I can access my personal account.
+#### 🏷 Epic: Checkout
+- Select Product Quantity and Options  
+- Enter Secure Payment Details  
+- Receive Order Confirmation Email  
 
-- **Reset Forgotten Password**  
-  As a user, I want to reset my password if I forget it, so that I can regain access without assistance.
-
-- **Receive Registration Confirmation**  
-  As a new user, I want to receive an email confirmation after registering, so that I know my account has been created successfully.
-
----
-
-### 🏷 Epic: Newsletter and Marketing
-
-- **Sign Up for the Newsletter**  
-  As a visitor, I want to sign up for the Warrior Tools newsletter, so that I can receive updates, offers and tool tips.
-
-- **Collect Newsletter Subscribers**  
-  As the store owner, I want to collect email addresses via a newsletter form, so that I can grow a mailing list and promote products.
+#### 🏷 Epic: Admin Product Management
+- Add New Products as Admin  
+- Edit Existing Product Listings  
+- Remove Discontinued Products  
 
 ---
 
-### 🏷 Epic: Checkout
+## 📋 Agile Workflow
 
-- **Select Product Quantity and Options**  
-  As a shopper, I want to select product quantity and size (if relevant), so that I can buy the correct items.
+Development for the Warrior Tools project followed Agile methodologies using GitHub Projects to organise, track, and prioritise tasks efficiently.
 
-- **Enter Secure Payment Details**  
-  As a shopper, I want to securely enter my payment details, so that I can complete my purchase with confidence.
+A dedicated Kanban board was created with three columns: **To Do**, **In Progress**, and **Done**. Each user story or feature was represented as a task card and moved through the workflow as progress was made.
 
-- **Receive Order Confirmation Email**  
-  As a customer, I want to receive an email confirmation after checking out, so that I have a record of my order.
+Below are screenshots of the final board showing all completed tasks:
+
+### 🧾 Agile Board Screenshots
+
+| View | Screenshot |
+|------|------------|
+| Agile Board – Part 1 | ![Agile Board Part 1](docs/agileboard.png) |
+| Agile Board – Part 2 | ![Agile Board Part 2](docs/agile-board2.png) |
+
+### ✅ Completed User Stories
+
+All cards were moved to **Done**, demonstrating that every planned feature and functionality was implemented successfully. This included:
+
+- Browse Tools by Category  
+- View Detailed Product Information  
+- View Basket Total While Shopping  
+- Search for Products  
+- Filter Products by Criteria  
+- Select Product Quantity and Options  
+- Enter Secure Payment Details  
+- Receive Order Confirmation Email  
+- Register for a Customer Account  
+- Log In and Access My Account  
+- Reset Forgotten Password  
+- Receive Registration Confirmation  
+- Sign Up for the Newsletter  
+- Add New Products as Admin  
+- Edit Existing Product Listings  
+- Remove Discontinued Products  
+
+This structured and iterative approach ensured that development stayed focused and transparent throughout the project lifecycle.
+
 
 ---
 
-### 🏷 Epic: Admin Product Management
+🔄 Changes from Original Plan
+Now that development is complete, here’s a brief review of where the implementation diverged from the original plan and why:
 
-- **Add New Products as Admin**  
-  As the store owner, I want to add new products to the store, so that shoppers can purchase the latest tools.
-
-- **Edit Existing Product Listings**  
-  As the store owner, I want to edit existing product listings, so that information is accurate and up to date.
-
-- **Remove Discontinued Products**  
-  As the store owner, I want to remove discontinued products, so that customers don’t attempt to buy unavailable items.
-
----
+| Planned Feature                                | Change                                                | Reason                                                                              |
+| ---------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **Power Tools only**                           | Broadened to include both power and hand tools        | To offer a more realistic inventory and enhance user value                          |
+| **SQLite for local dev only**                  | PostgreSQL used in production via Heroku              | Required for cloud deployment and scalability                                       |
+| **Basic static newsletter form**               | Implemented model-backed form with email confirmation | To support subscription management and GDPR compliance                              |
+| **Manual product sizes**                       | Introduced `has_sizes` and `variant_type` logic       | Provided greater control over which products offer selectable variants like voltage |
+| **Simple success message on testimonial form** | Built a full moderation system                        | To allow admin control over published content                                       |
+| **No wishlist in MVP**                         | Added wishlist functionality with add/remove buttons  | Boosted user engagement and repeat visits                                           |
+| **No email verification**                      | Added verification flow during signup                 | Improved security and trustworthiness of user accounts                              |
