@@ -64,6 +64,23 @@
             <!-- Checkout Form -->
             <section class="col-12 col-lg-6" aria-label="Checkout Form">
                 <p class="text-muted">Please fill out the form below to complete your order</p>
+
+                {% if order_form.errors %}
+                <div class="alert alert-danger">
+                    <p><strong>Please fix the errors below:</strong></p>
+                    <ul>
+                        {% for field in order_form %}
+                            {% for error in field.errors %}
+                                <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in order_form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
                 <form action="{% url 'checkout' %}" method="POST" id="payment-form" novalidate>
                     {% csrf_token %}
 
@@ -82,10 +99,10 @@
                         {{ order_form.postcode|as_crispy_field }}
                         {{ order_form.county|as_crispy_field }}
 
-                        <!-- ✅ Country Field -->
+                        <!-- Country Field -->
                         <div class="form-group">
                             <label for="id_country" class="form-label">Country*</label>
-                            <select name="country" id="id_country" class="stripe-style-input" aria-label="Country">
+                            <select name="country" id="id_country" class="stripe-style-input" aria-label="Country" required>
                                 {% for code, name in order_form.fields.country.choices %}
                                     <option value="{{ code }}"
                                         {% if order_form.data.country == code or order_form.initial.country == code %}
@@ -97,7 +114,7 @@
                             </select>
                         </div>
 
-                        <!-- ✅ Flag -->
+                        <!-- Flag -->
                         <div id="flag-wrapper">
                             {% if order_form.country.value %}
                                 {% with code=order_form.country.value|lower name=order_form.country.value|upper %}
@@ -110,7 +127,7 @@
                             {% endif %}
                         </div>
 
-                        <!-- ✅ Save Info Checkbox -->
+                        <!-- Save Info Checkbox -->
                         <div class="form-check form-check-inline float-right mr-0">
                             {% if user.is_authenticated %}
                                 <label class="form-check-label" for="id-save-info">

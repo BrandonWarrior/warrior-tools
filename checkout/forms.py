@@ -2,7 +2,6 @@ from django import forms
 from django_countries.widgets import CountrySelectWidget
 from .models import Order
 
-
 class AccessibleCountrySelectWidget(CountrySelectWidget):
     """
     Custom CountrySelectWidget that avoids injecting inaccessible flag images
@@ -12,12 +11,9 @@ class AccessibleCountrySelectWidget(CountrySelectWidget):
 
     def get_context(self, name, value, attrs):
         context = super().get_context(name, value, attrs)
-
-        # Remove any custom flag attributes injected by django-countries
         for group in context.get('widget', {}).get('optgroups', []):
             for option in group[1]:
                 option.get('attrs', {}).pop('data-country-flag-url', None)
-
         return context
 
 
@@ -58,7 +54,6 @@ class OrderForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Placeholder text for form fields
         placeholders = {
             'full_name': 'Full Name',
             'email': 'Email Address',
@@ -70,17 +65,19 @@ class OrderForm(forms.ModelForm):
             'county': 'County',
         }
 
-        # Autofocus on the first field
         self.fields['full_name'].widget.attrs['autofocus'] = True
 
-        # Apply placeholders, classes, and aria-labels
-        for field in self.fields:
-            if field != 'country':
+        for field_name, field in self.fields.items():
+            if field_name != 'country':
                 placeholder = (
-                    f"{placeholders[field]} *"
-                    if self.fields[field].required else placeholders[field]
+                    f"{placeholders[field_name]} *"
+                    if field.required else placeholders[field_name]
                 )
-                self.fields[field].widget.attrs['placeholder'] = placeholder
+                field.widget.attrs['placeholder'] = placeholder
 
-            self.fields[field].widget.attrs['class'] = 'stripe-style-input'
-            self.fields[field].widget.attrs['aria-label'] = self.fields[field].label
+            field.widget.attrs['class'] = 'stripe-style-input'
+            field.widget.attrs['aria-label'] = field.label
+   
+            # Add required attribute for client-side validation
+            if field.required:
+                field.widget.attrs['required'] = 'required'

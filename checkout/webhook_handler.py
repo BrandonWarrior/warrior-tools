@@ -27,12 +27,16 @@ class StripeWH_Handler:
         subject = render_to_string(
             "checkout/confirmation_emails/confirmation_email_subject.txt",
             {"order": order},
-        )
+        ).strip()  # Strip whitespace and newlines here to avoid BadHeaderError
         body = render_to_string(
             "checkout/confirmation_emails/confirmation_email_body.txt",
             {"order": order, "contact_email": settings.DEFAULT_FROM_EMAIL},
         )
-        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [cust_email])
+        try:
+            send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [cust_email])
+            logger.info(f"Confirmation email sent to {cust_email}")
+        except Exception as e:
+            logger.error(f"Failed to send confirmation email to {cust_email}: {e}")
 
     def handle_event(self, event):
         try:
@@ -90,7 +94,7 @@ class StripeWH_Handler:
                 except UserProfile.DoesNotExist:
                     profile = None
 
-            # Check if order exists by stripe_pid only
+            # Check if order exists by stripe_pid with retries
             order_exists = False
             attempt = 1
             while attempt <= 5:
