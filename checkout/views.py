@@ -1,3 +1,6 @@
+import logging
+import json
+
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
@@ -13,7 +16,8 @@ from profiles.models import UserProfile
 from bag.contexts import bag_contents
 
 import stripe
-import json
+
+logger = logging.getLogger(__name__)
 
 
 @require_POST
@@ -27,18 +31,17 @@ def cache_checkout_data(request):
                 "bag": json.dumps(request.session.get("bag", {})),
                 "save_info": request.POST.get("save_info"),
                 "username": (
-                    request.user.username
-                    if request.user.is_authenticated
-                    else "AnonymousUser"
+                    request.user.username if request.user.is_authenticated else "AnonymousUser"
                 ),
             },
         )
+        logger.debug(f"Cached checkout data for PaymentIntent {pid}")
         return HttpResponse(status=200)
     except Exception as e:
+        logger.error(f"Error caching checkout data: {e}")
         messages.error(
             request,
-            "Sorry, your payment cannot be processed right now. "
-            "Please try again later.",
+            "Sorry, your payment cannot be processed right now. Please try again later.",
         )
         return HttpResponse(content=str(e), status=400)
 
@@ -49,51 +52,61 @@ def checkout(request):
 
     if request.method == "POST":
         bag = request.session.get("bag", {})
+        logger.debug(f"Checkout POST received. Bag content: {bag}")
 
         form_data = {
-            "full_name": request.POST["full_name"],
-            "email": request.POST["email"],
-            "phone_number": request.POST["phone_number"],
-            "country": request.POST["country"],
-            "postcode": request.POST["postcode"],
-            "town_or_city": request.POST["town_or_city"],
-            "street_address1": request.POST["street_address1"],
-            "street_address2": request.POST["street_address2"],
-            "county": request.POST["county"],
+            "full_name": request.POST.get("full_name", ""),
+            "email": request.POST.get("email", ""),
+            "phone_number": request.POST.get("phone_number", ""),
+            "country": request.POST.get("country", ""),
+            "postcode": request.POST.get("postcode", ""),
+            "town_or_city": request.POST.get("town_or_city", ""),
+            "street_address1": request.POST.get("street_address1", ""),
+            "street_address2": request.POST.get("street_address2", ""),
+            "county": request.POST.get("county", ""),
         }
 
         order_form = OrderForm(form_data)
         if order_form.is_valid():
-            pid = request.POST.get("client_secret").split("_secret")[0]
+            try:
+                pid = request.POST.get("client_secret").split("_secret")[0]
+                logger.debug(f"Processing order with PaymentIntent id: {pid}")
 
-            # Check for existing order using only stripe_pid
-            existing_order = Order.objects.filter(stripe_pid=pid).first()
-            if existing_order:
-                return redirect(
-                    reverse("checkout_success", args=[existing_order.order_number])
-                )
+                # Check if order exists already
+                existing_order = Order.objects.filter(stripe_pid=pid).first()
+                if existing_order:
+                    logger.info(f"Order already exists for pid {pid}: {existing_order.order_number}")
+                    return redirect(reverse("checkout_success", args=[existing_order.order_number]))
 
-            order = order_form.save(commit=False)
-            order.stripe_pid = pid
-            order.original_bag = json.dumps(bag)
-            order.save()
+                order = order_form.save(commit=False)
+                order.stripe_pid = pid
+                order.original_bag = json.dumps(bag)
 
+                order.save()
+                logger.info(f"Order saved with order number {order.order_number}")
+
+            except Exception as e:
+                logger.error(f"Error saving order: {e}")
+                messages.error(request, "Server error saving your order. Please try again.")
+                return redirect(reverse("view_bag"))
+
+            # Create order line items
             for item_id, item_data in bag.items():
                 try:
                     product_id = int(item_id)
                     product = Product.objects.get(id=product_id)
+                    logger.debug(f"Product found: {product.name} (id {product_id})")
                 except Product.DoesNotExist:
+                    logger.error(f"Product with id {item_id} not found.")
                     messages.error(
                         request,
-                        (
-                            "One of the products in your bag wasn't found in our "
-                            "database. Please call us for assistance!"
-                        ),
+                        "One of the products in your bag wasn't found in our database. Please call us for assistance!",
                     )
                     order.delete()
                     return redirect(reverse("view_bag"))
                 except Exception as e:
-                    messages.error(request, f"Error with product id {item_id}: {e}")
+                    logger.error(f"Unexpected error retrieving product {item_id}: {e}")
+                    messages.error(request, "Server error. Please try again.")
                     order.delete()
                     return redirect(reverse("view_bag"))
 
@@ -104,6 +117,7 @@ def checkout(request):
                         quantity=item_data,
                     )
                     order_line_item.save()
+                    logger.debug(f"OrderLineItem created: {product.name} x {item_data}")
                 else:
                     for size, quantity in item_data.get("items_by_size", {}).items():
                         order_line_item = OrderLineItem(
@@ -113,10 +127,12 @@ def checkout(request):
                             product_size=size,
                         )
                         order_line_item.save()
+                        logger.debug(f"OrderLineItem created: {product.name} size {size} x {quantity}")
 
             request.session["save_info"] = "save-info" in request.POST
             return redirect(reverse("checkout_success", args=[order.order_number]))
         else:
+            logger.error(f"Order form invalid: {order_form.errors}")
             messages.error(
                 request,
                 "There was an error with your form. Please double check your information.",
@@ -128,13 +144,19 @@ def checkout(request):
             return redirect(reverse("products"))
 
         current_bag = bag_contents(request)
-        total = current_bag["grand_total"]
+        total = current_bag.get("grand_total", 0)
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
-        intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency=settings.STRIPE_CURRENCY,
-        )
+
+        try:
+            intent = stripe.PaymentIntent.create(
+                amount=stripe_total,
+                currency=settings.STRIPE_CURRENCY,
+            )
+        except Exception as e:
+            logger.error(f"Stripe PaymentIntent creation failed: {e}")
+            messages.error(request, "Payment initialization failed. Please try again later.")
+            return redirect(reverse("view_bag"))
 
         if request.user.is_authenticated:
             try:
@@ -160,10 +182,7 @@ def checkout(request):
         if not stripe_public_key:
             messages.warning(
                 request,
-                (
-                    "Stripe public key is missing. Did you forget to set it "
-                    "in your environment?"
-                ),
+                "Stripe public key is missing. Did you forget to set it in your environment?",
             )
 
         template = "checkout/checkout.html"
@@ -187,6 +206,7 @@ def send_confirmation_email(order):
         {"order": order, "contact_email": settings.DEFAULT_FROM_EMAIL},
     )
     send_mail(subject.strip(), body, settings.DEFAULT_FROM_EMAIL, [cust_email])
+    logger.info(f"Confirmation email sent to {cust_email}")
 
 
 def checkout_success(request, order_number):
@@ -212,6 +232,7 @@ def checkout_success(request, order_number):
             user_profile_form = UserProfileForm(profile_data, instance=profile)
             if user_profile_form.is_valid():
                 user_profile_form.save()
+                logger.debug(f"User profile updated for {request.user.username}")
 
     messages.success(
         request,

@@ -39,7 +39,9 @@ main.page-content {
     color: #1A4C8C;
 }
 
-#user-options p {
+/* Updated selectors for nav 'My Account' and cart totals text */
+.list-inline-item.dropdown p.oswald-font,
+.nav-link.cart-link p.oswald-font {
     font-family: 'Oswald', sans-serif !important;
     font-weight: 700;
     font-size: 0.9rem;
@@ -481,4 +483,3 @@ main.page-content {
       height: auto;
     }
   }
-  
