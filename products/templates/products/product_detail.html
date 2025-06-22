@@ -52,7 +52,7 @@
 
         {% if request.user.is_superuser %}
           <small class="ml-3">
-            <a href="{% url 'edit_product' product.id %}">Edit</a> |
+            <a href="{% url 'edit_product' product.id %}" style="color: #0056b3;">Edit</a> |
             <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
           </small>
         {% endif %}
@@ -123,17 +123,20 @@
                 <button type="button"
                         class="decrement-qty qty-button"
                         data-item_id="{{ product.id }}"
-                        id="decrement-qty_{{ product.id }}">
+                        id="decrement-qty_{{ product.id }}"
+                        aria-label="Decrease quantity">
                   <i class="fas fa-minus"></i>
                 </button>
               
+                <label for="id_qty_{{ product.id }}" class="sr-only">Quantity</label>
                 <input class="qty_input" type="number" name="quantity" value="1"
                        min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
               
                 <button type="button"
                         class="increment-qty qty-button"
                         data-item_id="{{ product.id }}"
-                        id="increment-qty_{{ product.id }}">
+                        id="increment-qty_{{ product.id }}"
+                        aria-label="Increase quantity">
                   <i class="fas fa-plus"></i>
                 </button>
               </div>                       

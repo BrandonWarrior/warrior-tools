@@ -26,10 +26,7 @@
         {% if field.name != 'image' and field.name != 'image_url' %}
           {{ field|as_crispy_field }}
         {% elif field.name == 'image' %}
-          <div class="form-group custom-file-field">
-            <label for="{{ field.id_for_label }}" class="form-label font-weight-bold">Image:</label>
-            {{ field }}
-          </div>
+          {{ field|as_crispy_field }}
         {% endif %}
       {% endfor %}
 

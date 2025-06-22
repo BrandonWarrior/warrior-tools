@@ -30,7 +30,7 @@
             <thead class="text-primary font-weight-bold d-none d-md-table-header-group">
               <tr>
                 <th scope="col">Tool</th>
-                <th scope="col"></th>
+                <th scope="col"><span class="sr-only">Details</span></th>
                 <th scope="col">Price</th>
                 <th scope="col">Qty</th>
                 <th scope="col">Subtotal</th>
@@ -68,12 +68,15 @@
                     {% csrf_token %}
                     <div class="quantity-controls mb-2">
                       <button type="button" class="btn btn-sm btn-navy decrement-qty" data-item_id="{{ item.item_id }}">
-                        <i class="fas fa-minus fa-sm"></i>
+                        <i class="fas fa-minus fa-sm" aria-hidden="true"></i>
+                        <span class="sr-only">Decrease quantity</span>
                       </button>
                       <input class="form-control form-control-sm qty_input" type="number" name="quantity"
-                             value="{{ item.quantity }}" min="1" max="99" id="id_qty_{{ item.item_id }}">
+                             value="{{ item.quantity }}" min="1" max="99" id="id_qty_{{ item.item_id }}"
+                             aria-label="Quantity for {{ item.product.name }}">
                       <button type="button" class="btn btn-sm btn-navy increment-qty" data-item_id="{{ item.item_id }}">
-                        <i class="fas fa-plus fa-sm"></i>
+                        <i class="fas fa-plus fa-sm" aria-hidden="true"></i>
+                        <span class="sr-only">Increase quantity</span>
                       </button>
                       {% if item.product.has_sizes %}
                         <input type="hidden" name="product_size" value="{{ item.size }}">
@@ -81,9 +84,9 @@
                     </div>
 
                     <div class="action-links d-flex justify-content-center gap-3">
-                      <a class="update-link small">Update</a>
+                      <a class="update-link small" href="#">Update</a>
                       <a class="remove-item text-danger small" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}">
-                        <i class="fas fa-trash-alt mr-1"></i>Remove
+                        <i class="fas fa-trash-alt mr-1" aria-hidden="true"></i>Remove
                       </a>
                     </div>
                   </form>

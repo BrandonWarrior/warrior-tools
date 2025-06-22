@@ -15,10 +15,14 @@
   {{ widget.input_text }}
 {% endif %}
 
+<!-- ✅ Accessible label for file input -->
+<label for="new-image" class="form-label font-weight-bold">Select an image to upload:</label>
+
 <!-- Upload button and input -->
 <span class="btn-file">
   Select Image
-  <input id="new-image" type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
+  <input id="new-image" type="{{ widget.type }}" name="{{ widget.name }}"
+         {% include "django/forms/widgets/attrs.html" %}>
 </span>
 
 <!-- New image preview -->

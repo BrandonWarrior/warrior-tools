@@ -5,7 +5,6 @@
 {% block body_class %}checkout-page{% endblock %}
 
 {% block extra_css %}
-<!-- Checkout page CSS -->
 <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
@@ -23,26 +22,17 @@
 <main class="checkout-page-wrapper" role="main">
     <div class="container checkout-content">
         <div class="row">
-            <!-- Right: Order summary -->
+            <!-- Order Summary -->
             <aside class="col-12 col-lg-6 order-lg-last mb-5" aria-label="Order Summary">
                 <p class="text-muted">Order Summary ({{ product_count }})</p>
-                <div class="row">
-                    <div class="col-7 offset-2">
-                        <p class="mb-1 mt-0 small text-muted">Item</p>
-                    </div>
-                    <div class="col-3 text-right">
-                        <p class="mb-1 mt-0 small text-muted">Subtotal</p>
-                    </div>
-                </div>
-
                 {% for item in bag_items %}
                 <div class="row">
                     <div class="col-2 mb-1">
                         <a href="{% url 'product_detail' item.product.id %}">
                             {% if item.product.image %}
-                            <img class="w-100" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                <img class="w-100" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                             {% else %}
-                            <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                                <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
                             {% endif %}
                         </a>
                     </div>
@@ -56,9 +46,7 @@
                     </div>
                 </div>
                 {% endfor %}
-
                 <hr class="my-0">
-
                 <div class="row text-black text-right">
                     <div class="col-7 offset-2">
                         <p class="my-0">Order Total:</p>
@@ -73,7 +61,7 @@
                 </div>
             </aside>
 
-            <!-- Left: Checkout form -->
+            <!-- Checkout Form -->
             <section class="col-12 col-lg-6" aria-label="Checkout Form">
                 <p class="text-muted">Please fill out the form below to complete your order</p>
                 <form action="{% url 'checkout' %}" method="POST" id="payment-form" novalidate>
@@ -93,16 +81,46 @@
                         {{ order_form.town_or_city|as_crispy_field }}
                         {{ order_form.postcode|as_crispy_field }}
                         {{ order_form.county|as_crispy_field }}
-                        {{ order_form.country|as_crispy_field }}
+
+                        <!-- ✅ Render Country Field Manually (No Widget Extras) -->
+                        <div class="form-group">
+                            <label for="id_country" class="form-label">Country*</label>
+                            <select name="country" id="id_country" class="stripe-style-input" aria-label="Country">
+                                {% for code, name in order_form.fields.country.choices %}
+                                    <option value="{{ code }}"
+                                        {% if order_form.data.country == code or order_form.initial.country == code %}
+                                            selected
+                                        {% endif %}>
+                                        {{ name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- ✅ Dynamic Flag Rendering -->
+                        <div id="flag-wrapper">
+                            {% if order_form.country.value %}
+                                {% with code=order_form.country.value|lower name=order_form.country.value|upper %}
+                                    <img id="flag_id_country"
+                                         class="country-select-flag"
+                                         style="margin: 6px 4px 0px;"
+                                         src="{% static 'flags/' %}{{ code }}.gif"
+                                         alt="{{ name }} flag">
+                                {% endwith %}
+                            {% endif %}
+                        </div>
+
                         <div class="form-check form-check-inline float-right mr-0">
                             {% if user.is_authenticated %}
-                            <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
-                            <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                                <label class="form-check-label" for="id-save-info">
+                                    Save this delivery information to my profile
+                                </label>
+                                <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
                             {% else %}
-                            <label class="form-check-label" for="id-save-info">
-                                <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
-                                <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-                            </label>
+                                <label class="form-check-label" for="id-save-info">
+                                    <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
+                                    <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+                                </label>
                             {% endif %}
                         </div>
                     </fieldset>
@@ -131,7 +149,6 @@
     </div>
 </main>
 
-<!-- Loading overlay with spinning cog -->
 <div id="loading-overlay" class="loading-spinner justify-content-center align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="text-center">
         <i class="fas fa-cog fa-spin fa-4x text-light mb-3"></i>
@@ -143,8 +160,42 @@
 
 {% block postloadjs %}
 {{ block.super }}
-<!-- Stripe integration -->
+
 {{ stripe_public_key|json_script:"id_stripe_public_key" }}
 {{ client_secret|json_script:"id_client_secret" }}
 <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+
+<!-- ✅ Dynamic Flag Update Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const countrySelect = document.getElementById('id_country');
+        let flagImg = document.getElementById('flag_id_country');
+        const wrapper = document.getElementById('flag-wrapper');
+
+        if (countrySelect) {
+            countrySelect.addEventListener('change', function () {
+                const selectedValue = this.value;
+
+                if (selectedValue) {
+                    const countryCode = selectedValue.toLowerCase();
+                    const countryName = selectedValue.toUpperCase();
+
+                    if (!flagImg) {
+                        flagImg = document.createElement('img');
+                        flagImg.id = 'flag_id_country';
+                        flagImg.className = 'country-select-flag';
+                        flagImg.style = 'margin: 6px 4px 0px;';
+                        wrapper.appendChild(flagImg);
+                    }
+
+                    flagImg.src = `/static/flags/${countryCode}.gif`;
+                    flagImg.alt = `${countryName} flag`;
+                } else if (flagImg) {
+                    flagImg.remove();
+                    flagImg = null;
+                }
+            });
+        }
+    });
+</script>
 {% endblock %}

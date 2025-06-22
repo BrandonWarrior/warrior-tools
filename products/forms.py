@@ -39,7 +39,6 @@ class ProductForm(forms.ModelForm):
             "variant_type",
             "price",
             "rating",
-            "image_url",
             "image",
         ]
 
@@ -50,13 +49,17 @@ class ProductForm(forms.ModelForm):
         has_sizes if variant does not require sizes.
         """
         super().__init__(*args, **kwargs)
+
+        # Set category choices dynamically using friendly names
         categories = Category.objects.all()
         friendly_names = [(c.id, c.get_friendly_name()) for c in categories]
         self.fields["category"].choices = friendly_names
 
+        # Apply consistent styling to all fields
         for field_name, field in self.fields.items():
             field.widget.attrs["class"] = "border-black rounded-0"
 
+        # Uncheck has_sizes by default for variants that don’t require sizes
         instance = kwargs.get("instance")
         if instance and instance.variant_type not in self.VARIANTS_WITH_SIZES:
             self.initial["has_sizes"] = False
