@@ -7,7 +7,6 @@ Disallow: /testimonials/testimonial/create/
 Disallow: /newsletter/subscribe/
 Disallow: /newsletter/unsubscribe/
 
-# Allow everything else
 Allow: /
 
 Sitemap: https://warrior-tools-21c01546c8bd.herokuapp.com/sitemap.xml
