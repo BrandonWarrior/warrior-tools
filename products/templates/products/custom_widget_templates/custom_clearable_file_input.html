@@ -1,66 +1,80 @@
+{% comment %}Custom Clearable File Input Template{% endcomment %}
 {% if widget.is_initial %}
   <p>{{ widget.initial_text }}:</p>
-  <a href="{{ widget.value.url }}" target="_blank">
+  <a href="{{ widget.value.url }}" target="_blank" rel="noopener noreferrer">
     <img id="existing-image" width="96" height="96" class="rounded shadow-sm mb-2" src="{{ widget.value.url }}" alt="Current product image">
   </a>
 
   {% if not widget.required %}
     <div class="custom-control custom-checkbox mt-2">
-      <input class="custom-control-input" type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}">
+      <input class="custom-control-input" type="checkbox"
+             name="{{ widget.checkbox_name }}"
+             id="{{ widget.checkbox_id }}">
       <label class="custom-control-label text-danger" for="{{ widget.checkbox_id }}">
         {{ widget.clear_checkbox_label }}
       </label>
     </div>
   {% endif %}
-  {{ widget.input_text }}
 {% endif %}
 
-<!-- ✅ Accessible label for file input -->
-<label for="new-image" class="form-label font-weight-bold">Select an image to upload:</label>
+<!-- Accessible label for file input -->
+<label for="{{ widget.attrs.id|default:'new-image' }}" class="form-label font-weight-bold">
+  Select an image to upload:
+</label>
 
 <!-- Upload button and input -->
 <span class="btn-file">
   Select Image
-  <input id="new-image" type="{{ widget.type }}" name="{{ widget.name }}"
+  <input type="{{ widget.type }}"
+         name="{{ widget.name }}"
          {% include "django/forms/widgets/attrs.html" %}>
 </span>
 
 <!-- New image preview -->
 <div class="mt-2">
-  <img id="image-preview" src="#" alt="New Image Preview" class="img-thumbnail" style="display: none; max-width: 150px;" />
-  <button id="remove-image" type="button" class="btn btn-sm btn-outline-danger mt-2" style="display: none;">Remove Selected Image</button>
+  <img id="image-preview" src="#" alt="New Image Preview"
+       class="img-thumbnail"
+       style="display: none; max-width: 150px;">
+  <button id="remove-image" type="button"
+          class="btn btn-sm btn-outline-danger mt-2"
+          style="display: none;">Remove Selected Image</button>
 </div>
 
-<strong><p class="text-danger" id="filename"></p></strong>
+<p id="filename" class="text-danger font-weight-bold mt-1"></p>
 
-<!-- JS to preview + remove uploaded image -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const input = document.getElementById('new-image');
+    const input = document.getElementById('{{ widget.attrs.id|default:"new-image" }}');
     const preview = document.getElementById('image-preview');
     const removeBtn = document.getElementById('remove-image');
+    const filename = document.getElementById('filename');
 
-    input?.addEventListener('change', function (event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          preview.src = e.target.result;
-          preview.style.display = 'block';
-          removeBtn.style.display = 'inline-block';
-        };
-        reader.readAsDataURL(file);
-      } else {
+    if (input) {
+      input.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+            removeBtn.style.display = 'inline-block';
+            filename.textContent = file.name;
+          };
+          reader.readAsDataURL(file);
+        } else {
+          preview.style.display = 'none';
+          removeBtn.style.display = 'none';
+          filename.textContent = '';
+        }
+      });
+
+      removeBtn?.addEventListener('click', function () {
+        input.value = '';
+        preview.src = '#';
         preview.style.display = 'none';
         removeBtn.style.display = 'none';
-      }
-    });
-
-    removeBtn?.addEventListener('click', function () {
-      input.value = '';
-      preview.src = '#';
-      preview.style.display = 'none';
-      removeBtn.style.display = 'none';
-    });
+        filename.textContent = '';
+      });
+    }
   });
 </script>

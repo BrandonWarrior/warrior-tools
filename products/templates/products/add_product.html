@@ -22,23 +22,9 @@
     <!-- Add Product Form -->
     <form method="POST" action="{% url 'add_product' %}" enctype="multipart/form-data" aria-label="Add product form">
       {% csrf_token %}
-
       {% for field in form %}
-        {% if field.name != 'image' %}
-          {{ field|as_crispy_field }}
-        {% endif %}
+        {{ field|as_crispy_field }}
       {% endfor %}
-
-      <!-- Image Field Manual Render -->
-      <div class="form-group">
-        <label for="custom_id_image" class="font-weight-bold">Image:</label>
-        <input type="file" name="image" id="custom_id_image" class="form-control-file rounded-0">
-        <div class="mt-2">
-          <img id="custom-image-preview" src="#" alt="New Image Preview"
-               class="img-thumbnail" style="display: none; max-width: 150px;">
-          <span class="text-danger" id="custom-filename"></span>
-        </div>
-      </div>
 
       <!-- Buttons -->
       <div class="d-flex justify-content-between mt-4">
