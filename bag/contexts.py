@@ -27,7 +27,7 @@ def bag_contents(request):
     fees based on a free delivery threshold.
     """
     bag_items = []
-    total = 0
+    total = Decimal("0.00")
     product_count = 0
     bag = request.session.get("bag", {})
 
@@ -63,8 +63,8 @@ def bag_contents(request):
         delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
         free_delivery_delta = settings.FREE_DELIVERY_THRESHOLD - total
     else:
-        delivery = 0
-        free_delivery_delta = 0
+        delivery = Decimal("0.00")
+        free_delivery_delta = Decimal("0.00")
 
     grand_total = delivery + total
 

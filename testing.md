@@ -228,6 +228,15 @@ The dropdown link was corrected to use the updated category slug:
 The link in main-nav.html was changed from ?category=wrenches to ?category=wrenches_and_pliers.
 The combined “All Hand Tools” link was also updated to include wrenches_and_pliers in the list of categories.
 
+### 🐞 Bug Summary
+Customers occasionally experienced duplicate orders when completing a purchase on the live site. Two identical orders would appear in the admin and confirmation emails, despite only one payment being made.
+
+Cause:
+In production, the checkout form was being submitted more than once due to frontend behavior and network conditions. This led to the backend order creation logic running multiple times before the session or payment metadata could prevent it.
+
+Fix:
+A backend check was added to detect if an order with the same user details, cart contents, and payment ID already exists. If a matching order is found, the system redirects the user to the original confirmation page instead of creating a new order.
+
 ### Code Style
 - Flake8 was used for linting with a `.flake8` config file
 - Black was used for autoformatting (88 character line length)
