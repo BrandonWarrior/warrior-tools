@@ -13,8 +13,7 @@ class CustomClearableFileInput(ClearableFileInput):
     A ClearableFileInput widget with customised labels and template
     for improved UI in product image uploads.
     """
-
     clear_checkbox_label = _("Remove")
     initial_text = _("Current Image")
-    input_text = _("")
+    input_text = _("")  # Removes default "Change" label
     template_name = "products/custom_widget_templates/custom_clearable_file_input.html"

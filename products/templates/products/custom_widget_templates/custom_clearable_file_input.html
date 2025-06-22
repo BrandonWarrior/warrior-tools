@@ -1,18 +1,62 @@
 {% if widget.is_initial %}
-    <p>{{ widget.initial_text }}:</p>
-    <a href="{{ widget.value.url }}">
-        <img width="96" height="96" class="rounded shadow-sm" src="{{ widget.value.url }}">
-    </a>
-    {% if not widget.required %}
-        <div class="custom-control custom-checkbox mt-2">
-            <input class="custom-control-input" type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}">
-            <label class="custom-control-label text-danger" for="{{ widget.checkbox_id }}">{{ widget.clear_checkbox_label }}</label>
-        </div>
-    {% endif %}<br>
-    {{ widget.input_text }}
+  <p>{{ widget.initial_text }}:</p>
+  <a href="{{ widget.value.url }}" target="_blank">
+    <img id="existing-image" width="96" height="96" class="rounded shadow-sm mb-2" src="{{ widget.value.url }}" alt="Current product image">
+  </a>
+
+  {% if not widget.required %}
+    <div class="custom-control custom-checkbox mt-2">
+      <input class="custom-control-input" type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}">
+      <label class="custom-control-label text-danger" for="{{ widget.checkbox_id }}">
+        {{ widget.clear_checkbox_label }}
+      </label>
+    </div>
+  {% endif %}
+  {{ widget.input_text }}
 {% endif %}
+
+<!-- Upload button and input -->
 <span class="btn-file">
-    Select Image
-    <input id="new-image" type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
-  </span>  
+  Select Image
+  <input id="new-image" type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
+</span>
+
+<!-- New image preview -->
+<div class="mt-2">
+  <img id="image-preview" src="#" alt="New Image Preview" class="img-thumbnail" style="display: none; max-width: 150px;" />
+  <button id="remove-image" type="button" class="btn btn-sm btn-outline-danger mt-2" style="display: none;">Remove Selected Image</button>
+</div>
+
 <strong><p class="text-danger" id="filename"></p></strong>
+
+<!-- JS to preview + remove uploaded image -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const input = document.getElementById('new-image');
+    const preview = document.getElementById('image-preview');
+    const removeBtn = document.getElementById('remove-image');
+
+    input?.addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+          removeBtn.style.display = 'inline-block';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        preview.style.display = 'none';
+        removeBtn.style.display = 'none';
+      }
+    });
+
+    removeBtn?.addEventListener('click', function () {
+      input.value = '';
+      preview.src = '#';
+      preview.style.display = 'none';
+      removeBtn.style.display = 'none';
+    });
+  });
+</script>
