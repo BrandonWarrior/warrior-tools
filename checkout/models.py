@@ -1,4 +1,5 @@
 import uuid
+from decimal import Decimal
 
 from django.db import models
 from django.db.models import Sum
@@ -50,14 +51,14 @@ class Order(models.Model):
         Update grand total each time a line item is added, including delivery.
         """
         self.order_total = (
-            self.lineitems.aggregate(Sum("lineitem_total"))["lineitem_total__sum"] or 0
+            self.lineitems.aggregate(Sum("lineitem_total"))["lineitem_total__sum"] or Decimal("0.00")
         )
-        if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
-            self.delivery_cost = (
-                self.order_total * settings.STANDARD_DELIVERY_PERCENTAGE / 100
+        if self.order_total < Decimal(settings.FREE_DELIVERY_THRESHOLD):
+            self.delivery_cost = self.order_total * (
+                Decimal(settings.STANDARD_DELIVERY_PERCENTAGE) / Decimal("100")
             )
         else:
-            self.delivery_cost = 0
+            self.delivery_cost = Decimal("0.00")
         self.grand_total = self.order_total + self.delivery_cost
         self.save()
 
