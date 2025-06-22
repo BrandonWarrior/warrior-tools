@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
+import logging
 
 from .models import Order, OrderLineItem
 from products.models import Product
@@ -11,6 +12,7 @@ import json
 import time
 from decimal import Decimal
 
+logger = logging.getLogger(__name__)
 
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
@@ -19,9 +21,7 @@ class StripeWH_Handler:
         self.request = request
 
     def _send_confirmation_email(self, order):
-        """
-        Send the user a confirmation email after successful order.
-        """
+        """Send the user a confirmation email after successful order."""
         cust_email = order.email
         subject = render_to_string(
             "checkout/confirmation_emails/confirmation_email_subject.txt",
@@ -31,13 +31,10 @@ class StripeWH_Handler:
             "checkout/confirmation_emails/confirmation_email_body.txt",
             {"order": order, "contact_email": settings.DEFAULT_FROM_EMAIL},
         )
-
         send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [cust_email])
 
     def handle_event(self, event):
-        """
-        Handle a generic/unknown/unexpected webhook event from Stripe.
-        """
+        """Handle a generic/unknown/unexpected webhook event from Stripe."""
         return HttpResponse(
             content=f'Unhandled webhook received: {event["type"]}', status=200
         )
@@ -46,7 +43,7 @@ class StripeWH_Handler:
         """
         Handle the payment_intent.succeeded webhook.
 
-        Verifies if order exists; creates one if not.
+        Verifies if order exists by stripe_pid; creates one if not.
         Sends confirmation email after success.
         """
         intent = event.data.object
@@ -56,7 +53,7 @@ class StripeWH_Handler:
         save_info = getattr(intent.metadata, "save_info", "false")
         username = getattr(intent.metadata, "username", "AnonymousUser")
 
-        print(">>> Metadata received in webhook:", intent.metadata)
+        logger.info(f">>> Metadata received in webhook: {intent.metadata}")
 
         charges = getattr(intent, "charges", None)
         if charges and charges.data and len(charges.data) > 0:
@@ -70,6 +67,7 @@ class StripeWH_Handler:
                 content="Webhook received but shipping details missing.", status=400
             )
 
+        # Clean empty shipping address fields
         for field, value in shipping_details.address.items():
             if value == "":
                 shipping_details.address[field] = None
@@ -93,6 +91,7 @@ class StripeWH_Handler:
             except UserProfile.DoesNotExist:
                 profile = None
 
+        # Check if order exists by stripe_pid only
         order_exists = False
         attempt = 1
         while attempt <= 5:
@@ -113,7 +112,6 @@ class StripeWH_Handler:
         else:
             order = None
             try:
-                # Calculate totals
                 bag_dict = json.loads(bag)
                 order_total = Decimal("0.00")
 
@@ -168,10 +166,10 @@ class StripeWH_Handler:
                                 quantity=quantity,
                                 product_size=size,
                             )
-
             except Exception as e:
                 if order:
                     order.delete()
+                logger.error(f"Error creating order from webhook: {e}")
                 return HttpResponse(
                     content=f'Webhook received: {event["type"]} | ERROR: {str(e)}',
                     status=500,
@@ -186,5 +184,16 @@ class StripeWH_Handler:
     def handle_payment_intent_payment_failed(self, event):
         """
         Handle the payment_intent.payment_failed webhook.
+
+        Logs the failure, does not create an order.
         """
-        return HttpResponse(content=f'Webhook received: {event["type"]}', status=200)
+        intent = event.data.object
+        pid = intent.id
+        error_message = intent.last_payment_error.message if intent.last_payment_error else "Unknown error"
+
+        logger.warning(f"Payment failed for PaymentIntent {pid}. Reason: {error_message}")
+        # You could add additional notifications here if desired
+
+        return HttpResponse(
+            content=f'Webhook received: {event["type"]} | Payment failed handled', status=200
+        )
