@@ -9,6 +9,7 @@ from profiles.models import UserProfile
 
 import json
 import time
+from decimal import Decimal
 
 
 class StripeWH_Handler:
@@ -60,10 +61,8 @@ class StripeWH_Handler:
         charges = getattr(intent, "charges", None)
         if charges and charges.data and len(charges.data) > 0:
             billing_details = charges.data[0].billing_details
-            grand_total = round(charges.data[0].amount / 100, 2)
         else:
             billing_details = getattr(intent, "billing_details", None)
-            grand_total = round(intent.amount / 100, 2)
 
         shipping_details = intent.shipping
         if not shipping_details or not shipping_details.address:
@@ -76,9 +75,7 @@ class StripeWH_Handler:
                 shipping_details.address[field] = None
 
         phone_number = shipping_details.phone or ""
-        email = (
-            billing_details.email if billing_details and billing_details.email else ""
-        )
+        email = billing_details.email if billing_details and billing_details.email else ""
 
         profile = None
         if username != "AnonymousUser":
@@ -110,7 +107,6 @@ class StripeWH_Handler:
                     street_address1__iexact=shipping_details.address.line1,
                     street_address2__iexact=shipping_details.address.line2,
                     county__iexact=shipping_details.address.state,
-                    grand_total=grand_total,
                     original_bag=bag,
                     stripe_pid=pid,
                 )
@@ -123,15 +119,33 @@ class StripeWH_Handler:
         if order_exists:
             self._send_confirmation_email(order)
             return HttpResponse(
-                content=(
-                    f'Webhook received: {event["type"]} | SUCCESS: '
-                    "Verified order already in database"
-                ),
+                content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database',
                 status=200,
             )
         else:
             order = None
             try:
+                # Calculate totals
+                bag_dict = json.loads(bag)
+                order_total = Decimal("0.00")
+
+                for item_id, item_data in bag_dict.items():
+                    product = Product.objects.get(id=item_id)
+                    if isinstance(item_data, int):
+                        order_total += product.price * item_data
+                    else:
+                        for size, quantity in item_data.get("items_by_size", {}).items():
+                            order_total += product.price * quantity
+
+                if order_total < Decimal(settings.FREE_DELIVERY_THRESHOLD):
+                    delivery_cost = order_total * (
+                        Decimal(settings.STANDARD_DELIVERY_PERCENTAGE) / Decimal("100")
+                    )
+                else:
+                    delivery_cost = Decimal("0.00")
+
+                grand_total = order_total + delivery_cost
+
                 order = Order.objects.create(
                     full_name=shipping_details.name,
                     user_profile=profile,
@@ -143,46 +157,41 @@ class StripeWH_Handler:
                     street_address1=shipping_details.address.line1,
                     street_address2=shipping_details.address.line2,
                     county=shipping_details.address.state,
+                    delivery_cost=delivery_cost,
+                    order_total=order_total,
                     grand_total=grand_total,
                     original_bag=bag,
                     stripe_pid=pid,
                 )
-                for item_id, item_data in json.loads(bag).items():
+
+                for item_id, item_data in bag_dict.items():
                     product = Product.objects.get(id=item_id)
                     if isinstance(item_data, int):
-                        order_line_item = OrderLineItem(
+                        OrderLineItem.objects.create(
                             order=order,
                             product=product,
                             quantity=item_data,
                         )
-                        order_line_item.save()
                     else:
-                        for size, quantity in item_data.get(
-                            "items_by_size", {}
-                        ).items():
-                            order_line_item = OrderLineItem(
+                        for size, quantity in item_data.get("items_by_size", {}).items():
+                            OrderLineItem.objects.create(
                                 order=order,
                                 product=product,
                                 quantity=quantity,
                                 product_size=size,
                             )
-                            order_line_item.save()
+
             except Exception as e:
                 if order:
                     order.delete()
                 return HttpResponse(
-                    content=(
-                        f'Webhook received: {event["type"]} | ' f"ERROR: {str(e)}"
-                    ),
+                    content=f'Webhook received: {event["type"]} | ERROR: {str(e)}',
                     status=500,
                 )
 
         self._send_confirmation_email(order)
         return HttpResponse(
-            content=(
-                f'Webhook received: {event["type"]} | '
-                "SUCCESS: Created order in webhook"
-            ),
+            content=f'Webhook received: {event["type"]} | SUCCESS: Created order in webhook',
             status=200,
         )
 
