@@ -66,17 +66,12 @@ def checkout(request):
         if order_form.is_valid():
             pid = request.POST.get("client_secret").split("_secret")[0]
 
-            # ✅ Prevent duplicate order creation
-            existing_order = Order.objects.filter(
-                full_name=form_data["full_name"],
-                email=form_data["email"],
-                phone_number=form_data["phone_number"],
-                original_bag=json.dumps(bag),
-                stripe_pid=pid,
-            ).first()
-
+            # Check for existing order using only stripe_pid
+            existing_order = Order.objects.filter(stripe_pid=pid).first()
             if existing_order:
-                return redirect(reverse("checkout_success", args=[existing_order.order_number]))
+                return redirect(
+                    reverse("checkout_success", args=[existing_order.order_number])
+                )
 
             order = order_form.save(commit=False)
             order.stripe_pid = pid
@@ -118,8 +113,7 @@ def checkout(request):
         else:
             messages.error(
                 request,
-                "There was an error with your form. Please double check your "
-                "information.",
+                "There was an error with your form. Please double check your information.",
             )
     else:
         bag = request.session.get("bag", {})
