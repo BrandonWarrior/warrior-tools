@@ -1,5 +1,5 @@
 {% comment %} Info toast notification (blue theme) {% endcomment %}
-<aside
+<div
   class="toast custom-toast rounded-0 border-top-0 bg-dark text-white shadow"
   role="alert"
   aria-live="polite"
@@ -7,13 +7,13 @@
   data-autohide="true"
   data-delay="7000">
 
-  {% comment %} Decorative pointer for toast appearance {% endcomment %}
+  <!-- Decorative pointer for toast appearance -->
   <div class="arrow-up arrow-info"></div>
 
-  {% comment %} Visual top cap using Bootstrap info color {% endcomment %}
+  <!-- Visual top cap using Bootstrap info color -->
   <div class="w-100 toast-capper bg-info"></div>
 
-  {% comment %} Toast header with label and dismiss control {% endcomment %}
+  <!-- Toast header with label and dismiss control -->
   <header class="toast-header bg-dark text-white border-0">
     <strong class="me-auto logo-font">Info</strong>
     <button type="button"
@@ -24,8 +24,8 @@
     </button>
   </header>
 
-  {% comment %} Dynamic message passed via Django messages framework {% endcomment %}
+  <!-- Dynamic message passed via Django messages framework -->
   <div class="toast-body bg-dark text-white">
     {{ message }}
   </div>
-</aside>
+</div>

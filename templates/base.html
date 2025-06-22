@@ -21,7 +21,7 @@
   {% block corecss %}
     <!-- 🎨 Core Stylesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Oswald&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Oswald&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/base.css' %}?v=3">
     <link rel="stylesheet" href="{% static 'css/account_pages.css' %}?v=1">
@@ -34,7 +34,7 @@
     <script src="https://js.stripe.com/v3/"></script>
   {% endblock %}
 
-  <!-- 🧭 Page Title -->
+  <!-- 🗭 Page Title -->
   <title>Warrior Tools {% block extra_title %}{% endblock %}</title>
 </head>
 
@@ -46,20 +46,16 @@
 
     <!-- 💻 Desktop Top Bar -->
     <section class="row pt-lg-2 d-none d-lg-flex">
-      <!-- 🔗 Logo -->
       <div class="col-12 col-lg-4 text-center text-lg-left my-auto py-1">
         <a href="{% url 'home' %}" class="nav-link main-logo-link" aria-label="Go to homepage">
           <h2 class="logo-font my-0"><strong>Warrior</strong> Tools</h2>
         </a>
       </div>
-
-      <!-- 🔍 Desktop Search Bar -->
       <div class="col-12 col-lg-4 my-auto py-1">
         <form method="GET" action="{% url 'products' %}" role="search">
           <label for="desktop-search-input" class="sr-only">Search for products</label>
           <div class="input-group w-100">
-            <input id="desktop-search-input" class="form-control search-input" type="text" name="q"
-                   placeholder="Search products..." aria-label="Search products">
+            <input id="desktop-search-input" class="form-control search-input" type="text" name="q" placeholder="Search products..." aria-label="Search products">
             <div class="input-group-append">
               <button class="btn search-button" type="submit" aria-label="Submit search">
                 <i class="fas fa-search"></i>
@@ -68,34 +64,29 @@
           </div>
         </form>
       </div>
-
-      <!-- 👤 Account & 🛍️ Cart (Desktop) -->
       <nav class="col-12 col-lg-4 my-auto py-1 text-center text-lg-right">
         <ul class="list-inline list-unstyled my-0">
-          <!-- 👤 Account Dropdown -->
-<li class="list-inline-item dropdown">
-  <a class="nav-link text-light" href="#" id="user-options" data-toggle="dropdown">
-    <div class="text-center">
-      <div><i class="fas fa-user fa-lg"></i></div>
-      <p class="my-0 oswald-font font-weight-bold">My Account</p>
-    </div>
-  </a>
-  <div class="dropdown-menu border-0" aria-labelledby="user-options">
-    {% if request.user.is_authenticated %}
-      {% if request.user.is_superuser %}
-        <a href="{% url 'add_product' %}" class="dropdown-item">Product Management</a>
-      {% endif %}
-      <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
-      <a href="{% url 'profile' %}#wishlist-heading" class="dropdown-item">Wishlist</a>
-      <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-    {% else %}
-      <a href="{% url 'account_signup' %}" class="dropdown-item">Sign Up</a>
-      <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-    {% endif %}
-  </div>
-</li>
-
-          <!-- Shopping Bag Icon -->
+          <li class="list-inline-item dropdown">
+            <a class="nav-link text-light" href="#" id="user-options-desktop" data-toggle="dropdown">
+              <div class="text-center">
+                <div><i class="fas fa-user fa-lg"></i></div>
+                <p class="my-0 oswald-font font-weight-bold">My Account</p>
+              </div>
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="user-options-desktop">
+              {% if request.user.is_authenticated %}
+                {% if request.user.is_superuser %}
+                  <a href="{% url 'add_product' %}" class="dropdown-item">Product Management</a>
+                {% endif %}
+                <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+                <a href="{% url 'profile' %}#wishlist-heading" class="dropdown-item">Wishlist</a>
+                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+              {% else %}
+                <a href="{% url 'account_signup' %}" class="dropdown-item">Sign Up</a>
+                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+              {% endif %}
+            </div>
+          </li>
           <li class="list-inline-item">
             <a class="nav-link cart-link" href="{% url 'view_bag' %}">
               <div class="text-center">
@@ -104,25 +95,24 @@
                   {% if grand_total %}£{{ grand_total|floatformat:2 }}{% else %}£0.00{% endif %}
                 </p>
               </div>
-            </a>            
+            </a>
           </li>
         </ul>
       </nav>
     </section>
 
-    <!-- Main Navigation (inc. Mobile Menu) -->
-    <nav class="row" aria-label="Main navigation">
+    <!-- Main Navigation (Mobile & Desktop) -->
+    <nav class="row">
       <div class="navbar navbar-expand-lg navbar-dark w-100">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Mobile Nav Content -->
-        <ul class="navbar-nav d-lg-none flex-row w-100 justify-content-around my-2">
+        <!-- Fixed: moved this outside ul -->
+        <div class="d-lg-none w-100">
           {% include 'includes/mobile-top-header.html' %}
-        </ul>
+        </div>
 
-        <!-- Include Main Nav Links -->
         {% include 'includes/main-nav.html' %}
       </div>
     </nav>
@@ -136,7 +126,6 @@
       </div>
     </section>
   </header>
-  <!-- HEADER END -->
 
   <!-- Toast Notification Area -->
   {% if messages and request.path != '/newsletter/subscribe/' and request.path != '/newsletter/unsubscribe/' %}
@@ -163,10 +152,8 @@
     {% block content %}{% endblock %}
   </main>
 
-  <!-- Footer Section -->
-  <footer class="{% block footer_theme %}footer-dark{% endblock %}">
-    {% include 'includes/footer.html' %}
-  </footer>
+  <!-- Footer Include Only (no outer footer tag) -->
+  {% include 'includes/footer.html' %}
 
 </div>
 

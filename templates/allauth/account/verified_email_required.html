@@ -7,9 +7,11 @@
 
 {% block content %}
 <div class="content-wrapper">
-  <div class="form-container">
+  <section class="form-container" aria-labelledby="verify-heading">
     <hr>
-    <h2 class="logo-font mb-4 text-uppercase">{% trans "Verify Your E-mail Address" %}</h2>
+    <h2 id="verify-heading" class="logo-font mb-4 text-uppercase">
+      {% trans "Verify Your E-mail Address" %}
+    </h2>
     <hr>
 
     {% url 'account_email' as email_url %}
@@ -33,6 +35,6 @@
         <strong>Note:</strong> you can still <a class="text-info" href="{{ email_url }}">change your e-mail address</a>.
       {% endblocktrans %}
     </p>
-  </div>
+  </section>
 </div>
 {% endblock %}

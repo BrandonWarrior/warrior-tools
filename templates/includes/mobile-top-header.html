@@ -1,76 +1,78 @@
-<!-- Mobile Logo Row -->
-<!-- Mobile Logo Row -->
-<div class="mobile-header-logo d-lg-none">
-  <a href="{% url 'home' %}" class="nav-link" aria-label="Go to homepage">
-    <h2 class="logo-font"><strong>Warrior</strong> Tools</h2>
-  </a>
-</div>
+<!-- Mobile Header Wrapper -->
+<div class="mobile-header-wrapper d-lg-none">
+  <!-- Mobile Logo Row -->
+  <div class="mobile-header-logo">
+    <a href="{% url 'home' %}" class="nav-link" aria-label="Go to homepage">
+      <h2 class="logo-font"><strong>Warrior</strong> Tools</h2>
+    </a>
+  </div>
 
-<!-- UPDATED: Mobile Navigation -->
-<nav class="d-block d-lg-none" aria-label="Mobile site navigation">
-  <ul class="list-inline d-flex justify-content-around my-2">
+  <!-- UPDATED: Mobile Navigation -->
+  <nav class="d-block" aria-label="Mobile site navigation">
+    <ul class="list-inline d-flex justify-content-around my-2">
 
-    <!-- 🔍 Mobile Search -->
-    <li class="list-inline-item dropdown" aria-haspopup="true" aria-expanded="false">
-      <a class="text-light nav-link" href="#" id="mobile-search" data-toggle="dropdown" aria-controls="mobile-search-dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Search products">
-        <div class="text-center">
-          <div><i class="fas fa-search fa-lg"></i></div>
-          <p class="my-0">Search</p>
-        </div>
-      </a>
-      <div id="mobile-search-dropdown" class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0 bg-dark" aria-labelledby="mobile-search">
-        <form class="form" method="GET" action="{% url 'products' %}" role="search" aria-label="Search products form">
-          <label for="mobile-search-input" class="sr-only">Search for products</label>
-          <div class="input-group w-100">
-            <input id="mobile-search-input" class="form-control search-input dark-bg rounded-0"
-                   type="text" name="q" placeholder="Search products..." aria-label="Search products">
-            <div class="input-group-append">
-              <button class="btn search-button dark-search-btn rounded-0" type="submit" aria-label="Submit search">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
+      <!-- 🔍 Mobile Search -->
+      <li class="list-inline-item dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="text-light nav-link" href="#" id="mobile-search" data-toggle="dropdown" aria-controls="mobile-search-dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Search products">
+          <div class="text-center">
+            <div><i class="fas fa-search fa-lg"></i></div>
+            <p class="my-0">Search</p>
           </div>
-        </form>
-      </div>
-    </li>
-
-    <!-- Mobile Account -->
-    <li class="list-inline-item dropdown" aria-haspopup="true" aria-expanded="false">
-      <a class="text-light nav-link" href="#" id="user-options" data-toggle="dropdown" aria-controls="user-options-dropdown" aria-haspopup="true" aria-expanded="false" aria-label="User account menu">
-        <div class="text-center">
-          <div><i class="fas fa-user fa-lg"></i></div>
-          <p class="my-0">My Account</p>
+        </a>
+        <div id="mobile-search-dropdown" class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0 bg-dark" aria-labelledby="mobile-search">
+          <form class="form" method="GET" action="{% url 'products' %}" role="search" aria-label="Search products form">
+            <label for="mobile-search-input" class="sr-only">Search for products</label>
+            <div class="input-group w-100">
+              <input id="mobile-search-input" class="form-control search-input dark-bg rounded-0"
+                     type="text" name="q" placeholder="Search products..." aria-label="Search products">
+              <div class="input-group-append">
+                <button class="btn search-button dark-search-btn rounded-0" type="submit" aria-label="Submit search">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-      </a>
-      <div id="user-options-dropdown" class="dropdown-menu border-0 bg-dark text-light" aria-labelledby="user-options">
-        {% if request.user.is_authenticated %}
-          {% if request.user.is_superuser %}
-            <a href="{% url 'add_product' %}" class="dropdown-item text-light">Product Management</a>
-          {% endif %}
-          <a href="{% url 'profile' %}" class="dropdown-item text-light">My Profile</a>
-          <a href="{% url 'account_logout' %}" class="dropdown-item text-light">Logout</a>
-        {% else %}
-          <a href="{% url 'account_signup' %}" class="dropdown-item text-light">Register</a>
-          <a href="{% url 'account_login' %}" class="dropdown-item text-light">Login</a>
-        {% endif %}
-      </div>
-    </li>
+      </li>
 
-    <!-- Mobile Bag -->
-    <li class="list-inline-item">
-      <a class="nav-link" href="{% url 'view_bag' %}" aria-label="View shopping bag">
-        <div class="text-center">
-          <div><i class="fas fa-shopping-bag fa-lg"></i></div>
-          <p class="my-0 oswald-font {% if grand_total %}font-weight-bold{% else %}text-light{% endif %}">
-            {% if grand_total %}
-              £{{ grand_total|floatformat:2 }}
-            {% else %}
-              £0.00
+      <!-- Mobile Account -->
+      <li class="list-inline-item dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="text-light nav-link" href="#" id="user-options-mobile" data-toggle="dropdown" aria-controls="user-options-dropdown" aria-haspopup="true" aria-expanded="false" aria-label="User account menu">
+          <div class="text-center">
+            <div><i class="fas fa-user fa-lg"></i></div>
+            <p class="my-0">My Account</p>
+          </div>
+        </a>
+        <div id="user-options-dropdown" class="dropdown-menu border-0 bg-dark text-light" aria-labelledby="user-options-mobile">
+          {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
+              <a href="{% url 'add_product' %}" class="dropdown-item text-light">Product Management</a>
             {% endif %}
-          </p>
+            <a href="{% url 'profile' %}" class="dropdown-item text-light">My Profile</a>
+            <a href="{% url 'account_logout' %}" class="dropdown-item text-light">Logout</a>
+          {% else %}
+            <a href="{% url 'account_signup' %}" class="dropdown-item text-light">Register</a>
+            <a href="{% url 'account_login' %}" class="dropdown-item text-light">Login</a>
+          {% endif %}
         </div>
-      </a>
-    </li>
+      </li>
 
-  </ul>
-</nav>
+      <!-- Mobile Bag -->
+      <li class="list-inline-item">
+        <a class="nav-link" href="{% url 'view_bag' %}" aria-label="View shopping bag">
+          <div class="text-center">
+            <div><i class="fas fa-shopping-bag fa-lg"></i></div>
+            <p class="my-0 oswald-font {% if grand_total %}font-weight-bold{% else %}text-light{% endif %}">
+              {% if grand_total %}
+                £{{ grand_total|floatformat:2 }}
+              {% else %}
+                £0.00
+              {% endif %}
+            </p>
+          </div>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+</div>

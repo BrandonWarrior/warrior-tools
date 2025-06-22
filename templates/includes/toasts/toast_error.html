@@ -1,5 +1,5 @@
 {% comment %} Toast notification container {% endcomment %}
-<aside
+<div
   class="toast custom-toast rounded-0 border-top-0 bg-dark text-white shadow"
   role="alert"
   aria-live="assertive"
@@ -7,13 +7,13 @@
   data-autohide="true"
   data-delay="7000">
 
-  {% comment %} Decorative arrow indicator {% endcomment %}
+  <!-- Decorative arrow indicator -->
   <div class="arrow-up arrow-danger"></div>
 
-  {% comment %} Visual top cap to match toast theme {% endcomment %}
+  <!-- Visual top cap to match toast theme -->
   <div class="w-100 toast-capper bg-danger"></div>
 
-  {% comment %} Toast header with dismiss button {% endcomment %}
+  <!-- Toast header with dismiss button -->
   <header class="toast-header bg-dark text-white border-0">
     <strong class="me-auto logo-font">Error!</strong>
     <button
@@ -25,8 +25,8 @@
     </button>
   </header>
 
-  {% comment %} Toast body displaying the message content {% endcomment %}
+  <!-- Toast body displaying the message content -->
   <div class="toast-body bg-dark text-white">
     {{ message }}
   </div>
-</aside>
+</div>

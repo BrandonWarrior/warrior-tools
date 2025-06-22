@@ -19,7 +19,7 @@
 {% block content %}
 <div class="overlay"></div>
 
-<main class="checkout-page-wrapper" role="main">
+<div class="checkout-page-wrapper">
     <div class="container checkout-content">
         <div class="row">
             <!-- Order Summary -->
@@ -82,7 +82,7 @@
                         {{ order_form.postcode|as_crispy_field }}
                         {{ order_form.county|as_crispy_field }}
 
-                        <!-- ✅ Render Country Field Manually (No Widget Extras) -->
+                        <!-- ✅ Country Field -->
                         <div class="form-group">
                             <label for="id_country" class="form-label">Country*</label>
                             <select name="country" id="id_country" class="stripe-style-input" aria-label="Country">
@@ -97,7 +97,7 @@
                             </select>
                         </div>
 
-                        <!-- ✅ Dynamic Flag Rendering -->
+                        <!-- ✅ Flag -->
                         <div id="flag-wrapper">
                             {% if order_form.country.value %}
                                 {% with code=order_form.country.value|lower name=order_form.country.value|upper %}
@@ -110,6 +110,7 @@
                             {% endif %}
                         </div>
 
+                        <!-- ✅ Save Info Checkbox -->
                         <div class="form-check form-check-inline float-right mr-0">
                             {% if user.is_authenticated %}
                                 <label class="form-check-label" for="id-save-info">
@@ -147,7 +148,7 @@
             </section>
         </div>
     </div>
-</main>
+</div>
 
 <div id="loading-overlay" class="loading-spinner justify-content-center align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="text-center">
@@ -165,7 +166,6 @@
 {{ client_secret|json_script:"id_client_secret" }}
 <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 
-<!-- ✅ Dynamic Flag Update Script -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const countrySelect = document.getElementById('id_country');

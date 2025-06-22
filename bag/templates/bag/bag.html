@@ -12,7 +12,7 @@
 <!-- ========== Tool Bag Page ========== -->
 <div class="overlay"></div>
 
-<main class="container bag-content" role="main">
+<div class="container bag-content">
   <header class="row">
     <div class="col">
       <hr>
@@ -26,7 +26,6 @@
       {% if bag_items %}
         <div class="table-responsive rounded" role="region" aria-label="Bag Items Table">
           <table class="table table-sm table-borderless">
-            <!-- === Table Header for Desktop === -->
             <thead class="text-primary font-weight-bold d-none d-md-table-header-group">
               <tr>
                 <th scope="col">Tool</th>
@@ -36,12 +35,9 @@
                 <th scope="col">Subtotal</th>
               </tr>
             </thead>
-
-            <!-- === Bag Items === -->
             <tbody>
               {% for item in bag_items %}
               <tr>
-                <!-- === Product Image Column === -->
                 <td class="p-3 w-25">
                   {% if item.product.image %}
                     <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
@@ -49,8 +45,6 @@
                     <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
                   {% endif %}
                 </td>
-
-                <!-- === Product Details Column === -->
                 <td class="align-middle">
                   <p class="text-primary font-weight-bold mb-1">{{ item.product.name }}</p>
                   {% if item.product.has_sizes %}
@@ -58,11 +52,7 @@
                   {% endif %}
                   <p class="text-muted small mb-0">SKU: {{ item.product.sku|upper }}</p>
                 </td>
-
-                <!-- === Price Column === -->
                 <td class="align-middle">£{{ item.product.price }}</td>
-
-                <!-- === Quantity Controls + Action Buttons Column === -->
                 <td class="align-middle">
                   <form class="update-form" method="POST" action="{% url 'adjust_bag' item.item_id %}">
                     {% csrf_token %}
@@ -82,7 +72,6 @@
                         <input type="hidden" name="product_size" value="{{ item.size }}">
                       {% endif %}
                     </div>
-
                     <div class="action-links d-flex justify-content-center gap-3">
                       <a class="update-link small" href="#">Update</a>
                       <a class="remove-item text-danger small" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}">
@@ -91,13 +80,10 @@
                     </div>
                   </form>
                 </td>
-
-                <!-- === Subtotal Column === -->
                 <td class="align-middle">£{{ item.product.price|calc_subtotal:item.quantity }}</td>
               </tr>
               {% endfor %}
             </tbody>
-
             <tfoot>
               <tr>
                 <td colspan="5" class="pt-4">
@@ -132,55 +118,11 @@
       {% endif %}
     </article>
   </section>
-</main>
+</div>
 {% endblock %}
 
 {% block postloadjs %}
   {{ block.super }}
   {% include 'products/includes/quantity_input_script.html' %}
-
-  <script>
-    // Submit update form when "Update" is clicked
-    $('.update-link').click(function () {
-      $(this).closest('form.update-form').submit();
-    });
-
-    // Handle remove button via AJAX
-    $('.remove-item').click(function () {
-      const csrfToken = "{{ csrf_token }}";
-      const itemId = $(this).attr('id').split('remove_')[1];
-      const size = $(this).data('product_size');
-      const url = `/bag/remove/${itemId}/`;
-      const data = {
-        'csrfmiddlewaretoken': csrfToken,
-        'product_size': size
-      };
-      $.post(url, data).done(function () {
-        location.reload();
-      });
-    });
-
-    // Handle increment/decrement buttons
-    $(document).ready(function () {
-      function updateQtyInput(btn, isIncrement) {
-        const itemId = btn.data('item_id');
-        const input = $(`#id_qty_${itemId}`);
-        let currentVal = parseInt(input.val());
-        if (!isNaN(currentVal)) {
-          const newVal = isIncrement ? currentVal + 1 : Math.max(1, currentVal - 1);
-          input.val(newVal);
-        }
-      }
-
-      $('.increment-qty').click(function (e) {
-        e.preventDefault();
-        updateQtyInput($(this), true);
-      });
-
-      $('.decrement-qty').click(function (e) {
-        e.preventDefault();
-        updateQtyInput($(this), false);
-      });
-    });
-  </script>
+  <script src="{% static 'bag/js/bag.js' %}"></script>
 {% endblock %}
