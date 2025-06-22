@@ -18,10 +18,6 @@ import json
 
 @require_POST
 def cache_checkout_data(request):
-    """
-    Update Stripe PaymentIntent metadata with bag and user info
-    before payment is processed.
-    """
     try:
         pid = request.POST.get("client_secret").split("_secret")[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -48,10 +44,6 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
-    """
-    Process checkout form: on POST validate form and create order,
-    on GET display checkout form with Stripe payment intent.
-    """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
@@ -69,13 +61,28 @@ def checkout(request):
             "street_address2": request.POST["street_address2"],
             "county": request.POST["county"],
         }
+
         order_form = OrderForm(form_data)
         if order_form.is_valid():
-            order = order_form.save(commit=False)
             pid = request.POST.get("client_secret").split("_secret")[0]
+
+            # ✅ Prevent duplicate order creation
+            existing_order = Order.objects.filter(
+                full_name=form_data["full_name"],
+                email=form_data["email"],
+                phone_number=form_data["phone_number"],
+                original_bag=json.dumps(bag),
+                stripe_pid=pid,
+            ).first()
+
+            if existing_order:
+                return redirect(reverse("checkout_success", args=[existing_order.order_number]))
+
+            order = order_form.save(commit=False)
             order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
             order.save()
+
             for item_id, item_data in bag.items():
                 try:
                     product = Product.objects.get(id=item_id)
@@ -170,9 +177,6 @@ def checkout(request):
 
 
 def send_confirmation_email(order):
-    """
-    Send a confirmation email to the user after a successful order.
-    """
     cust_email = order.email
     subject = render_to_string(
         "checkout/confirmation_emails/confirmation_email_subject.txt",
@@ -182,16 +186,10 @@ def send_confirmation_email(order):
         "checkout/confirmation_emails/confirmation_email_body.txt",
         {"order": order, "contact_email": settings.DEFAULT_FROM_EMAIL},
     )
-
     send_mail(subject.strip(), body, settings.DEFAULT_FROM_EMAIL, [cust_email])
 
 
 def checkout_success(request, order_number):
-    """
-    Handle checkout success: attach user profile to order,
-    save profile info if requested, send confirmation email,
-    and clear the bag from session.
-    """
     save_info = request.session.get("save_info")
     order = get_object_or_404(Order, order_number=order_number)
 
