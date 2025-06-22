@@ -116,7 +116,17 @@ class StripeWH_Handler:
                 order_total = Decimal("0.00")
 
                 for item_id, item_data in bag_dict.items():
-                    product = Product.objects.get(id=item_id)
+                    try:
+                        # Ensure item_id is int for DB query
+                        product_id = int(item_id)
+                        product = Product.objects.get(id=product_id)
+                    except Product.DoesNotExist:
+                        logger.error(f"Product with id {item_id} does not exist.")
+                        raise
+                    except Exception as e:
+                        logger.error(f"Error retrieving product with id {item_id}: {e}")
+                        raise
+
                     if isinstance(item_data, int):
                         order_total += product.price * item_data
                     else:
@@ -151,7 +161,16 @@ class StripeWH_Handler:
                 )
 
                 for item_id, item_data in bag_dict.items():
-                    product = Product.objects.get(id=item_id)
+                    try:
+                        product_id = int(item_id)
+                        product = Product.objects.get(id=product_id)
+                    except Product.DoesNotExist:
+                        logger.error(f"Product with id {item_id} does not exist.")
+                        raise
+                    except Exception as e:
+                        logger.error(f"Error retrieving product with id {item_id}: {e}")
+                        raise
+
                     if isinstance(item_data, int):
                         OrderLineItem.objects.create(
                             order=order,

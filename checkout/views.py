@@ -40,7 +40,7 @@ def cache_checkout_data(request):
             "Sorry, your payment cannot be processed right now. "
             "Please try again later.",
         )
-        return HttpResponse(content=e, status=400)
+        return HttpResponse(content=str(e), status=400)
 
 
 def checkout(request):
@@ -80,23 +80,8 @@ def checkout(request):
 
             for item_id, item_data in bag.items():
                 try:
-                    product = Product.objects.get(id=item_id)
-                    if isinstance(item_data, int):
-                        order_line_item = OrderLineItem(
-                            order=order,
-                            product=product,
-                            quantity=item_data,
-                        )
-                        order_line_item.save()
-                    else:
-                        for size, quantity in item_data["items_by_size"].items():
-                            order_line_item = OrderLineItem(
-                                order=order,
-                                product=product,
-                                quantity=quantity,
-                                product_size=size,
-                            )
-                            order_line_item.save()
+                    product_id = int(item_id)
+                    product = Product.objects.get(id=product_id)
                 except Product.DoesNotExist:
                     messages.error(
                         request,
@@ -107,6 +92,27 @@ def checkout(request):
                     )
                     order.delete()
                     return redirect(reverse("view_bag"))
+                except Exception as e:
+                    messages.error(request, f"Error with product id {item_id}: {e}")
+                    order.delete()
+                    return redirect(reverse("view_bag"))
+
+                if isinstance(item_data, int):
+                    order_line_item = OrderLineItem(
+                        order=order,
+                        product=product,
+                        quantity=item_data,
+                    )
+                    order_line_item.save()
+                else:
+                    for size, quantity in item_data.get("items_by_size", {}).items():
+                        order_line_item = OrderLineItem(
+                            order=order,
+                            product=product,
+                            quantity=quantity,
+                            product_size=size,
+                        )
+                        order_line_item.save()
 
             request.session["save_info"] = "save-info" in request.POST
             return redirect(reverse("checkout_success", args=[order.order_number]))

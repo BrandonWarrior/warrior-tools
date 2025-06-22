@@ -21,6 +21,9 @@ The testing process included:
 ## 🧪 Manual Testing
 Manual testing was conducted to ensure that each core feature of Warrior Tools behaves as expected under typical user interactions. The testing covered the full user journey from account creation to checkout, as well as administrative and edge-case scenarios.
 
+### Code Strcuture 
+- [Code Structure](docs/screenshots/code-structure.png)
+
 ### 🔐 User Authentication & Profiles
 
 | Test                 | Action                        | Expected Result                                   | Outcome |
@@ -142,20 +145,19 @@ Hover and click actions translate to touch events correctly on mobile devices.
 ## 🔦 Lighthouse Testing
 Google Lighthouse was used to audit key performance metrics and best practice compliance for the Warrior Tools website. Tests were run on multiple core pages in both desktop and mobile modes using Chrome DevTools.
 
-Homepage (/)
-
-Product listing (/products/)
-
-Product detail (/products/<product_id>/)
-
-Shopping bag (/bag/)
-
-Checkout (/checkout/)
-
-Profile dashboard (/profile/)
-
 ## ✅ HTML Validation
 All HTML files were validated using the W3C Markup Validation Service. The following observations were made:
+
+- [HTML Validation](docs/screenshots/html-val.png)
+- [HTML Warnings](docs/screenshots/html-warnings.png)
+
+## ✅ CSS Validation
+
+- [CSS Validation](docs/screenshots/css-val.png)
+
+## ✅ CSS Validation
+
+- [JS Validation](docs/screenshots/js-val.png)
 
 ## ♿ Accessibility Testing
 

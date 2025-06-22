@@ -4,7 +4,7 @@
 ## 📄 Additional Documentation
 
   [📑 Planning & User Stories](PLANNING.md)
-  
+
   [🧪 Testing & Validation](TESTING.md)
 
 ## Overview
@@ -74,13 +74,90 @@ The Warrior Tools site uses a strong, consistent colour scheme to reinforce its 
 
 
 ## Screenshots
+## 📸 Screenshots
 
-| Page | Screenshot |
-|------|------------|
-| Home Page | ![Home Page](static/docs/screenshots/homepage.png) |
-| Product Detail | ![Product Detail](static/docs/screenshots/product-detail.png) |
-| Checkout Page | ![Checkout](static/docs/screenshots/checkout.png) |
-| Profile Dashboard | ![Profile](static/docs/screenshots/profile.png) |
+### Home Pages
+- [Home](docs/screenshots/home.png)
+- [Home 2](docs/screenshots/home2.png)
+
+Screenshots showing the homepage designs and layout variations users first see.
+
+### Products
+- [Product Detail](docs/screenshots/product-detail.png)
+- [Products](docs/screenshots/products.png)
+
+Views of product listings and detailed product pages highlighting tool information.
+
+### Product Management
+- [Add Product](docs/screenshots/add-product.png)
+- [Add Product Test](docs/screenshots/add-product-test.png)
+- [Add Product 2](docs/screenshots/add-product2.png)
+- [Add Product 3](docs/screenshots/add-product3.png)
+- [Edit Product](docs/screenshots/edit-product.png)
+- [Edit Product 2](docs/screenshots/edit-product2.png)
+
+Admin interface screenshots for adding and editing products in the inventory.
+
+### Shopping Bag
+- [Bag](docs/screenshots/bag.png)
+
+Displays the shopping cart interface where users review selected items before checkout.
+
+### Checkout
+- [Checkout](docs/screenshots/checkout.png)
+- [Checkout 2](docs/screenshots/checkout2.png)
+
+Checkout pages illustrating payment and shipping forms users complete to place orders.
+
+### Orders
+- [Order Confirmed](docs/screenshots/order-confirmed.png)
+
+Confirmation page after successful order placement with order details and summary.
+
+### Navigation, Header and Footer
+- [Desktop Header](docs/screenshots/desktop-header.png)
+- [Header Nav](docs/screenshots/header-nav.png)
+- [My Account Dropdown](docs/screenshots/my-account-dropdown.png)
+- [Smaller Header](docs/screenshots/smaller-header.png)
+- [Smaller Nav](docs/screenshots/smaller-nav.png)
+- [Footer](docs/screenshots/footer.png)
+
+Various navigation bars, menus, dropdowns, and header/footer elements across pages.
+
+
+### Profile
+- [Profile](docs/screenshots/profile.png)
+
+User profile dashboard showing saved delivery info, past orders, and wishlist access.
+
+### Wishlist
+- [Wishlist](docs/screenshots/wishlist.png)
+
+User’s wishlist page with saved tools for future purchase consideration.
+
+### Newsletter
+- [Newsletter](docs/screenshots/newsletter.png)
+- [Newsletter Validation](docs/screenshots/newsletter-val.png)
+
+Newsletter subscription forms and validation messages shown to site visitors.
+
+### Testimonials
+- [Submit Testimonial](docs/screenshots/submit-testimonial.png)
+- [Testimonial Validation](docs/screenshots/testimonial-val.png)
+
+User-submitted feedback forms and admin validation screens for reviews.
+
+### Toast Notifications
+- [Tool Added Toast](docs/screenshots/too-added-toast.png)
+- [Order Confirmed Toast](docs/screenshots/order-confirmed-toast.png)
+- [Testimonial Toast](docs/screenshots/testimonial-toast.png)
+
+Popup notification examples confirming actions like adding tools or order success.
+
+### Admin
+- [Admin](docs/screenshots/admin.png)
+
+Django admin panel screenshots showing product and testimonial management.
 
 ## ✨ Key Features at a Glance
 
