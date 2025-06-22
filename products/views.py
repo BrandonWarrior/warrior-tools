@@ -20,9 +20,11 @@ def all_products(request):
         sort_param = request.GET.get("sort", "")
         if sort_param:
             if sort_param == "name_asc":
-                products = products.annotate(lower_name=Lower("name")).order_by("lower_name")
+                products = products.annotate(lower_name=Lower("name"))
+                products = products.order_by("lower_name")
             elif sort_param == "name_desc":
-                products = products.annotate(lower_name=Lower("name")).order_by("-lower_name")
+                products = products.annotate(lower_name=Lower("name"))
+                products = products.order_by("-lower_name")
             elif sort_param == "price_asc":
                 products = products.order_by("price")
             elif sort_param == "price_desc":
@@ -70,7 +72,10 @@ def product_detail(request, product_id):
     in_wishlist = False
 
     if request.user.is_authenticated:
-        in_wishlist = WishlistItem.objects.filter(user=request.user, product=product).exists()
+        in_wishlist = WishlistItem.objects.filter(
+            user=request.user,
+            product=product
+        ).exists()
 
     context = {
         "product": product,
@@ -94,7 +99,10 @@ def add_product(request):
             messages.success(request, "Successfully added product!")
             return redirect(reverse("product_detail", args=[product.id]))
         else:
-            messages.error(request, "Failed to add product. Please ensure the form is valid.")
+            messages.error(
+                request,
+                "Failed to add product. Please ensure the form is valid."
+            )
     else:
         form = ProductForm()
 
@@ -118,7 +126,10 @@ def edit_product(request, product_id):
             messages.success(request, "Successfully updated product!")
             return redirect(reverse("product_detail", args=[product.id]))
         else:
-            messages.error(request, "Failed to update product. Please ensure the form is valid.")
+            messages.error(
+                request,
+                "Failed to update product. Please ensure the form is valid."
+            )
     else:
         form = ProductForm(instance=product)
         messages.info(request, f"You are editing {product.name}")
@@ -148,12 +159,22 @@ def delete_product(request, product_id):
 def toggle_wishlist(request, product_id):
     """ Add or remove product from user's wishlist """
     product = get_object_or_404(Product, pk=product_id)
-    wishlist_item, created = WishlistItem.objects.get_or_create(user=request.user, product=product)
+    wishlist_item, created = WishlistItem.objects.get_or_create(
+        user=request.user,
+        product=product
+    )
 
     if not created:
         wishlist_item.delete()
-        messages.info(request, f"Removed {product.name} from your wishlist.")
+        messages.info(
+            request,
+            f"Removed {product.name} from your wishlist."
+        )
     else:
-        messages.success(request, f"Added {product.name} to your wishlist.")
+        messages.success(
+            request,
+            f"Added {product.name} to your wishlist."
+        )
 
-    return redirect(request.META.get("HTTP_REFERER", "products"))
+    referer = request.META.get("HTTP_REFERER", "products")
+    return redirect(referer)
