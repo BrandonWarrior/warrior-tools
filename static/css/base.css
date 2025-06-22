@@ -446,3 +446,39 @@ main.page-content {
     }
   }
   
+/* Global fixes for very small screens (iPhone SE, etc.) */
+@media only screen and (max-width: 375px) {
+    body {
+      padding-top: 5rem; /* Ensure content clears sticky header */
+    }
+  
+    .content-wrapper,
+    .container,
+    .form-container,
+    .bag-content {
+      padding-top: 4rem; /* Or more if needed */
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  
+    h1, h2, h3, h4 {
+      font-size: 1.25rem;
+    }
+  
+    .btn {
+      font-size: 0.9rem;
+      padding: 0.5rem 0.75rem;
+    }
+  
+    input,
+    select,
+    textarea {
+      font-size: 1rem;
+    }
+  
+    img.img-thumbnail {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  
