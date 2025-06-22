@@ -151,3 +151,11 @@ body.form-page .form-container .login-or {
     color: #163f73;
     text-decoration: underline;
 }
+
+@media only screen and (max-width: 375px) {
+    .form-container,
+    .bag-content,
+    .content-wrapper {
+      padding-top: 5rem; /* Adjust as needed */
+    }
+  }
