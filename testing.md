@@ -143,7 +143,38 @@ Font sizes and icons adapt well for readability.
 Hover and click actions translate to touch events correctly on mobile devices.
 
 ## 🔦 Lighthouse Testing
-Google Lighthouse was used to audit key performance metrics and best practice compliance for the Warrior Tools website. Tests were run on multiple core pages in both desktop and mobile modes using Chrome DevTools.
+
+Lighthouse audits were conducted across multiple pages of the Warrior Tools website using Chrome DevTools in both **mobile** and **desktop** simulation modes. These audits evaluated the site for:
+
+- **Performance**
+- **Accessibility**
+- **Best Practices**
+- **SEO**
+
+### 📱 Mobile Audit
+
+![Lighthouse Mobile Report](docs/lighthouse2.png)
+
+> ⚠️ *Note:* The mobile performance scores was lower due to a slow-loading test environment. Lighthouse reported that "the page loaded too slowly to finish within the time limit." This may reflect test conditions more than actual site speed.
+
+### 🖥️ Desktop Audit
+
+![Lighthouse Desktop Report](docs/lighthouse1.png)
+
+This result reflects performance under standard conditions for the homepage, product list, and checkout flow.
+
+### ✅ Summary & Future Improvements
+
+All major screens were tested manually via Lighthouse, with consistently strong scores in **accessibility**, **SEO**, and **best practices**.
+
+In future iterations, I plan to:
+
+- Optimize image formats and enable lazy loading
+- Improve server response times for mobile
+- Minimize unused JavaScript
+- Explore CDN options for faster delivery
+
+These steps should improve performance scores further and enhance the user experience across all devices.
 
 ## ✅ HTML Validation
 All HTML files were validated using the W3C Markup Validation Service. The following observations were made:
