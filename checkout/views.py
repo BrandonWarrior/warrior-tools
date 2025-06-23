@@ -12,6 +12,8 @@ from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
 from bag.contexts import bag_contents
 
+from checkout.webhook_handler import StripeWH_Handler  # ✅ NEW
+
 import stripe
 import json
 
@@ -128,8 +130,6 @@ def checkout(request):
         else:
             order_form = OrderForm()
 
-        # in the video, the below code is not indented properly
-        # this is the correct indentation
         if not stripe_public_key:
             messages.warning(request, 'Stripe public key is missing. \
                 Did you forget to set it in your environment?')
@@ -142,7 +142,6 @@ def checkout(request):
         }
 
         return render(request, template, context)
-        # end of the corrected indentation
 
 
 def checkout_success(request, order_number):
@@ -154,11 +153,9 @@ def checkout_success(request, order_number):
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
-        # Attach the user's profile to the order
         order.user_profile = profile
         order.save()
 
-        # Save the user's info
         if save_info:
             profile_data = {
                 'default_phone_number': order.phone_number,
@@ -179,6 +176,10 @@ def checkout_success(request, order_number):
 
     if 'bag' in request.session:
         del request.session['bag']
+
+    # ✅ Send confirmation email manually here
+    handler = StripeWH_Handler(request)
+    handler._send_confirmation_email(order)
 
     template = 'checkout/checkout_success.html'
     context = {

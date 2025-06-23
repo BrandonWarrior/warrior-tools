@@ -25,21 +25,29 @@ class StripeWH_Handler:
     def _send_confirmation_email(self, order):
         """Send the user a confirmation email after successful order."""
         cust_email = order.email
-        subject = render_to_string(
-            "checkout/confirmation_emails/confirmation_email_subject.txt",
-            {"order": order},
-        ).strip()
-        body = render_to_string(
-            "checkout/confirmation_emails/confirmation_email_body.txt",
-            {"order": order, "contact_email": settings.DEFAULT_FROM_EMAIL},
-        )
         try:
-            send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [cust_email])
-            logger.info(f"Confirmation email sent to {cust_email}")
-        except Exception as e:
-            logger.error(
-                f"Failed to send confirmation email to {cust_email}: {e}"
+            subject = render_to_string(
+                "checkout/confirmation_emails/confirmation_email_subject.txt",
+                {"order": order},
+            ).strip()
+            body = render_to_string(
+                "checkout/confirmation_emails/confirmation_email_body.txt",
+                {"order": order, "contact_email": settings.DEFAULT_FROM_EMAIL},
             )
+
+            print("📬 About to send email to:", cust_email)
+            print("📧 SUBJECT:", subject)
+            print("📨 BODY:\n", body)
+
+            logger.info(f"📬 About to send email to: {cust_email}")
+            logger.debug(f"📧 SUBJECT: {subject}")
+            logger.debug(f"📨 BODY:\n{body}")
+
+            send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [cust_email])
+            logger.info(f"✅ Confirmation email sent to {cust_email}")
+        except Exception as e:
+            logger.error(f"❌ Failed to send confirmation email to {cust_email}: {e}")
+            print("❌ EMAIL SEND ERROR:", e)
 
     def handle_event(self, event):
         try:
@@ -48,9 +56,7 @@ class StripeWH_Handler:
                 status=200,
             )
         except Exception as e:
-            logger.error(
-                f"Exception in handle_event:\n{traceback.format_exc()}"
-            )
+            logger.error(f"Exception in handle_event:\n{traceback.format_exc()}")
             return HttpResponse(content=f'Webhook handler error: {e}', status=500)
 
     def handle_payment_intent_succeeded(self, event):
@@ -63,8 +69,7 @@ class StripeWH_Handler:
             username = intent.metadata.get("username", "AnonymousUser")
 
             logger.info(
-                f"Webhook received for PaymentIntent {pid} with metadata: "
-                f"{intent.metadata}"
+                f"Webhook received for PaymentIntent {pid} with metadata: {intent.metadata}"
             )
 
             charges = getattr(intent, "charges", None)
@@ -100,12 +105,8 @@ class StripeWH_Handler:
                         profile.default_country = shipping_details.address.country
                         profile.default_postcode = shipping_details.address.postal_code
                         profile.default_town_or_city = shipping_details.address.city
-                        profile.default_street_address1 = (
-                            shipping_details.address.line1
-                        )
-                        profile.default_street_address2 = (
-                            shipping_details.address.line2
-                        )
+                        profile.default_street_address1 = shipping_details.address.line1
+                        profile.default_street_address2 = shipping_details.address.line2
                         profile.default_county = shipping_details.address.state
                         profile.save()
                 except UserProfile.DoesNotExist:
@@ -125,8 +126,7 @@ class StripeWH_Handler:
             if order_exists:
                 self._send_confirmation_email(order)
                 return HttpResponse(
-                    content=f'Webhook received: {event["type"]} | '
-                            f"SUCCESS: Verified order already in database",
+                    content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database',
                     status=200,
                 )
             else:
@@ -140,28 +140,21 @@ class StripeWH_Handler:
                             product_id = int(item_id)
                             product = Product.objects.get(id=product_id)
                         except Product.DoesNotExist:
-                            logger.error(
-                                f"Product with id {item_id} does not exist."
-                            )
+                            logger.error(f"Product with id {item_id} does not exist.")
                             raise
                         except Exception as e:
-                            logger.error(
-                                f"Error retrieving product with id {item_id}: {e}"
-                            )
+                            logger.error(f"Error retrieving product {item_id}: {e}")
                             raise
 
                         if isinstance(item_data, int):
                             order_total += product.price * item_data
                         else:
-                            for size, quantity in item_data.get(
-                                "items_by_size", {}
-                            ).items():
+                            for size, quantity in item_data.get("items_by_size", {}).items():
                                 order_total += product.price * quantity
 
                     if order_total < Decimal(settings.FREE_DELIVERY_THRESHOLD):
                         delivery_cost = order_total * (
-                            Decimal(settings.STANDARD_DELIVERY_PERCENTAGE)
-                            / Decimal("100")
+                            Decimal(settings.STANDARD_DELIVERY_PERCENTAGE) / Decimal("100")
                         )
                     else:
                         delivery_cost = Decimal("0.00")
@@ -191,26 +184,18 @@ class StripeWH_Handler:
                             product_id = int(item_id)
                             product = Product.objects.get(id=product_id)
                         except Product.DoesNotExist:
-                            logger.error(
-                                f"Product with id {item_id} does not exist."
-                            )
+                            logger.error(f"Product with id {item_id} does not exist.")
                             raise
                         except Exception as e:
-                            logger.error(
-                                f"Error retrieving product with id {item_id}: {e}"
-                            )
+                            logger.error(f"Error retrieving product {item_id}: {e}")
                             raise
 
                         if isinstance(item_data, int):
                             OrderLineItem.objects.create(
-                                order=order,
-                                product=product,
-                                quantity=item_data,
+                                order=order, product=product, quantity=item_data
                             )
                         else:
-                            for size, quantity in item_data.get(
-                                "items_by_size", {}
-                            ).items():
+                            for size, quantity in item_data.get("items_by_size", {}).items():
                                 OrderLineItem.objects.create(
                                     order=order,
                                     product=product,
@@ -220,10 +205,7 @@ class StripeWH_Handler:
                 except Exception as e:
                     if order:
                         order.delete()
-                    logger.error(
-                        f"Error creating order from webhook: "
-                        f"{traceback.format_exc()}"
-                    )
+                    logger.error(f"Error creating order from webhook:\n{traceback.format_exc()}")
                     return HttpResponse(
                         content=f'Webhook received: {event["type"]} | ERROR: {e}',
                         status=500,
@@ -231,15 +213,13 @@ class StripeWH_Handler:
 
             self._send_confirmation_email(order)
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} | '
-                        f"SUCCESS: Created order in webhook",
+                content=f'Webhook received: {event["type"]} | SUCCESS: Created order in webhook',
                 status=200,
             )
 
         except Exception as e:
             logger.error(
-                f"Exception in handle_payment_intent_succeeded:\n"
-                f"{traceback.format_exc()}"
+                f"Exception in handle_payment_intent_succeeded:\n{traceback.format_exc()}"
             )
             return HttpResponse(content=f'Webhook handler error: {e}', status=500)
 
@@ -254,18 +234,15 @@ class StripeWH_Handler:
             )
 
             logger.warning(
-                f"Payment failed for PaymentIntent {pid}. "
-                f"Reason: {error_message}"
+                f"Payment failed for PaymentIntent {pid}. Reason: {error_message}"
             )
 
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} | '
-                        f"Payment failed handled",
+                content=f'Webhook received: {event["type"]} | Payment failed handled',
                 status=200,
             )
         except Exception as e:
             logger.error(
-                f"Exception in handle_payment_intent_payment_failed:\n"
-                f"{traceback.format_exc()}"
+                f"Exception in handle_payment_intent_payment_failed:\n{traceback.format_exc()}"
             )
             return HttpResponse(content=f'Webhook handler error: {e}', status=500)
