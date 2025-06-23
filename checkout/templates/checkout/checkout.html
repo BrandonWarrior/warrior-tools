@@ -2,217 +2,156 @@
 {% load static %}
 {% load bag_tools %}
 
-{% block body_class %}checkout-page{% endblock %}
-
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
 {% block page_header %}
-<header class="container header-container">
+<div class="container header-container">
     <div class="row">
         <div class="col"></div>
     </div>
-</header>
+</div>
 {% endblock %}
 
 {% block content %}
 <div class="overlay"></div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <hr>
+            <h2 class="logo-font mb-4">Checkout</h2>
+            <hr>
+        </div>
+    </div>
 
-<div class="checkout-page-wrapper">
-    <div class="container checkout-content">
-        <div class="row">
-            <!-- Order Summary -->
-            <aside class="col-12 col-lg-6 order-lg-last mb-5" aria-label="Order Summary">
-                <p class="text-muted">Order Summary ({{ product_count }})</p>
-                {% for item in bag_items %}
-                <div class="row">
-                    <div class="col-2 mb-1">
-                        <a href="{% url 'product_detail' item.product.id %}">
-                            {% if item.product.image %}
-                                <img class="w-100" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                            {% else %}
-                                <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
-                            {% endif %}
-                        </a>
-                    </div>
-                    <div class="col-7">
-                        <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                        <p class="my-0 small">Size: {% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</p>
-                        <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
-                    </div>
-                    <div class="col-3 text-right">
-                        <p class="my-0 small text-muted">£{{ item.product.price|floatformat:2 }}</p>
-                    </div>
+    <div class="row">
+        <!-- Order Summary -->
+        <div class="col-12 col-lg-6 order-lg-last mb-5">
+            <p class="text-muted">Order Summary ({{ product_count }})</p>
+            <div class="row">
+                <div class="col-7 offset-2">
+                    <p class="mb-1 mt-0 small text-muted">Item</p>
                 </div>
-                {% endfor %}
-                <hr class="my-0">
-                <div class="row text-black text-right">
-                    <div class="col-7 offset-2">
-                        <p class="my-0">Order Total:</p>
-                        <p class="my-0">Delivery:</p>
-                        <p class="my-0">Grand Total:</p>
-                    </div>
-                    <div class="col-3">
-                        <p class="my-0">£{{ total|floatformat:2 }}</p>
-                        <p class="my-0">£{{ delivery|floatformat:2 }}</p>
-                        <p class="my-0"><strong>£{{ grand_total|floatformat:2 }}</strong></p>
-                    </div>
+                <div class="col-3 text-right">
+                    <p class="mb-1 mt-0 small text-muted">Subtotal</p>
                 </div>
-            </aside>
-
-            <!-- Checkout Form -->
-            <section class="col-12 col-lg-6" aria-label="Checkout Form">
-                <p class="text-muted">Please fill out the form below to complete your order</p>
-
-                {% if order_form.errors %}
-                <div class="alert alert-danger">
-                    <p><strong>Please fix the errors below:</strong></p>
-                    <ul>
-                        {% for field in order_form %}
-                            {% for error in field.errors %}
-                                <li><strong>{{ field.label }}:</strong> {{ error }}</li>
-                            {% endfor %}
-                        {% endfor %}
-                        {% for error in order_form.non_field_errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
+            </div>
+            {% for item in bag_items %}
+            <div class="row">
+                <div class="col-2 mb-1">
+                    <a href="{% url 'product_detail' item.product.id %}">
+                        {% if item.product.image %}
+                        <img class="w-100" src="{{ item.product.image.url }}" alt="{{ product.name }}">
+                        {% else %}
+                        <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                        {% endif %}
+                    </a>
                 </div>
-                {% endif %}
+                <div class="col-7">
+                    <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                    <p class="my-0 small">Size: {% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</p>
+                    <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
+                </div>
+                <div class="col-3 text-right">
+                    <p class="my-0 small text-muted">${{ item.product.price | calc_subtotal:item.quantity }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            <hr class="my-0">
+            <div class="row text-black text-right">
+                <div class="col-7 offset-2">
+                    <p class="my-0">Order Total:</p>
+                    <p class="my-0">Delivery:</p>
+                    <p class="my-0">Grand Total:</p>
+                </div>
+                <div class="col-3">
+                    <p class="my-0">${{ total | floatformat:2 }}</p>
+                    <p class="my-0">${{ delivery | floatformat:2 }}</p>
+                    <p class="my-0"><strong>${{ grand_total | floatformat:2 }}</strong></p>
+                </div>
+            </div>
+        </div>
 
-                <form action="{% url 'checkout' %}" method="POST" id="payment-form" novalidate>
-                    {% csrf_token %}
+        <!-- Checkout Form -->
+        <div class="col-12 col-lg-6">
+            <p class="text-muted">Please fill out the form below to complete your order</p>
+            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+                {% csrf_token %}
+                <fieldset class="rounded px-3 mb-5">
+                    <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
+                    {{ order_form.full_name | as_crispy_field }}
+                    {{ order_form.email | as_crispy_field }}
+                </fieldset>
 
-                    <fieldset class="rounded px-3 mb-5">
-                        <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
-                        {{ order_form.full_name|as_crispy_field }}
-                        {{ order_form.email|as_crispy_field }}
-                        {{ order_form.phone_number|as_crispy_field }}
-                    </fieldset>
-
-                    <fieldset class="rounded px-3 mb-5">
-                        <legend class="fieldset-label small text-black px-2 w-auto">Delivery</legend>
-                        {{ order_form.street_address1|as_crispy_field }}
-                        {{ order_form.street_address2|as_crispy_field }}
-                        {{ order_form.town_or_city|as_crispy_field }}
-                        {{ order_form.postcode|as_crispy_field }}
-                        {{ order_form.county|as_crispy_field }}
-
-                        <!-- Country Field -->
-                        <div class="form-group">
-                            <label for="id_country" class="form-label">Country*</label>
-                            <select name="country" id="id_country" class="stripe-style-input" aria-label="Country" required>
-                                {% for code, name in order_form.fields.country.choices %}
-                                    <option value="{{ code }}"
-                                        {% if order_form.data.country == code or order_form.initial.country == code %}
-                                            selected
-                                        {% endif %}>
-                                        {{ name }}
-                                    </option>
-                                {% endfor %}
-                            </select>
-                        </div>
-
-                        <!-- Flag -->
-                        <div id="flag-wrapper">
-                            {% if order_form.country.value %}
-                                {% with code=order_form.country.value|lower name=order_form.country.value|upper %}
-                                    <img id="flag_id_country"
-                                         class="country-select-flag"
-                                         style="margin: 6px 4px 0px;"
-                                         src="{% static 'flags/' %}{{ code }}.gif"
-                                         alt="{{ name }} flag">
-                                {% endwith %}
-                            {% endif %}
-                        </div>
-
-                        <!-- Save Info Checkbox -->
-                        <div class="form-check form-check-inline float-right mr-0">
-                            {% if user.is_authenticated %}
-                                <label class="form-check-label" for="id-save-info">
-                                    Save this delivery information to my profile
-                                </label>
-                                <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
-                            {% else %}
-                                <label class="form-check-label" for="id-save-info">
-                                    <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
-                                    <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-                                </label>
-                            {% endif %}
-                        </div>
-                    </fieldset>
-
-                    <fieldset class="px-3">
-                        <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
-                        <div class="mb-3" id="card-element"></div>
-                        <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
-                        <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                    </fieldset>
-
-                    <div class="submit-button text-right mt-5 mb-2">                    
-                        <a href="{% url 'view_bag' %}" class="btn btn-outline-navy rounded-0 mr-2">
-                            Adjust Bag
-                        </a>
-                        <button id="submit-button" class="btn btn-navy rounded-0">
-                            Complete Order
-                        </button>
-                        <p class="small text-danger my-0">
-                            Your card will be charged <strong>£{{ grand_total|floatformat:2 }}</strong>
-                        </p>
+                <fieldset class="rounded px-3 mb-5">
+                    <legend class="fieldset-label small text-black px-2 w-auto">Delivery</legend>
+                    {{ order_form.phone_number | as_crispy_field }}
+                    {{ order_form.street_address1 | as_crispy_field }}
+                    {{ order_form.street_address2 | as_crispy_field }}
+                    {{ order_form.town_or_city | as_crispy_field }}
+                    {{ order_form.postcode | as_crispy_field }}
+                    {{ order_form.county | as_crispy_field }}
+                    {{ order_form.country | as_crispy_field }}
+                    <div class="form-check form-check-inline float-right mr-0">
+                        {% if user.is_authenticated %}
+                        <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
+                        <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                        {% else %}
+                        <label class="form-check-label" for="id-save-info">
+                            <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
+                            <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+                        </label>
+                        {% endif %}
                     </div>
-                </form>
-            </section>
+                </fieldset>
+
+                <fieldset class="px-3">
+                    <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
+                    <div class="mb-3" id="card-element"></div>
+                    <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                    <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                </fieldset>
+
+                <div class="submit-button text-right mt-5 mb-2">
+                    <a href="{% url 'view_bag' %}" class="btn btn-outline-black rounded-0">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                        <span class="font-weight-bold">Adjust Bag</span>
+                    </a>
+                    <button id="submit-button" class="btn btn-black rounded-0">
+                        <span class="font-weight-bold">Complete Order</span>
+                        <span class="icon">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </button>
+                    <p class="small text-danger my-0">
+                        <span class="icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </span>
+                        <span>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></span>
+                    </p>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-<div id="loading-overlay" class="loading-spinner justify-content-center align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="text-center">
-        <i class="fas fa-cog fa-spin fa-4x text-light mb-3"></i>
-        <h4 class="text-light logo-font">Processing Your Tool Order...</h4>
-        <p class="text-light small">Hang tight while we calibrate the wrenches ⚙️</p>
+<!-- ✅ Custom Loading Spinner -->
+<div id="custom-loading-spinner" class="d-none">
+    <div class="spinner-wrapper">
+        <div class="tool-spinner">
+            <i class="fas fa-wrench fa-3x fa-spin text-white"></i>
+        </div>
+        <p class="text-light mt-3">Processing your payment...</p>
     </div>
 </div>
 {% endblock %}
 
 {% block postloadjs %}
 {{ block.super }}
-
 {{ stripe_public_key|json_script:"id_stripe_public_key" }}
 {{ client_secret|json_script:"id_client_secret" }}
 <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const countrySelect = document.getElementById('id_country');
-        let flagImg = document.getElementById('flag_id_country');
-        const wrapper = document.getElementById('flag-wrapper');
-
-        if (countrySelect) {
-            countrySelect.addEventListener('change', function () {
-                const selectedValue = this.value;
-
-                if (selectedValue) {
-                    const countryCode = selectedValue.toLowerCase();
-                    const countryName = selectedValue.toUpperCase();
-
-                    if (!flagImg) {
-                        flagImg = document.createElement('img');
-                        flagImg.id = 'flag_id_country';
-                        flagImg.className = 'country-select-flag';
-                        flagImg.style = 'margin: 6px 4px 0px;';
-                        wrapper.appendChild(flagImg);
-                    }
-
-                    flagImg.src = `/static/flags/${countryCode}.gif`;
-                    flagImg.alt = `${countryName} flag`;
-                } else if (flagImg) {
-                    flagImg.remove();
-                    flagImg = null;
-                }
-            });
-        }
-    });
-</script>
 {% endblock %}
