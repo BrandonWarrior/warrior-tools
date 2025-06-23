@@ -23,6 +23,10 @@ def webhook(request):
     payload = request.body
     sig_header = request.headers.get('stripe-signature')
 
+    # Log the secret and the signature header for debugging
+    logging.info(f'webhook secret: {wh_secret}')
+    logging.info(f'sig header: {sig_header}')
+
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, wh_secret)
     except ValueError as e:
