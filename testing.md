@@ -179,16 +179,20 @@ These steps should improve performance scores further and enhance the user exper
 ## ✅ HTML Validation
 All HTML files were validated using the W3C Markup Validation Service. The following observations were made:
 
-- [HTML Validation](docs/screenshots/html-val.png)
-- [HTML Warnings](docs/screenshots/html-warnings.png)
+- ![HTML Validation](docs/html-vali.png)
+- ![HTML Warnings](docs/html-warnings.png)
 
 ## ✅ CSS Validation
 
-- [CSS Validation](docs/screenshots/css-val.png)
+- ![CSS Validation](docs/css-vali.png)
 
-## ✅ CSS Validation
+  The CSS files were validated using the W3C CSS Validator. No major errors were found. Minor warnings related to vendor-specific properties were acknowledged but are intentionally used for compatibility.
 
-- [JS Validation](docs/screenshots/js-val.png)
+## ✅ ##JS Validation
+
+- ![JS Validation](docs/js-vali.png)
+
+  JavaScript files were checked using JSHint. No critical issues were detected. Any flagged suggestions were reviewed and either implemented or intentionally ignored for compatibility and framework-specific requirements.
 
 ## ♿ Accessibility Testing
 

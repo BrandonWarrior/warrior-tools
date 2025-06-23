@@ -56,6 +56,18 @@ Clear calls to action (e.g., Add to Bag, Product Details, Sign Up)
 
 Streamlined user flows for both browsing and checkout
 
+## 📘 Facebook Page
+
+As part of the marketing strategy for Warrior Tools, an official Facebook Page was created to:
+
+- Engage with the DIY and tradesperson community
+- Promote products, offers, and new arrivals
+- Share customer testimonials and project inspiration
+- Provide customer service and updates
+
+### 🔗 Page URL
+[facebook.com/profile.php?id=61577160016945](https://www.facebook.com/profile.php?id=61577160016945)
+
 ## 🎨 Colour Palette
 The Warrior Tools site uses a strong, consistent colour scheme to reinforce its professional, trustworthy identity. Here’s a breakdown of the main colours used:
 
@@ -158,6 +170,12 @@ Popup notification examples confirming actions like adding tools or order succes
 - [Admin](docs/screenshots/admin.png)
 
 Django admin panel screenshots showing product and testimonial management.
+
+### 404 Page 
+
+![404 Page](docs/404.png)
+
+The custom 404 error page is displayed when a user attempts to access a page that does not exist on the Warrior Tools website.
 
 ## ✨ Key Features at a Glance
 
@@ -595,48 +613,35 @@ Production (Heroku + AWS):
 
 Automatically switches to S3 for file handling using environment variables
 
-## 📧 Email Integration
-Warrior Tools uses email in three key areas to keep users informed and secure:
+## 📧 Email Integration
 
-Order confirmations after checkout
+Warrior Tools uses email functionality in three key areas to enhance user experience and maintain clear communication.
 
-Newsletter subscriptions and unsubscriptions
+### ✅ Order Confirmations  
+After successful checkout, users receive a detailed confirmation email showing the order number, delivery address, order summary, and contact details.
 
-Account registration email verification
+![Order Confirmation Email](docs/confirmation-emal.png)
 
-These emails are handled using Django’s send_mail() function, secure SMTP backend, and context-driven templates.
 
-### 🛒 1. Order Confirmation Emails
-Triggered automatically after successful payment via Stripe.
+### ✅ Newsletter Subscriptions  
+When users sign up for the newsletter, they receive a welcome email outlining the benefits of being a subscriber.
 
-Includes:
+![Newsletter Subscription Email](docs/subbed-email.png)
 
-Order reference
 
-Product summary
+### ✅ Newsletter Unsubscriptions  
+Users can unsubscribe via a simple form, after which they receive a confirmation email with the option to re-subscribe if it was a mistake.
 
-Delivery address
+**Unsubscribe Form Interface:**  
+![Unsubscribe Form](docs/unsub-email.png)
 
-Templates:
+**Unsubscribe Confirmation Email:**  
+![Unsubscribe Confirmation Email](docs/re-sub-email.png)
 
-confirmation_email_subject.txt
 
-confirmation_email_body.txt
-
-### 📨 2. Newsletter Subscription Emails
-✅ On Subscription:
-
-User email is added to NewsletterSubscriber model
-
-Sends a welcome/confirmation email outlining:
-
-What they’ll receive (e.g., new tool announcements, usage tips)
-
-❌ On Unsubscription:
-
-Email is deleted from the system
-
-A confirmation email is sent to notify the user they’ve successfully unsubscribed
+### ✅ Account Verification  
+During registration, a verification email is dispatched to activate the user account.  
+This ensures the email address belongs to the user and helps maintain platform integrity.
 
 ### 🔑 3. Email Verification on Signup
 When a new user registers, a verification email is sent.
